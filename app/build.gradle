@@ -23,6 +23,7 @@ android {
             res.srcDirs =
                     [
                             'src/main/res/layout/location',
+                            'src/main/res/layout/upload',
                             'src/main/res/layout/login',
                             'src/main/res/layout/mypage',
                             'src/main/res',
