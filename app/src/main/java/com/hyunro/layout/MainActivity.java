@@ -18,12 +18,13 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -79,10 +80,16 @@ public class MainActivity extends AppCompatActivity
     String tomorrowDateAsString;
     String yesterdayDateAsString;
 
+    FirebaseAuth mAuth;
+    String token;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mAuth = FirebaseAuth.getInstance();
+        token = mAuth.getCurrentUser().getUid();
 
         manager = getSupportFragmentManager();
         fragment_1 = (Fragment_1) manager.findFragmentById(R.id.fragment1);
@@ -342,14 +349,12 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onFragmentInteraction201(Uri uri) {}
     @Override
-    public void onFragmentInteraction202(Uri uri) {
-    }
+    public void onFragmentInteraction202(Uri uri) {}
     @Override
     public void onFragmentInteraction203(Uri uri) {}
     @Override
     public void onFragmentInteraction3(Uri uri) {}
 
-    ImageView imageView;
     File file;
     public void takePicture() {
         if(file==null) {
@@ -409,4 +414,11 @@ public class MainActivity extends AppCompatActivity
     public void onGranted(int requestCode, String[] permissions) {
         Toast.makeText(this, "permissions granted : " + permissions.length, Toast.LENGTH_LONG).show();
     }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        if(token.equals("")) mAuth.signOut();
+    }
+
 }

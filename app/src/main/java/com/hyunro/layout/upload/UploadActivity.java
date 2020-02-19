@@ -90,7 +90,7 @@ public class UploadActivity extends AppCompatActivity {
             }
         });
 
-        Button uploadButton; // 취소 버튼▼
+        Button uploadButton; // 업로드 버튼▼
         uploadButton = findViewById(R.id.uploadButton);
         uploadButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

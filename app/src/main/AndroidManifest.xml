@@ -10,7 +10,7 @@
 
     <uses-feature
         android:name="android.hardware.Camera2"
-        android:required="true"></uses-feature>
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -20,17 +20,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".upload.UploadActivity"></activity>
-        <activity
-            android:name=".location.LocSelectActivity"
-            android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".login.RegisterActivity"></activity>
+        <activity android:name=".login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".upload.UploadActivity" />
+        <activity
+            android:name=".location.LocSelectActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".MainActivity"></activity>
 
         <provider
             android:name="androidx.core.content.FileProvider"
