@@ -25,12 +25,13 @@
             android:id="@+id/searchLocEdit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
             android:hint="나의 의상 공유하기"
             android:inputType="textPersonName"
             android:textSize="22sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/backButton"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -53,14 +54,15 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="1000dp">
+                android:layout_height="wrap_content">
 
 
                 <ImageView
                     android:id="@+id/imageToUpload"
                     android:layout_width="300dp"
-                    android:layout_height="300dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
+                    android:minHeight="300dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.495"
                     app:layout_constraintStart_toStartOf="parent"
@@ -70,219 +72,341 @@
                 </ImageView>
 
                 <TextView
-                    android:id="@+id/locationLabel"
+                    android:id="@+id/upload_label_location"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="40dp"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="16dp"
                     android:text="위치"
-                    android:textSize="20sp"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toStartOf="@+id/verticalGuideline1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/upload_label_ageGender" />
+
+                <TextView
+                    android:id="@+id/upload_label_nickname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="닉네임"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toStartOf="@+id/verticalGuideline1"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/imageToUpload" />
 
                 <TextView
-                    android:id="@+id/userLabel"
+                    android:id="@+id/upload_label_ageGender"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="24dp"
-                    android:text="성별/나이"
-                    android:textSize="20sp"
+                    android:layout_marginTop="16dp"
+                    android:text="나이/성별"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toStartOf="@+id/verticalGuideline1"
+                    app:layout_constraintHorizontal_bias="0.481"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/locationLabel" />
+                    app:layout_constraintTop_toBottomOf="@+id/upload_label_nickname" />
 
                 <TextView
-                    android:id="@+id/todayWeatherLabel"
+                    android:id="@+id/upload_label_weather"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="60dp"
                     android:text="오늘 날씨"
-                    android:textSize="20sp"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toStartOf="@+id/verticalGuideline1"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/userLabel" />
-
-                <TextView
-                    android:id="@+id/todayWeatherContent"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="72dp"
-                    android:layout_marginEnd="48dp"
-                    android:text="오늘 오전/오후 날씨 내용"
-                    android:textSize="20sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/locationContent" />
-
-                <TextView
-                    android:id="@+id/todayWeatherContent2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="116dp"
-                    android:text="아우터 내용"
-                    android:textSize="20sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/todayWeatherContent" />
-
-                <TextView
-                    android:id="@+id/topContent"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginEnd="140dp"
-                    android:text="상의 내용"
-                    android:textSize="20sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/todayWeatherContent2" />
-
-                <TextView
-                    android:id="@+id/bottomContent"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="128dp"
-                    android:text="하의 내용"
-                    android:textSize="20sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/topContent" />
-
-                <TextView
-                    android:id="@+id/shoesContent"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="116dp"
-                    android:text="신발 내용"
-                    android:textSize="20sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/bottomContent" />
+                    app:layout_constraintTop_toBottomOf="@+id/upload_label_location" />
 
                 <EditText
-                    android:id="@+id/descriptionContent"
+                    android:id="@+id/upload_description"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="40dp"
-                    android:layout_marginEnd="48dp"
+                    android:layout_marginTop="12dp"
                     android:hint="설명 내용"
-                    android:textSize="20sp"
+                    android:lines="10"
+                    android:maxLength="200"
+                    android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/shoesContent" />
+                    app:layout_constraintStart_toStartOf="@+id/verticalGuideline1"
+                    app:layout_constraintTop_toBottomOf="@+id/upload_spinner_shoes" />
 
                 <Spinner
-                    android:id="@+id/spinnerTest"
+                    android:id="@+id/upload_spinner_outer"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="32dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/descriptionContent" />
+                    app:layout_constraintHorizontal_bias="0.483"
+                    app:layout_constraintStart_toStartOf="@+id/verticalGuideline1"
+                    app:layout_constraintTop_toBottomOf="@+id/upload_label_weather" />
+
+                <Spinner
+                    android:id="@+id/upload_spinner_bottom"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.483"
+                    app:layout_constraintStart_toStartOf="@+id/verticalGuideline1"
+                    app:layout_constraintTop_toBottomOf="@+id/upload_spinner_top" />
+
+                <Spinner
+                    android:id="@+id/upload_spinner_top"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.483"
+                    app:layout_constraintStart_toStartOf="@+id/verticalGuideline1"
+                    app:layout_constraintTop_toBottomOf="@+id/upload_spinner_outer" />
+
+                <Spinner
+                    android:id="@+id/upload_spinner_shoes"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.483"
+                    app:layout_constraintStart_toStartOf="@+id/verticalGuideline1"
+                    app:layout_constraintTop_toBottomOf="@+id/upload_spinner_bottom" />
 
                 <TextView
-                    android:id="@+id/todayWeatherLabel2"
+                    android:id="@+id/upload_label_outer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="32dp"
                     android:text="아우터"
-                    android:textSize="20sp"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toStartOf="@+id/verticalGuideline1"
+                    app:layout_constraintHorizontal_bias="0.506"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/todayWeatherLabel" />
+                    app:layout_constraintTop_toBottomOf="@+id/upload_label_weather" />
 
                 <TextView
-                    android:id="@+id/topLabel"
+                    android:id="@+id/upload_label_top"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
                     android:layout_marginTop="16dp"
                     android:text="상의"
-                    android:textSize="20sp"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toStartOf="@+id/verticalGuideline1"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/todayWeatherLabel2" />
+                    app:layout_constraintTop_toBottomOf="@+id/upload_label_outer" />
 
                 <TextView
-                    android:id="@+id/bottomLabel"
+                    android:id="@+id/upload_label_bottom"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="40dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="16dp"
                     android:text="하의"
-                    android:textSize="20sp"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toStartOf="@+id/verticalGuideline1"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/topLabel" />
+                    app:layout_constraintTop_toBottomOf="@+id/upload_label_top" />
 
                 <TextView
-                    android:id="@+id/locationContent"
+                    android:id="@+id/upload_ageGender"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="40dp"
-                    android:text="위치내용"
-                    android:textSize="20sp"
+                    android:layout_marginTop="16dp"
+                    android:text="나이/성별 내용"
+                    android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/locationLabel"
+                    app:layout_constraintStart_toStartOf="@+id/verticalGuideline1"
+                    app:layout_constraintTop_toBottomOf="@+id/upload_label_nickname" />
+
+                <TextView
+                    android:id="@+id/upload_nickname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="닉네임 내용"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/verticalGuideline1"
                     app:layout_constraintTop_toBottomOf="@+id/imageToUpload" />
 
                 <TextView
-                    android:id="@+id/userContent"
+                    android:id="@+id/upload_location"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="96dp"
-                    android:text="성별/나이 내용"
-                    android:textSize="20sp"
+                    android:layout_marginTop="16dp"
+                    android:text="위치"
+                    android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/locationContent" />
-
-                <ImageButton
-                    android:id="@+id/locationSelectButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="28dp"
-                    app:layout_constraintStart_toEndOf="@+id/locationContent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageToUpload"
-                    app:srcCompat="@android:drawable/ic_menu_more" />
+                    app:layout_constraintStart_toStartOf="@+id/verticalGuideline1"
+                    app:layout_constraintTop_toBottomOf="@+id/upload_label_ageGender" />
 
                 <TextView
-                    android:id="@+id/shoesLabel"
+                    android:id="@+id/upload_label_shoes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="76dp"
-                    android:layout_marginTop="36dp"
+                    android:layout_marginTop="16dp"
                     android:text="신발"
-                    android:textSize="20sp"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toStartOf="@+id/verticalGuideline1"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/bottomLabel" />
+                    app:layout_constraintTop_toBottomOf="@+id/upload_label_bottom" />
 
                 <TextView
-                    android:id="@+id/descriptionLabel"
+                    android:id="@+id/upload_label_description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="64dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="16dp"
                     android:text="설명"
-                    android:textSize="20sp"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toStartOf="@+id/verticalGuideline1"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/shoesLabel" />
+                    app:layout_constraintTop_toBottomOf="@+id/upload_label_shoes" />
 
                 <Button
                     android:id="@+id/cancelButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="40dp"
-                    android:layout_marginBottom="50dp"
+                    android:layout_marginTop="80dp"
+                    android:layout_marginBottom="40dp"
                     android:text="취소"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/upload_description" />
 
                 <Button
                     android:id="@+id/uploadButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="80dp"
                     android:layout_marginEnd="40dp"
-                    android:layout_marginBottom="50dp"
+                    android:layout_marginBottom="40dp"
                     android:text="등록"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/upload_description" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/verticalGuideline1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="120dp" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/verticalGuideline2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="260dp" />
+
+                <ImageView
+                    android:id="@+id/upload_amSkyImage"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintStart_toStartOf="@+id/verticalGuideline1"
+                    app:layout_constraintTop_toBottomOf="@+id/upload_label_am"
+                    app:srcCompat="@android:color/holo_red_light" />
+
+                <ImageView
+                    android:id="@+id/upload_pmSkyImage"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintStart_toStartOf="@+id/verticalGuideline2"
+                    app:layout_constraintTop_toBottomOf="@+id/upload_label_pm"
+                    app:srcCompat="@android:color/holo_red_light" />
+
+                <TextView
+                    android:id="@+id/upload_label_am"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="오전"
+                    app:layout_constraintEnd_toStartOf="@+id/verticalGuideline2"
+                    app:layout_constraintStart_toStartOf="@+id/verticalGuideline1"
+                    app:layout_constraintTop_toBottomOf="@+id/upload_label_location" />
+
+                <TextView
+                    android:id="@+id/upload_amSkyText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="16dp"
+                    android:text="맑음"
+                    app:layout_constraintStart_toEndOf="@+id/upload_amSkyImage"
+                    app:layout_constraintTop_toBottomOf="@+id/upload_label_am" />
+
+                <TextView
+                    android:id="@+id/upload_amTemp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:text="0.0˚C"
+                    app:layout_constraintStart_toEndOf="@+id/upload_amSkyImage"
+                    app:layout_constraintTop_toBottomOf="@+id/upload_amSkyText" />
+
+                <TextView
+                    android:id="@+id/upload_amHumidity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:text="30%"
+                    app:layout_constraintStart_toEndOf="@+id/upload_amSkyImage"
+                    app:layout_constraintTop_toBottomOf="@+id/upload_amTemp" />
+
+                <TextView
+                    android:id="@+id/upload_pmHumidity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:text="30%"
+                    app:layout_constraintStart_toEndOf="@+id/upload_pmSkyImage"
+                    app:layout_constraintTop_toBottomOf="@+id/upload_pmTemp" />
+
+                <TextView
+                    android:id="@+id/upload_pmTemp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="35dp"
+                    android:text="0.0˚C"
+                    app:layout_constraintStart_toEndOf="@+id/upload_pmSkyImage"
+                    app:layout_constraintTop_toBottomOf="@+id/upload_pmSkyText" />
+
+                <TextView
+                    android:id="@+id/upload_pmSkyText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="16dp"
+                    android:text="흐림"
+                    app:layout_constraintStart_toEndOf="@+id/upload_pmSkyImage"
+                    app:layout_constraintTop_toBottomOf="@+id/upload_label_pm" />
+
+                <TextView
+                    android:id="@+id/upload_label_pm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="오후"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/verticalGuideline2"
+                    app:layout_constraintTop_toBottomOf="@+id/upload_label_location" />
+
+                <TextView
+                    android:id="@+id/countCurrentText"
+                    android:layout_width="50dp"
+                    android:layout_height="20dp"
+                    android:text="0"
+                    android:gravity="right"
+                    app:layout_constraintEnd_toStartOf="@+id/countMaxText"
+                    app:layout_constraintTop_toBottomOf="@+id/upload_description" />
+
+                <TextView
+                    android:id="@+id/countMaxText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="50dp"
+                    android:text="/200"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/upload_description" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

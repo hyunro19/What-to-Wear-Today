@@ -1,5 +1,6 @@
 package com.hyunro.layout.upload;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentResolver;
@@ -9,26 +10,58 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.hyunro.layout.MainActivity;
 import com.hyunro.layout.R;
-import com.hyunro.layout.location.LocSelectActivity;
+import com.hyunro.layout.login.RegisterActivity;
+import com.hyunro.layout.util.WeatherAdapter;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Set;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class UploadActivity extends AppCompatActivity {
-
+    String locXY;
+    String token;
+    String nickname;
+    String dateOfBirth;
+    String gender;
+    Map<String, String> todayAM;
+    Map<String, String> todayPM;
+    EditText upload_description;
+    TextView countCurrentText;
+    Bitmap bitmap;
+    int age;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +73,9 @@ public class UploadActivity extends AppCompatActivity {
         if (bundle.get("file") != null) {
             File file;
             file = (File)bundle.get("file");
-            BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inSampleSize = 8;
-            Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath(), options);
+//            BitmapFactory.Options options = new BitmapFactory.Options();
+//            options.inSampleSize = 8;
+            bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
             ImageView imageView = findViewById(R.id.imageToUpload);
             imageView.setImageBitmap(bitmap);
         } else if (bundle.get("fileUri") != null) {
@@ -53,7 +86,7 @@ public class UploadActivity extends AppCompatActivity {
             InputStream instream = null;
             try {
                 instream = resolver.openInputStream(fileUri);
-                Bitmap bitmap = BitmapFactory.decodeStream(instream);
+                bitmap = BitmapFactory.decodeStream(instream);
                 ImageView imageView = findViewById(R.id.imageToUpload);
                 imageView.setImageBitmap(bitmap);
                 instream.close();
@@ -72,16 +105,6 @@ public class UploadActivity extends AppCompatActivity {
             }
         });
 
-        ImageButton locSelectButton; // 위치 설정 버튼▼
-        locSelectButton = findViewById(R.id.locationSelectButton);
-        locSelectButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), LocSelectActivity.class);
-                // 현재 위치 정보 가져가서 select default로 두는 것 고려
-                startActivity(intent);
-            }
-        });
-
         Button cancelButton; // 취소 버튼▼
         cancelButton = findViewById(R.id.cancelButton);
         cancelButton.setOnClickListener(new View.OnClickListener() {
@@ -94,17 +117,51 @@ public class UploadActivity extends AppCompatActivity {
         uploadButton = findViewById(R.id.uploadButton);
         uploadButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                uploadOutfit();
                 Toast.makeText(UploadActivity.this, "Upload Button Clicked", Toast.LENGTH_SHORT).show();
             }
         });
 
-        String[] items = {"mike", "angel", "crow", "john", "ginnie", "sally", "cohen", "rice"};
 
-        Spinner spinnerTest = findViewById(R.id.spinnerTest);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,items);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerTest.setAdapter(adapter);
 
+        Spinner spinnerOuter = findViewById(R.id.upload_spinner_outer);
+        String[] itemsOuter = {"코트", "블레이저", "가죽자켓", "숏패딩", "롱패딩", "가디건", "정장자켓"};
+        ArrayAdapter<String> adapterOuter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,itemsOuter);
+        adapterOuter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerOuter.setAdapter(adapterOuter);
+
+        Spinner spinnerTop = findViewById(R.id.upload_spinner_top);
+        String[] itemsTop = {"정장셔츠", "캐쥬얼셔츠", "맨투맨", "후드티", "반팔티셔츠", "민소매"};
+        ArrayAdapter<String> adapterTop = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,itemsTop);
+        adapterTop.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerTop.setAdapter(adapterTop);
+
+        Spinner spinnerBottom = findViewById(R.id.upload_spinner_bottom);
+        String[] itemsBottom = {"긴_청바지", "반_청바지", "긴_면바지", "긴_반바지", "긴_린넨바지", "반_린넨바지", "짧은치마", "긴치마"};
+        ArrayAdapter<String> adapterBottom = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,itemsBottom);
+        adapterBottom.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerBottom.setAdapter(adapterBottom);
+
+        Spinner spinnerShoes = findViewById(R.id.upload_spinner_shoes);
+        String[] itemsShoes = {"운동화", "부츠", "슬리퍼", "쪼리", "가죽구두", "하이힐", "단화", "로퍼"};
+        ArrayAdapter<String> adapterShoes = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,itemsShoes);
+        adapterShoes.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerShoes.setAdapter(adapterShoes);
+
+
+        upload_description = findViewById(R.id.upload_description);
+        upload_description.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {   }
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {    }
+            @Override
+            public void afterTextChanged(Editable s) {
+                int countText = upload_description.getText().length();
+                countCurrentText = findViewById(R.id.countCurrentText);
+                countCurrentText.setText(countText+"");
+            }
+        });
 
     }
 
@@ -115,10 +172,175 @@ public class UploadActivity extends AppCompatActivity {
         String firstLoc = pref.getString("firstLoc", "서울특별시");
         String secondLoc = pref.getString("secondLoc", "중구");
         String thirdLoc = pref.getString("thirdLoc", "신당동");
-//        String locXY = pref.getString("locXY", "60127");
-        TextView locationContent = findViewById(R.id.locationContent);
+        locXY = pref.getString("locXY", "60127");
+        TextView locationContent = findViewById(R.id.upload_location);
         locationContent.setText(firstLoc+" "+secondLoc+" "+thirdLoc);
+
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        token = bundle.getString("token");
+        todayAM = (Map)bundle.getSerializable("todayAM");
+        todayPM = (Map)bundle.getSerializable("todayPM");
+
+        Map<String, String> skyText = WeatherAdapter.skyText;
+
+        ImageView upload_amSkyImage = findViewById(R.id.upload_amSkyImage);
+        String todayAMSkyCode = todayAM.get("SKY")+todayAM.get("PTY");
+        int todayAMSkyImageId = getResources().getIdentifier( "ic_weather_1"+todayAMSkyCode, "drawable",this.getPackageName());
+        upload_amSkyImage.setImageResource(todayAMSkyImageId);
+        TextView upload_amSkyText = findViewById(R.id.upload_amSkyText);
+
+        upload_amSkyText.setText(skyText.get(todayAMSkyCode));
+        TextView upload_amTemp = findViewById(R.id.upload_amTemp);
+        upload_amTemp.setText(todayAM.get("TMN")+"˚C");
+        TextView upload_amHumidity = findViewById(R.id.upload_amHumidity);
+        upload_amHumidity.setText(todayAM.get("REH")+"%");
+
+        ImageView upload_pmSkyImage = findViewById(R.id.upload_pmSkyImage);
+        String todayPMSkyCode = todayAM.get("SKY")+todayAM.get("PTY");
+        int todayPMSkyImageId = getResources().getIdentifier( "ic_weather_1"+todayPMSkyCode, "drawable",this.getPackageName());
+        upload_pmSkyImage.setImageResource(todayPMSkyImageId);
+        TextView upload_pmSkyText = findViewById(R.id.upload_pmSkyText);
+
+        upload_pmSkyText.setText(skyText.get(todayPMSkyCode));
+        TextView upload_pmTemp = findViewById(R.id.upload_pmTemp);
+        upload_pmTemp.setText(todayPM.get("TMX")+"˚C");
+        TextView upload_pmHumidity = findViewById(R.id.upload_pmHumidity);
+        upload_pmHumidity.setText(todayAM.get("REH")+"%");
+
+
+
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("users").document(token)
+                .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    // Custom User Data Exists
+                    Log.d("Token : ", "token : " + token);
+                    Log.d("UploadActivity : ", "Cached document data: " + document.getData());
+                    nickname = document.getString("nickname");
+                    gender = document.getString("gender");
+                    dateOfBirth = document.getString("dateOfBirth");
+
+                    Calendar now =  Calendar.getInstance();
+                    int nowYear = now.get(Calendar.YEAR);
+                    int nowMonth = now.get(Calendar.MONTH)+1;
+                    int nowDay = now.get(Calendar.DAY_OF_MONTH);
+                    int birthYear = Integer.parseInt(dateOfBirth.substring(0,4));
+                    int birthMonth = Integer.parseInt(dateOfBirth.substring(4,6));
+                    int birthDay = Integer.parseInt(dateOfBirth.substring(6,8));
+
+                    age = nowYear-birthYear;
+                    if(nowMonth<birthMonth) age -=1;
+                    if(nowMonth==birthMonth && nowDay<birthDay) age -= 1;
+
+                    TextView nicknameTextView = findViewById(R.id.upload_nickname);
+                    nicknameTextView.setText(nickname);
+                    TextView ageGenderTextView = findViewById(R.id.upload_ageGender);
+                    String genderText = "남성";
+//                    if(gender.equals("M")) genderText = "남성";
+                    if(gender.equals("F")) genderText = "여성";
+                    ageGenderTextView.setText(age+"세/"+genderText);
+
+                } else {
+                    // Custom User Data X -> Registration Required
+                    Log.d("UploadActivity : ", "Cached get failed: ", task.getException());
+
+                }
+            }
+        });
+
+    } // onStart();
+
+    public void uploadOutfit(){
+        Date now = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd-HHmmss");
+        String ref = format.format(now)+"_"+nickname;
+        Toast.makeText(this, ref, Toast.LENGTH_SHORT).show();
+
+        Map<String, Object> data = new HashMap<>();
+        // user info
+        data.put("uid",token);
+        data.put("nickname", nickname);
+        data.put("gender", gender);
+        data.put("age",age);
+
+        // outfit info
+        String outer = ((Spinner)findViewById(R.id.upload_spinner_outer)).getSelectedItem().toString();
+        String top = ((Spinner)findViewById(R.id.upload_spinner_top)).getSelectedItem().toString();
+        String bottom = ((Spinner)findViewById(R.id.upload_spinner_bottom)).getSelectedItem().toString();
+        String shoes = ((Spinner)findViewById(R.id.upload_spinner_shoes)).getSelectedItem().toString();
+        String description = ((TextView)findViewById(R.id.upload_description)).getText().toString();
+        data.put("outer",outer);
+        data.put("top",top);
+        data.put("bottom",bottom);
+        data.put("shoes",shoes);
+        data.put("description",description);
+
+        // document info
+        data.put("documentId", ref);
+        data.put("uploadDate", new Date());
+
+        // weather info
+        data.put("locXY", locXY);
+        // x랑 y를 따로 저장해서 int로 해야 인근 범위를 비교할 수 있겠다...
+        // 아니면 String 두개로 쪼개서 parseInt +-1값까지 == 비교를 해줘야...
+        // (x==17 || x==18 || x==19) 이런 식으로
+        data.put("AM_SKY",todayAM.get("SKY"));
+        data.put("AM_PTY",todayAM.get("PTY"));
+        data.put("AM_REH",Double.parseDouble(todayAM.get("REH")));
+        data.put("AM_TMN",Double.parseDouble(todayAM.get("TMN")));
+
+        data.put("PM_SKY",todayPM.get("SKY"));
+        data.put("PM_PTY",todayPM.get("PTY"));
+        data.put("PM_REH",Double.parseDouble(todayPM.get("REH")));
+        data.put("PM_TMX",Double.parseDouble(todayPM.get("TMX")));
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("outfit").document(ref)
+                .set(data)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("UploadActivity", "DocumentSnapshot successfully written!");
+                        Toast.makeText(UploadActivity.this, "DB 등록 성공", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(UploadActivity.this, "DB 등록 실패", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReference();
+        StorageReference outfitPhotoRef = storageRef.child("outfitPhoto/"+ref+".jpg");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] photoData = baos.toByteArray();
+        UploadTask uploadTask = outfitPhotoRef.putBytes(photoData);
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(UploadActivity.this, "Photo 등록 실패", Toast.LENGTH_SHORT).show();
+                // Handle unsuccessful uploads
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Toast.makeText(UploadActivity.this, "Photo 등록 성공", Toast.LENGTH_SHORT).show();
+                finish();
+                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
+                // ...
+            }
+        });
+
     }
+
 
 
 }

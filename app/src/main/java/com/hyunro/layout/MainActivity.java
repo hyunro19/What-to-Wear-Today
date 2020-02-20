@@ -90,6 +90,7 @@ public class MainActivity extends AppCompatActivity
 
         mAuth = FirebaseAuth.getInstance();
         token = mAuth.getCurrentUser().getUid();
+        Log.d("MainActivity","in onCreate() method, token = "+token);
 
         manager = getSupportFragmentManager();
         fragment_1 = (Fragment_1) manager.findFragmentById(R.id.fragment1);
@@ -389,12 +390,18 @@ public class MainActivity extends AppCompatActivity
         if (requestCode == 101 && resultCode == RESULT_OK) {
             Intent intent = new Intent(this, UploadActivity.class);
             intent.putExtra("file", file);
+            intent.putExtra("token", token);
+            intent.putExtra("todayAM", (HashMap)today.get(AM));
+            intent.putExtra("todayPM", (HashMap)today.get(PM));
             startActivity(intent);
 
         } else if (requestCode == 102 && resultCode == RESULT_OK) {
             Intent intent = new Intent(this, UploadActivity.class);
             Uri fileUri = data.getData();
             intent.putExtra("fileUri", fileUri);
+            intent.putExtra("token", token);
+            intent.putExtra("todayAM", (HashMap)today.get(AM));
+            intent.putExtra("todayPM", (HashMap)today.get(PM));
             startActivity(intent);
 
         }
