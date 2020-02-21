@@ -11,6 +11,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -22,13 +24,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.hyunro.layout.location.LocSelectActivity;
 import com.hyunro.layout.upload.UploadActivity;
 import com.hyunro.layout.util.WeatherAdapter;
@@ -64,11 +71,12 @@ public class MainActivity extends AppCompatActivity
     FragmentManager manager;
     String locXY;
 
-    final Map<String, Object> yesterdayAM = new HashMap<>();
-    final Map<String, Object> yesterdayPM = new HashMap<>();
-    final Map<String, Map<String, Object>> today = new HashMap<>();
-    final Map<String, Object> tomorrowAM = new HashMap<>();
-    final Map<String, Object> tomorrowPM = new HashMap<>();
+    Map<String, Map<String, Object>> outfit = new HashMap<>();
+    Map<String, Object> yesterdayAM = new HashMap<>();
+    Map<String, Object> yesterdayPM = new HashMap<>();
+    Map<String, Map<String, Object>> today = new HashMap<>();
+    Map<String, Object> tomorrowAM = new HashMap<>();
+    Map<String, Object> tomorrowPM = new HashMap<>();
     String AM = "0600";
     String PM = "1500";
 
@@ -145,23 +153,58 @@ public class MainActivity extends AppCompatActivity
         LeftBtmBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this, "LeftBtmBtn", Toast.LENGTH_SHORT).show();
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment_201).commit();
+                if(fragment_201 != null) {
+                    manager.beginTransaction().show(fragment_201).commit();
+                }
+                if(fragment_202 != null) {
+                    manager.beginTransaction().hide(fragment_202).commit();
+                }
+                if(fragment_203 != null) {
+                    manager.beginTransaction().hide(fragment_203).commit();
+                }
+//                getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment_201).commit();
             }
         });
         final ImageButton MidBtmBtn;
         MidBtmBtn = findViewById(R.id.MidBtmBtn);
         MidBtmBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                if(!fragment_202.isAdded()) {
+                    getSupportFragmentManager().beginTransaction().add(R.id.container, fragment_202).commit();
+                    Log.d("Check added", "fragment202 added");
+                }
                 Toast.makeText(MainActivity.this, "MidBtmBtn", Toast.LENGTH_SHORT).show();
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment_202).commit();
+                if(fragment_201 != null) {
+                    manager.beginTransaction().hide(fragment_201).commit();
+                }
+                if(fragment_202 != null) {
+                    manager.beginTransaction().show(fragment_202).commit();
+                }
+                if(fragment_203 != null) {
+                    manager.beginTransaction().hide(fragment_203).commit();
+                }
+
             }
         });
         final ImageButton RightBtmBtn;
         RightBtmBtn = findViewById(R.id.RightBtmBtn);
         RightBtmBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                if(!fragment_203.isAdded()) {
+                    getSupportFragmentManager().beginTransaction().add(R.id.container, fragment_203).commit();
+                    Log.d("Check added", "fragment203 added");
+                }
                 Toast.makeText(MainActivity.this, "RightBtmBtn", Toast.LENGTH_SHORT).show();
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment_203).commit();
+                if(fragment_201 != null) {
+                    manager.beginTransaction().hide(fragment_201).commit();
+                }
+                if(fragment_202 != null) {
+                    manager.beginTransaction().hide(fragment_202).commit();
+                }
+                if(fragment_203 != null) {
+                    manager.beginTransaction().show(fragment_203).commit();
+                }
+//                getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment_203).commit();
             }
         });
 
@@ -224,31 +267,58 @@ public class MainActivity extends AppCompatActivity
         TextView currentLocation = findViewById(R.id.currentLocation);
         currentLocation.setText(firstLoc+" "+secondLoc+" "+thirdLoc);
 
-        // 오늘 날씨 3시간 단위로 읽어오기
+
         db = FirebaseFirestore.getInstance();
-        db.collection("weather").document(locXY).collection(todayDateAsString)
+        // outfit data 가져오기
+        // filtering 필요
+        db.collection("outfit").orderBy("uploadDate", Query.Direction.DESCENDING).limit(5)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.w("Outfit Read", "Complete getting documents.", task.getException());
                                 Map<String, Object> data = document.getData();
-                                if(document.getId().equals("0000")) data.put("fcstDate", dateFormating(todayDateAsString, todayYoil));
-                                String fcstTime = document.getId().substring(0,2);
-                                if(fcstTime.startsWith("0")) fcstTime = fcstTime.substring(1,2);
-                                data.put("fcstTime",fcstTime);
-                                today.put(document.getId(), data);
+                                outfit.put(document.getId(), data);
                             }
 
                             // weatherByThreeHours
-                            spread_Fragment_201();
+                            downloadOutfitPhoto();
 
                         } else {
-                            Log.w("데이터 읽기", "Error getting documents.", task.getException());
+                            Log.w("Outfit Read", "Error getting documents.", task.getException());
                         }
                     }
                 });
+
+
+
+        // 오늘 날씨 3시간 단위로 읽어오기
+        db.collection("weather").document(locXY).collection(todayDateAsString)
+            .get()
+            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Map<String, Object> data = document.getData();
+                        if(document.getId().equals("0000")) data.put("fcstDate", dateFormating(todayDateAsString, todayYoil));
+                        String fcstTime = document.getId().substring(0,2);
+                        if(fcstTime.startsWith("0")) fcstTime = fcstTime.substring(1,2);
+                        data.put("fcstTime",fcstTime);
+                        today.put(document.getId(), data);
+                    }
+
+                    // weatherByThreeHours
+                    fragment_201.spread_Fragment_201_weather();
+
+                } else {
+                    Log.w("데이터 읽기", "Error getting documents.", task.getException());
+                }
+                }
+            });
 
         db.collection("weather").document(locXY).collection(yesterdayDateAsString).document(AM)
                 .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -262,6 +332,8 @@ public class MainActivity extends AppCompatActivity
                         }
                     }
                     Log.d("ReadFromFirebase : ", "Cached document data: " + document.getData());
+                    Log.d("fragment202 null? : ", (yesterdayAM.keySet())+"");
+//                    fragment_202.spread_fragment_202_yesterday();
                 } else {
                     Log.d("ReadFromFirebase : ", "Cached get failed: ", task.getException());
                 }
@@ -330,7 +402,7 @@ public class MainActivity extends AppCompatActivity
     WeatherAdapter weatherAdapter;
 
     public void spread_Fragment_201(){
-        Log.d("sperad_Framgnet_201","weatherAdapter==null ? "+(weatherAdapter==null));
+//        Log.d("sperad_Framgnet_201","weatherAdapter==null ? "+(weatherAdapter==null));
         todayWeatherRecyclerView = findViewById(R.id.todayWeatherRecyclerView);
         layoutManager = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
         todayWeatherRecyclerView.setLayoutManager(layoutManager);
@@ -339,12 +411,12 @@ public class MainActivity extends AppCompatActivity
         List list = new ArrayList(set);
         Collections.sort(list);
         for(Object key : list) {
-            Log.d((String)key, today.get(key)+"spread_Fragment_201 in MainActivity after ondestroy");
+//            Log.d((String)key, today.get(key)+"spread_Fragment_201 in MainActivity");
             weatherAdapter.addItem(today.get(key));
         }
         todayWeatherRecyclerView.setAdapter(weatherAdapter);
-
     }
+
     @Override
     public void onFragmentInteraction1(Uri uri) {}
     @Override
@@ -428,4 +500,37 @@ public class MainActivity extends AppCompatActivity
         if(token.equals("")) mAuth.signOut();
     }
 
+
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference storageRef = storage.getReference();
+    int count;
+    public void downloadOutfitPhoto(){
+        for(String key : outfit.keySet()) {
+            final String documentId = key;
+            StorageReference islandRef = storageRef.child("outfitPhoto/"+documentId+".jpg");
+            final long ONE_MEGABYTE = 1024 * 1024;
+            islandRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                @Override
+                public void onSuccess(byte[] bytes) {
+                    // Data for "images/island.jpg" is returns, use this as needed
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                    outfit.get(documentId).put("photo", bitmap);
+                    Log.d("downloadOutfitPhoto", "successful for "+documentId);
+                    count += 1;
+                    if(count == outfit.keySet().size()) {
+                        fragment_201.spread_Fragment_201_outfit();
+                        Log.d("downloadOutfitPhoto", "successful for all");
+                    }
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                    // Handle any errors
+                }
+            });
+        }
+
+
+
+    }
 }

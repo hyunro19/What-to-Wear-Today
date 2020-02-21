@@ -12,6 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintGuide_begin="40dp"
         app:layout_constraintStart_toStartOf="parent" />
@@ -309,7 +310,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="2dp"
         android:gravity="center"
-        android:text="흐리고비"
+        android:text="흐리고\n비"
         app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine5"
         app:layout_constraintStart_toStartOf="@+id/verticalGuideLine1"
         app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine4"
@@ -343,7 +344,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="2dp"
         android:gravity="center"
-        android:text="흐리고눈"
+        android:text="흐리고\n눈"
         app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine5"
         app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine2"
         app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine4" />
@@ -522,7 +523,7 @@
         app:layout_constraintTop_toBottomOf="@+id/yesterdayOutfitShoes" />
 
     <TextView
-        android:id="@+id/yesterdayOutfitAcc2"
+        android:id="@+id/todayOutfitAcc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
@@ -532,7 +533,7 @@
         app:layout_constraintTop_toBottomOf="@+id/todayOutfitShoes" />
 
     <TextView
-        android:id="@+id/yesterdayOutfitAcc3"
+        android:id="@+id/tomorrowOutfitAcc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
@@ -620,6 +621,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/verticalGuideLine3"
         app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine7" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="?android:attr/listDivider"
+        android:outlineAmbientShadowColor="@color/common_google_signin_btn_text_light"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.36"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/yesterdayLabel" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

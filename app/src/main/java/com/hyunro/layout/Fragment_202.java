@@ -1,6 +1,8 @@
 package com.hyunro.layout;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,22 +12,24 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.hyunro.layout.util.WeatherAdapter;
 
 import java.util.HashMap;
 import java.util.Map;
 
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link Fragment_202.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link Fragment_202#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class Fragment_202 extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -42,14 +46,6 @@ public class Fragment_202 extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Fragment_1.
-     */
     // TODO: Rename and change types and number of parameters
     public static Fragment_202 newInstance(String param1, String param2) {
         Fragment_202 fragment = new Fragment_202();
@@ -67,12 +63,14 @@ public class Fragment_202 extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        Log.d("Fragment202 Cycle", "fragment202 onCreate");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        Log.d("Fragment202 Cycle", "fragment202 onCreateView");
         return inflater.inflate(R.layout.fragment_202, container, false);
     }
 
@@ -92,24 +90,16 @@ public class Fragment_202 extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
+        Log.d("Fragment202 Cycle", "fragment202 onAttach");
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
+        Log.d("Fragment202 Cycle", "fragment202 onDetach");
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction202(Uri uri);
@@ -118,7 +108,29 @@ public class Fragment_202 extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+//        spread_fragment_202();
+        Log.d("Fragment202 Cycle", "fragment202 onStrart");
         MainActivity mainActivity = (MainActivity)getActivity();
+        spread_fragment_202_top(mainActivity);
+        spread_fragment_202_bottom(mainActivity);
+    }
+    public void onResuem() {
+        super.onResume();
+        Log.d("Fragment202 Cycle", "fragment202 onResume");
+    }
+
+
+    private String dateFormating(String dateAsString, String Yoil) {
+        String month = dateAsString.substring(4,6);
+        String day = dateAsString.substring(6,8);
+        if(month.startsWith("0")) month = month.substring(1);
+        if(day.startsWith("0")) day = day.substring(1);
+
+        return month+"/"+day+" "+Yoil;
+    }
+
+    public void spread_fragment_202_top(MainActivity mainActivity){
+
         Map<String, Object> yesterdayAM = mainActivity.yesterdayAM;
         Map<String, Object> yesterdayPM = mainActivity.yesterdayPM;
         Map<String, Map<String, Object>> today = mainActivity.today;
@@ -126,23 +138,6 @@ public class Fragment_202 extends Fragment {
         Map<String, Object> tomorrowPM = mainActivity.tomorrowPM;
 
         Map<String, String> skyText = WeatherAdapter.skyText;
-//        Map<String, String> skyText = new HashMap<String, String>() {{
-//            put("10", "맑음");
-//            put("11", "비");
-//            put("12","비/눈");
-//            put("13","눈");
-//            put("14","소나기");
-//            put("30","구름많음");
-//            put("31","구름많고\n비");
-//            put("32","구름많고\n비/눈");
-//            put("33","구름많고\n눈");
-//            put("34","구름많고\n소나기");
-//            put("40","흐림");
-//            put("41","흐리고\n비");
-//            put("42","흐리고\n비/눈");
-//            put("43","흐리고\n눈");
-//            put("44","흐리고\n소나기");
-//        }};
 
         // 어제
         String yesterdayDateAsString = mainActivity.yesterdayDateAsString;
@@ -220,17 +215,74 @@ public class Fragment_202 extends Fragment {
         tomorrowPMSkyText.setText(skyText.get(tomorrowPMSkyCode));
         TextView tomorrowPMTemp = mainActivity.findViewById(R.id.tomorrowPMTemp);
         tomorrowPMTemp.setText((String)tomorrowPM.get("TMX")+"˚C");
+    }
+
+    public void spread_fragment_202_bottom(final MainActivity mainActivity) {
+
+        String yesterdayDateAsString = mainActivity.yesterdayDateAsString;
+        String todayDateAsString = mainActivity.todayDateAsString;
+        Map<String, String> map = new HashMap<>();
+        map.put("today", todayDateAsString);
+        map.put("yesterday", yesterdayDateAsString);
+
+        // photo spread
+//        FirebaseStorage storage = FirebaseStorage.getInstance();
+//        StorageReference storageRef = storage.getReference();
+        // mainActivity꺼 같이 쓰자
+        StorageReference storageRef = mainActivity.storageRef;
+        FirebaseFirestore db = mainActivity.db;
+
+
+        for(String key : map.keySet()) {
+
+            final String temp = key;
+            String token = mainActivity.token;
+            StorageReference islandRef = storageRef.child("outfitPhoto/" + map.get(key) + "_" + token + ".jpg");
+            final long ONE_MEGABYTE = 1024 * 1024;
+            islandRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                @Override
+                public void onSuccess(byte[] bytes) {
+                    // Data for "images/island.jpg" is returns, use this as needed
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                    int outfitImage = getContext().getResources().getIdentifier(temp + "OutfitImage", "id", getContext().getPackageName());
+                    ImageView myOutfitPhoto = getActivity().findViewById(outfitImage);
+                    myOutfitPhoto.setImageBitmap(bitmap);
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                    Log.d("loglog", "spread_fragment_202_bottom");
+                    // Handle any errors
+                }
+            });
+
+
+            db.collection("outfit").document(map.get(key) + "_" + token)
+                    .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if(document.getData()!=null) {
+                            Map<String, Object> data = document.getData();
+                            String[] array = {"Outer", "Top", "Bottom", "Shoes"};
+                            for(String item : array) {
+                                int viewId = getContext().getResources().getIdentifier(temp + "Outfit"+item, "id", getContext().getPackageName());
+                                TextView textView = getActivity().findViewById(viewId);
+                                textView.setText((String)data.get(item.toLowerCase()));
+                            }
+                        }
+                    } else {
+                        Log.d("ReadFromFirebase : ", "Cached get failed: ", task.getException());
+                    }
+                }
+            });
+
+
+        }
+
+        // info spread
 
 
     }
-
-    private String dateFormating(String dateAsString, String Yoil) {
-        String month = dateAsString.substring(4,6);
-        String day = dateAsString.substring(6,8);
-        if(month.startsWith("0")) month = month.substring(1);
-        if(day.startsWith("0")) day = day.substring(1);
-
-        return month+"/"+day+" "+Yoil;
-    }
-
 }

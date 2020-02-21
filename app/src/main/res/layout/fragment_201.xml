@@ -131,7 +131,13 @@
                     android:id="@+id/readDBtest"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:gravity="center"
+                    android:text="오늘과 비슷한 날씨에 다른 사람들은 아래와 같이 입었습니다." />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/outfitRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
             </LinearLayout>
         </ScrollView>
 

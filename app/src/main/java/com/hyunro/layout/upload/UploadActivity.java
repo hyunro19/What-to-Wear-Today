@@ -165,6 +165,8 @@ public class UploadActivity extends AppCompatActivity {
 
     }
 
+    String location;
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -172,9 +174,10 @@ public class UploadActivity extends AppCompatActivity {
         String firstLoc = pref.getString("firstLoc", "서울특별시");
         String secondLoc = pref.getString("secondLoc", "중구");
         String thirdLoc = pref.getString("thirdLoc", "신당동");
+        location = firstLoc+" "+secondLoc+" "+thirdLoc;
         locXY = pref.getString("locXY", "60127");
         TextView locationContent = findViewById(R.id.upload_location);
-        locationContent.setText(firstLoc+" "+secondLoc+" "+thirdLoc);
+        locationContent.setText(location);
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
@@ -207,7 +210,6 @@ public class UploadActivity extends AppCompatActivity {
         upload_pmTemp.setText(todayPM.get("TMX")+"˚C");
         TextView upload_pmHumidity = findViewById(R.id.upload_pmHumidity);
         upload_pmHumidity.setText(todayAM.get("REH")+"%");
-
 
 
 
@@ -257,8 +259,8 @@ public class UploadActivity extends AppCompatActivity {
 
     public void uploadOutfit(){
         Date now = new Date();
-        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd-HHmmss");
-        String ref = format.format(now)+"_"+nickname;
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+        String ref = format.format(now)+"_"+token;
         Toast.makeText(this, ref, Toast.LENGTH_SHORT).show();
 
         Map<String, Object> data = new HashMap<>();
@@ -286,6 +288,7 @@ public class UploadActivity extends AppCompatActivity {
 
         // weather info
         data.put("locXY", locXY);
+        data.put("location", location);
         // x랑 y를 따로 저장해서 int로 해야 인근 범위를 비교할 수 있겠다...
         // 아니면 String 두개로 쪼개서 parseInt +-1값까지 == 비교를 해줘야...
         // (x==17 || x==18 || x==19) 이런 식으로

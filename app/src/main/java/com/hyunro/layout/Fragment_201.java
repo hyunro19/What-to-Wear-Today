@@ -18,23 +18,17 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.hyunro.layout.util.OutfitAdapter;
 import com.hyunro.layout.util.WeatherAdapter;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link Fragment_201.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link Fragment_201#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class Fragment_201 extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -51,14 +45,6 @@ public class Fragment_201 extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Fragment_1.
-     */
     // TODO: Rename and change types and number of parameters
     public static Fragment_201 newInstance(String param1, String param2) {
         Fragment_201 fragment = new Fragment_201();
@@ -78,6 +64,7 @@ public class Fragment_201 extends Fragment {
         }
     }
 
+    public View temp;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -109,16 +96,6 @@ public class Fragment_201 extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction201(Uri uri);
@@ -126,11 +103,68 @@ public class Fragment_201 extends Fragment {
 
     public void onStart(){
         super.onStart();
-
+        spread_Fragment_201_weather();
     }
 
     public void onStop(){
         super.onStop();
 
     }
+    public void onResume(){
+        super.onResume();
+//        spread_Fragment_201();
+    }
+
+    RecyclerView todayWeatherRecyclerView;
+    LinearLayoutManager layoutManager;
+    WeatherAdapter weatherAdapter;
+
+    public void spread_Fragment_201_weather(){
+        MainActivity mainActivity = (MainActivity) getActivity();
+        if(mainActivity.today.isEmpty()) return;
+        Map<String, Map<String, Object>> today = mainActivity.today;
+
+        Log.d("spread_Fragment_201", "today Map.keySet()? "+(mainActivity.today.keySet()));
+        todayWeatherRecyclerView = mainActivity.findViewById(R.id.todayWeatherRecyclerView);
+        layoutManager = new LinearLayoutManager(mainActivity, LinearLayoutManager.HORIZONTAL, false);
+        todayWeatherRecyclerView.setLayoutManager(layoutManager);
+
+        weatherAdapter = new WeatherAdapter(mainActivity);
+        weatherAdapter.notifyDataSetChanged();
+        Set set = today.keySet();
+        List list = new ArrayList(set);
+        Collections.sort(list);
+        for(Object key : list) {
+            weatherAdapter.addItem(today.get(key));
+        }
+
+        todayWeatherRecyclerView.setAdapter(weatherAdapter);
+//        Log.d("sperad_Framgnet_201","weatherAdapter==null ? "+(weatherAdapter==null));
+
+
+
+    }
+
+    RecyclerView outfitRecyclerView;
+    LinearLayoutManager layoutManagerOutfit;
+    OutfitAdapter outfitAdapter;
+    public void spread_Fragment_201_outfit(){
+        MainActivity mainActivity = (MainActivity) getActivity();
+        if(mainActivity.outfit.isEmpty()) return;
+        Map<String, Map<String, Object>> outfit = mainActivity.outfit;
+        outfitRecyclerView = mainActivity.findViewById(R.id.outfitRecyclerView);
+        layoutManagerOutfit = new LinearLayoutManager(mainActivity, LinearLayoutManager.VERTICAL, false);
+        outfitRecyclerView.setLayoutManager(layoutManagerOutfit);
+
+        outfitAdapter = new OutfitAdapter(mainActivity);
+        outfitAdapter.notifyDataSetChanged();
+        Set set = outfit.keySet();
+        List list = new ArrayList(set);
+        Collections.sort(list);
+        for(Object key : list) {
+            outfitAdapter.addItem(outfit.get(key));
+        }
+        outfitRecyclerView.setAdapter(outfitAdapter);
+    }
+
 }

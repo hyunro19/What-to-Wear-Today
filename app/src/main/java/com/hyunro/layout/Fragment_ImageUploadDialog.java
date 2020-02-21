@@ -22,23 +22,6 @@ public class Fragment_ImageUploadDialog extends DialogFragment {
     public Fragment_ImageUploadDialog() {
     }
 
-
-//    public View OnCreateDialogu(LayoutInflater inflater, ViewGroup container,
-//                             Bundle savedInstanceState) {
-//        View view = inflater.inflate(R.layout.fragment__image_upload_dialog, container);
-//
-//        // 레이아웃 XML과 뷰 변수 연결
-//
-//        // remove dialog title
-//        getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-//
-//        // remove dialog background
-//        getDialog().getWindow().setBackgroundDrawable(
-//                new ColorDrawable(android.graphics.Color.TRANSPARENT));
-//
-//        return view;
-//    }
-
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
