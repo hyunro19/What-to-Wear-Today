@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity
     FragmentManager manager;
     String locXY;
 
-    Map<String, Map<String, Object>> outfit = new HashMap<>();
+    public static Map<String, Map<String, Object>> outfit = new HashMap<>();
     Map<String, Object> yesterdayAM = new HashMap<>();
     Map<String, Object> yesterdayPM = new HashMap<>();
     Map<String, Map<String, Object>> today = new HashMap<>();
@@ -518,6 +518,7 @@ public class MainActivity extends AppCompatActivity
                     Log.d("downloadOutfitPhoto", "successful for "+documentId);
                     count += 1;
                     if(count == outfit.keySet().size()) {
+                        count = 0;
                         fragment_201.spread_Fragment_201_outfit();
                         Log.d("downloadOutfitPhoto", "successful for all");
                     }

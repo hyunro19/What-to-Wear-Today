@@ -235,11 +235,12 @@ public class Fragment_202 extends Fragment {
 
         for(String key : map.keySet()) {
 
+            // Read Photo from Storage
             final String temp = key;
             String token = mainActivity.token;
-            StorageReference islandRef = storageRef.child("outfitPhoto/" + map.get(key) + "_" + token + ".jpg");
+            StorageReference ref = storageRef.child("outfitPhoto/" + map.get(key) + "_" + token + ".jpg");
             final long ONE_MEGABYTE = 1024 * 1024;
-            islandRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+            ref.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
                 @Override
                 public void onSuccess(byte[] bytes) {
                     // Data for "images/island.jpg" is returns, use this as needed
@@ -256,7 +257,7 @@ public class Fragment_202 extends Fragment {
                 }
             });
 
-
+            // Read Information from Database
             db.collection("outfit").document(map.get(key) + "_" + token)
                     .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override

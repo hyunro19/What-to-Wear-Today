@@ -17,8 +17,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class OutfitAdapter extends RecyclerView.Adapter<OutfitAdapter.ViewHolder> {
+public class OutfitAdapter extends RecyclerView.Adapter<OutfitAdapter.ViewHolder> implements OnOutfitClickListener {
     public ArrayList<Map<String, Object>> outfitRecyclerArray = new ArrayList<>();
+    OnOutfitClickListener listener;
     Context context;
 
     public OutfitAdapter(Context context) {
@@ -31,7 +32,7 @@ public class OutfitAdapter extends RecyclerView.Adapter<OutfitAdapter.ViewHolder
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View itemView = inflater.inflate(R.layout.recycler_outfit, parent, false);
 
-        return new OutfitAdapter.ViewHolder(itemView);
+        return new OutfitAdapter.ViewHolder(itemView, this);
     }
 
     @Override
@@ -63,7 +64,7 @@ public class OutfitAdapter extends RecyclerView.Adapter<OutfitAdapter.ViewHolder
     }
 
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView outfitRecycle_photo;
         TextView outfitRecycle_nickname;
         TextView outfitRecycle_ageGender;
@@ -73,7 +74,7 @@ public class OutfitAdapter extends RecyclerView.Adapter<OutfitAdapter.ViewHolder
         TextView outfitRecycle_bottom;
         TextView outfitRecycle_shoes;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(View itemView, final OnOutfitClickListener listener) {
             super(itemView);
 
             outfitRecycle_photo = itemView.findViewById(R.id.outfitRecycle_photo);
@@ -84,6 +85,17 @@ public class OutfitAdapter extends RecyclerView.Adapter<OutfitAdapter.ViewHolder
             outfitRecycle_top = itemView.findViewById(R.id.outfitRecycle_top);
             outfitRecycle_bottom = itemView.findViewById(R.id.outfitRecycle_bottom);
             outfitRecycle_shoes = itemView.findViewById(R.id.outfitRecycle_shoes);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int position = getAdapterPosition();
+                    if (listener != null) {
+                        listener.onOutfitClick(ViewHolder.this, view, position);
+                    }
+                }
+            });
+
         }
 
         public void setItem(Map<String, Object> outfit) {
@@ -98,6 +110,15 @@ public class OutfitAdapter extends RecyclerView.Adapter<OutfitAdapter.ViewHolder
             outfitRecycle_bottom.setText((String)outfit.get("bottom"));
             outfitRecycle_shoes.setText((String)outfit.get("shoes"));
 
+        }
+    }
+    public void setOnOutfitClickListener(OnOutfitClickListener listener) {
+        this.listener = listener;
+    }
+    @Override
+    public void onOutfitClick(ViewHolder holder, View view, int position) {
+        if(listener != null) {
+            listener.onOutfitClick(holder, view, position);
         }
     }
 }

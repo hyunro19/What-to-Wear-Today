@@ -1,12 +1,14 @@
 package com.hyunro.layout;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -18,6 +20,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.hyunro.layout.detail.DetailActivity;
+import com.hyunro.layout.util.OnOutfitClickListener;
 import com.hyunro.layout.util.OutfitAdapter;
 import com.hyunro.layout.util.WeatherAdapter;
 
@@ -165,6 +169,18 @@ public class Fragment_201 extends Fragment {
             outfitAdapter.addItem(outfit.get(key));
         }
         outfitRecyclerView.setAdapter(outfitAdapter);
+
+        outfitAdapter.setOnOutfitClickListener(new OnOutfitClickListener() {
+            @Override
+            public void onOutfitClick(OutfitAdapter.ViewHolder holder, View view, int position) {
+                HashMap<String, Object> info = (HashMap)outfitAdapter.getItem(position);
+                String documentId = (String)info.get("documentId");
+                Intent intent = new Intent(getContext(), DetailActivity.class);
+                intent.putExtra("documentId", documentId);
+                startActivity(intent);
+//                Toast.makeText(getContext(), "아이템 선택됨 : "+item.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 }

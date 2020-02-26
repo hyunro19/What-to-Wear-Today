@@ -27,15 +27,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.hyunro.layout.MainActivity;
 import com.hyunro.layout.R;
-import com.hyunro.layout.login.RegisterActivity;
 import com.hyunro.layout.util.WeatherAdapter;
 
 import java.io.ByteArrayOutputStream;
@@ -43,7 +40,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -76,7 +72,7 @@ public class UploadActivity extends AppCompatActivity {
 //            BitmapFactory.Options options = new BitmapFactory.Options();
 //            options.inSampleSize = 8;
             bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
-            ImageView imageView = findViewById(R.id.imageToUpload);
+            ImageView imageView = findViewById(R.id.detail_image);
             imageView.setImageBitmap(bitmap);
         } else if (bundle.get("fileUri") != null) {
             Uri fileUri;
@@ -87,7 +83,7 @@ public class UploadActivity extends AppCompatActivity {
             try {
                 instream = resolver.openInputStream(fileUri);
                 bitmap = BitmapFactory.decodeStream(instream);
-                ImageView imageView = findViewById(R.id.imageToUpload);
+                ImageView imageView = findViewById(R.id.detail_image);
                 imageView.setImageBitmap(bitmap);
                 instream.close();
             } catch (FileNotFoundException e) {
@@ -98,7 +94,7 @@ public class UploadActivity extends AppCompatActivity {
         }
 
         ImageButton backButton; // 뒤로가기 버튼▼
-        backButton = findViewById(R.id.backButton);
+        backButton = findViewById(R.id.detail_backButton);
         backButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 onBackPressed();
@@ -106,7 +102,7 @@ public class UploadActivity extends AppCompatActivity {
         });
 
         Button cancelButton; // 취소 버튼▼
-        cancelButton = findViewById(R.id.cancelButton);
+        cancelButton = findViewById(R.id.detail_cancelButton);
         cancelButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 finish();
@@ -124,32 +120,32 @@ public class UploadActivity extends AppCompatActivity {
 
 
 
-        Spinner spinnerOuter = findViewById(R.id.upload_spinner_outer);
+        Spinner spinnerOuter = findViewById(R.id.detail_spinner_outer);
         String[] itemsOuter = {"코트", "블레이저", "가죽자켓", "숏패딩", "롱패딩", "가디건", "정장자켓"};
         ArrayAdapter<String> adapterOuter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,itemsOuter);
         adapterOuter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerOuter.setAdapter(adapterOuter);
 
-        Spinner spinnerTop = findViewById(R.id.upload_spinner_top);
+        Spinner spinnerTop = findViewById(R.id.detail_spinner_top);
         String[] itemsTop = {"정장셔츠", "캐쥬얼셔츠", "맨투맨", "후드티", "반팔티셔츠", "민소매"};
         ArrayAdapter<String> adapterTop = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,itemsTop);
         adapterTop.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerTop.setAdapter(adapterTop);
 
-        Spinner spinnerBottom = findViewById(R.id.upload_spinner_bottom);
+        Spinner spinnerBottom = findViewById(R.id.detail_spinner_bottom);
         String[] itemsBottom = {"긴_청바지", "반_청바지", "긴_면바지", "긴_반바지", "긴_린넨바지", "반_린넨바지", "짧은치마", "긴치마"};
         ArrayAdapter<String> adapterBottom = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,itemsBottom);
         adapterBottom.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerBottom.setAdapter(adapterBottom);
 
-        Spinner spinnerShoes = findViewById(R.id.upload_spinner_shoes);
+        Spinner spinnerShoes = findViewById(R.id.detail_spinner_shoes);
         String[] itemsShoes = {"운동화", "부츠", "슬리퍼", "쪼리", "가죽구두", "하이힐", "단화", "로퍼"};
         ArrayAdapter<String> adapterShoes = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,itemsShoes);
         adapterShoes.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerShoes.setAdapter(adapterShoes);
 
 
-        upload_description = findViewById(R.id.upload_description);
+        upload_description = findViewById(R.id.detail_description);
         upload_description.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {   }
@@ -187,28 +183,28 @@ public class UploadActivity extends AppCompatActivity {
 
         Map<String, String> skyText = WeatherAdapter.skyText;
 
-        ImageView upload_amSkyImage = findViewById(R.id.upload_amSkyImage);
+        ImageView upload_amSkyImage = findViewById(R.id.detail_amSkyImage);
         String todayAMSkyCode = todayAM.get("SKY")+todayAM.get("PTY");
         int todayAMSkyImageId = getResources().getIdentifier( "ic_weather_1"+todayAMSkyCode, "drawable",this.getPackageName());
         upload_amSkyImage.setImageResource(todayAMSkyImageId);
-        TextView upload_amSkyText = findViewById(R.id.upload_amSkyText);
+        TextView upload_amSkyText = findViewById(R.id.detail_amSkyText);
 
         upload_amSkyText.setText(skyText.get(todayAMSkyCode));
-        TextView upload_amTemp = findViewById(R.id.upload_amTemp);
+        TextView upload_amTemp = findViewById(R.id.detail_amTemp);
         upload_amTemp.setText(todayAM.get("TMN")+"˚C");
-        TextView upload_amHumidity = findViewById(R.id.upload_amHumidity);
+        TextView upload_amHumidity = findViewById(R.id.detail_amHumidity);
         upload_amHumidity.setText(todayAM.get("REH")+"%");
 
-        ImageView upload_pmSkyImage = findViewById(R.id.upload_pmSkyImage);
+        ImageView upload_pmSkyImage = findViewById(R.id.detail_pmSkyImage);
         String todayPMSkyCode = todayAM.get("SKY")+todayAM.get("PTY");
         int todayPMSkyImageId = getResources().getIdentifier( "ic_weather_1"+todayPMSkyCode, "drawable",this.getPackageName());
         upload_pmSkyImage.setImageResource(todayPMSkyImageId);
-        TextView upload_pmSkyText = findViewById(R.id.upload_pmSkyText);
+        TextView upload_pmSkyText = findViewById(R.id.detail_pmSkyText);
 
         upload_pmSkyText.setText(skyText.get(todayPMSkyCode));
-        TextView upload_pmTemp = findViewById(R.id.upload_pmTemp);
+        TextView upload_pmTemp = findViewById(R.id.detail_pmTemp);
         upload_pmTemp.setText(todayPM.get("TMX")+"˚C");
-        TextView upload_pmHumidity = findViewById(R.id.upload_pmHumidity);
+        TextView upload_pmHumidity = findViewById(R.id.detail_pmHumidity);
         upload_pmHumidity.setText(todayAM.get("REH")+"%");
 
 
@@ -239,9 +235,9 @@ public class UploadActivity extends AppCompatActivity {
                     if(nowMonth<birthMonth) age -=1;
                     if(nowMonth==birthMonth && nowDay<birthDay) age -= 1;
 
-                    TextView nicknameTextView = findViewById(R.id.upload_nickname);
+                    TextView nicknameTextView = findViewById(R.id.detail_nickname);
                     nicknameTextView.setText(nickname);
-                    TextView ageGenderTextView = findViewById(R.id.upload_ageGender);
+                    TextView ageGenderTextView = findViewById(R.id.detail_ageGender);
                     String genderText = "남성";
 //                    if(gender.equals("M")) genderText = "남성";
                     if(gender.equals("F")) genderText = "여성";
@@ -271,11 +267,11 @@ public class UploadActivity extends AppCompatActivity {
         data.put("age",age);
 
         // outfit info
-        String outer = ((Spinner)findViewById(R.id.upload_spinner_outer)).getSelectedItem().toString();
-        String top = ((Spinner)findViewById(R.id.upload_spinner_top)).getSelectedItem().toString();
-        String bottom = ((Spinner)findViewById(R.id.upload_spinner_bottom)).getSelectedItem().toString();
-        String shoes = ((Spinner)findViewById(R.id.upload_spinner_shoes)).getSelectedItem().toString();
-        String description = ((TextView)findViewById(R.id.upload_description)).getText().toString();
+        String outer = ((Spinner)findViewById(R.id.detail_spinner_outer)).getSelectedItem().toString();
+        String top = ((Spinner)findViewById(R.id.detail_spinner_top)).getSelectedItem().toString();
+        String bottom = ((Spinner)findViewById(R.id.detail_spinner_bottom)).getSelectedItem().toString();
+        String shoes = ((Spinner)findViewById(R.id.detail_spinner_shoes)).getSelectedItem().toString();
+        String description = ((TextView)findViewById(R.id.detail_description)).getText().toString();
         data.put("outer",outer);
         data.put("top",top);
         data.put("bottom",bottom);

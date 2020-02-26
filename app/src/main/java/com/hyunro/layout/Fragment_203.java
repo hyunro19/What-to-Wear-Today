@@ -1,13 +1,17 @@
 package com.hyunro.layout;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
+
+import com.hyunro.layout.mypage.UserUpdateActivity;
 
 
 /**
@@ -64,6 +68,7 @@ public class Fragment_203 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_203, container, false);
     }
@@ -105,5 +110,17 @@ public class Fragment_203 extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction203(Uri uri);
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        Button button = getActivity().findViewById(R.id.fragment203_myInfo);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), UserUpdateActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

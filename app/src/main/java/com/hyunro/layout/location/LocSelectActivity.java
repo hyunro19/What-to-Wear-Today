@@ -1,7 +1,6 @@
 package com.hyunro.layout.location;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,7 +9,6 @@ import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
-import android.location.Location;
 
 import android.location.LocationManager;
 import android.net.Uri;
@@ -33,21 +31,14 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.hyunro.layout.MainActivity;
 import com.hyunro.layout.R;
 import com.pedro.library.AutoPermissions;
 import com.pedro.library.AutoPermissionsListener;
-
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -132,7 +123,7 @@ public class LocSelectActivity extends AppCompatActivity
 
 
         // Search
-        searchLocEdit = findViewById(R.id.searchLocEdit);
+        searchLocEdit = findViewById(R.id.detail_title);
         searchLocEdit.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -162,7 +153,7 @@ public class LocSelectActivity extends AppCompatActivity
         });
 
         ImageButton backButton; // 뒤로가기 버튼▼
-        backButton = findViewById(R.id.backButton);
+        backButton = findViewById(R.id.detail_backButton);
         backButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 onBackPressed();
