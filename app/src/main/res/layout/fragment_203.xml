@@ -7,27 +7,76 @@
     android:layout_height="match_parent"
     tools:context=".Fragment_203">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/whatthisis"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="fragment203"
-        app:layout_constraintBottom_toTopOf="@+id/editText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="252dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/fragment203_title"
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:text="My WTWT"
+                android:textSize="25sp"/>
+
+            <Button
+                android:id="@+id/fragment203_myInfo"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:textSize="25sp"
+                android:drawableRight="@android:drawable/ic_media_play"
+                android:text="내 정보 수정" />
+
+            <Button
+                android:id="@+id/fragment203_myOutfits"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:textSize="25sp"
+                android:drawableRight="@android:drawable/ic_media_play"
+                android:text="내 게시글 관리" />
+
+            <Button
+                android:id="@+id/fragment203_preferences"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:textSize="25sp"
+                android:drawableRight="@android:drawable/ic_media_play"
+                android:text="환경설정" />
+
+            <Button
+                android:id="@+id/fragment203_logout"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:textSize="25sp"
+                android:drawableRight="@android:drawable/ic_media_play"
+                android:text="로그아웃" />
+
+            <Button
+                android:id="@+id/fragment203_withdraw"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:textSize="25sp"
+                android:drawableRight="@android:drawable/ic_media_play"
+                android:text="회원탈퇴" />
+
+            <TextView
+                android:id="@+id/fragment203_version"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_gravity="bottom"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:text="현재 버전 : ver1.0"
+                android:textSize="20sp"/>
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

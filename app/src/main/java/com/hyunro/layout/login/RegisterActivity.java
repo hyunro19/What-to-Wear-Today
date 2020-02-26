@@ -65,7 +65,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
         datePickerDateOfBirth = findViewById(R.id.register_dateOfBirthPicker);
-
+        datePickerDateOfBirth.init(1990, 0, 1,null);
 
 
 

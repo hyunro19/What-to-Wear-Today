@@ -20,7 +20,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".login.RegisterActivity"></activity>
+        <activity android:name=".mypage.UserUpdateActivity"></activity>
+        <activity android:name=".detail.DetailActivity" />
+        <activity android:name=".login.RegisterActivity" />
         <activity android:name=".login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,7 +34,7 @@
         <activity
             android:name=".location.LocSelectActivity"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

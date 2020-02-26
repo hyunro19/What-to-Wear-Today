@@ -26,6 +26,7 @@ android {
                             'src/main/res/layout/upload',
                             'src/main/res/layout/login',
                             'src/main/res/layout/mypage',
+                            'src/main/res/layout/detail',
                             'src/main/res',
                     ]
         }
