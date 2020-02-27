@@ -177,6 +177,7 @@ public class Fragment_201 extends Fragment {
                 String documentId = (String)info.get("documentId");
                 Intent intent = new Intent(getContext(), DetailActivity.class);
                 intent.putExtra("documentId", documentId);
+                intent.putExtra("senderActivity", "MainActivity");
                 startActivity(intent);
 //                Toast.makeText(getContext(), "아이템 선택됨 : "+item.toString(), Toast.LENGTH_SHORT).show();
             }

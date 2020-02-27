@@ -18,15 +18,6 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/fragment203_title"
-                android:layout_width="match_parent"
-                android:layout_height="75dp"
-                android:layout_margin="5dp"
-                android:gravity="center"
-                android:text="My WTWT"
-                android:textSize="25sp"/>
-
             <Button
                 android:id="@+id/fragment203_myInfo"
                 android:layout_width="match_parent"
@@ -51,21 +42,14 @@
                 android:drawableRight="@android:drawable/ic_media_play"
                 android:text="환경설정" />
 
-            <Button
-                android:id="@+id/fragment203_logout"
+            <TextView
+                android:id="@+id/fragment203_title"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:textSize="25sp"
-                android:drawableRight="@android:drawable/ic_media_play"
-                android:text="로그아웃" />
-
-            <Button
-                android:id="@+id/fragment203_withdraw"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:textSize="25sp"
-                android:drawableRight="@android:drawable/ic_media_play"
-                android:text="회원탈퇴" />
+                android:layout_height="75dp"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:text="My WTWT"
+                android:textSize="25sp"/>
 
             <TextView
                 android:id="@+id/fragment203_version"

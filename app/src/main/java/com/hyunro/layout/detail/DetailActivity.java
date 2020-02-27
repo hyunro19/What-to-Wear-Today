@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.hyunro.layout.MainActivity;
 import com.hyunro.layout.R;
+import com.hyunro.layout.mypage.MyOutfitsActivity;
 import com.hyunro.layout.util.WeatherAdapter;
 
 import java.util.Map;
@@ -28,9 +29,13 @@ public class DetailActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         String documentId = (String)bundle.get("documentId");
+        String senderActivity = (String)bundle.get("senderActivity");
+        Toast.makeText(this, "From "+senderActivity, Toast.LENGTH_SHORT).show();
         Map<String, Object> info = outfit.get(documentId);
-        // info를 ui에 뿌려주면 된다.
+        if (senderActivity.equals("MyOutfitsActivity")) info = MyOutfitsActivity.myOutfit.get(documentId);
 
+
+        // info를 ui에 뿌려주면 된다.
 
         ImageButton detail_backButton = findViewById(R.id.detail_backButton);
         detail_backButton.setOnClickListener(new View.OnClickListener() {
@@ -87,10 +92,6 @@ public class DetailActivity extends AppCompatActivity {
         detail_bottom.setText((String)info.get("bottom"));
         detail_shoes.setText((String)info.get("shoes"));
         detail_description.setText((String)info.get("description"));
-
-
-
-
 
     }
 

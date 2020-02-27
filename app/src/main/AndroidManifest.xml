@@ -20,7 +20,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".mypage.UserUpdateActivity"></activity>
+        <activity android:name=".mypage.MyOutfitsActivity"></activity>
+        <activity android:name=".mypage.UserUpdateActivity" />
         <activity android:name=".detail.DetailActivity" />
         <activity android:name=".login.RegisterActivity" />
         <activity android:name=".login.LoginActivity">

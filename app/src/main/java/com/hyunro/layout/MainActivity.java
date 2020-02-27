@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity
     String yesterdayDateAsString;
 
     FirebaseAuth mAuth;
-    String token;
+    public String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

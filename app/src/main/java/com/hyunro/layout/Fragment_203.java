@@ -11,6 +11,7 @@ import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
 
+import com.hyunro.layout.mypage.MyOutfitsActivity;
 import com.hyunro.layout.mypage.UserUpdateActivity;
 
 
@@ -114,11 +115,23 @@ public class Fragment_203 extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        Button button = getActivity().findViewById(R.id.fragment203_myInfo);
-        button.setOnClickListener(new View.OnClickListener() {
+        View fragment203_myInfo = getActivity().findViewById(R.id.fragment203_myInfo);
+        fragment203_myInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), UserUpdateActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        View fragment203_myOutfits = getActivity().findViewById(R.id.fragment203_myOutfits);
+        fragment203_myOutfits.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity mainActivity = (MainActivity) getActivity();
+                String token = mainActivity.token;
+                Intent intent = new Intent(getActivity(), MyOutfitsActivity.class);
+                intent.putExtra("token", token);
                 startActivity(intent);
             }
         });
