@@ -3,8 +3,12 @@ package com.hyunro.layout.mypage;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -12,6 +16,9 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -21,7 +28,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.hyunro.layout.R;
-import com.hyunro.layout.login.RegisterActivity;
+import com.hyunro.layout.login.LoginActivity;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -39,13 +46,21 @@ public class UserUpdateActivity extends AppCompatActivity {
     String gender;
     FirebaseFirestore db;
     String token;
+    FirebaseAuth mAuth;
+    private GoogleSignInClient mGoogleSignInClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_update);
 
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+        mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser= mAuth.getCurrentUser();
         String displayName = currentUser.getDisplayName();
         String email = currentUser.getEmail();
@@ -109,48 +124,23 @@ public class UserUpdateActivity extends AppCompatActivity {
         userUpdate_completeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                nickname = userUpdate_nickname.getText().toString();
-                year = datePickerDateOfBirth.getYear();
-                month= datePickerDateOfBirth.getMonth()+1;
-                day  = datePickerDateOfBirth.getDayOfMonth();
-
-                if(nickname == null || nickname.equals("") ) {
-                    Toast.makeText(UserUpdateActivity.this, "닉네임을 작성해주세요.", Toast.LENGTH_SHORT).show();
-                    return;
-                } else if (gender == null) {
-                    Toast.makeText(UserUpdateActivity.this, "성별을 선택해주세요."+nickname, Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                String dateOfBirth = ""+year;
-                if(month<10) dateOfBirth +="0";
-                dateOfBirth += month;
-                if(day<10) dateOfBirth +="0";
-                dateOfBirth += day;
-
-                FirebaseFirestore db = FirebaseFirestore.getInstance();
-                Map<String, Object> user = new HashMap<>();
-                user.put("nickname", nickname);
-                user.put("dateOfBirth", dateOfBirth);
-                user.put("gender", gender);
-                user.put("RegistrationDate", new Date());
-
-                db.collection("users").document(token)
-                        .set(user)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                Log.d("RegisterActivity", "DocumentSnapshot successfully written!");
-                                Toast.makeText(UserUpdateActivity.this, "등록 성공 : dateOfBirth : "+year+"/"+month+"/"+day+"\n성별 : "+gender+"\n닉네임 : "+nickname, Toast.LENGTH_SHORT).show();
+                new AlertDialog.Builder(UserUpdateActivity.this)
+                        .setTitle("회원정보수정")
+                        .setMessage("정말 수정 하시겠습니까?")
+//                        .setIcon(android.R.drawable.ic_menu_save)
+                        .setPositiveButton("네", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                // 확인시 처리 로직
+                                updateUserInfo();
                                 finish();
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(UserUpdateActivity.this, "등록 실패", Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                            }})
+                        .setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                // 취소시 처리 로직
+
+                            }})
+                        .show();
+
             }
         });
 
@@ -174,7 +164,60 @@ public class UserUpdateActivity extends AppCompatActivity {
             }
         });
 
+        View userUpdate_signout = findViewById(R.id.userUpdate_signout);
+        userUpdate_signout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+            new AlertDialog.Builder(UserUpdateActivity.this)
+                .setTitle("로그아웃")
+                .setMessage("정말 로그아웃 하시겠습니까?")
+//                        .setIcon(android.R.drawable.ic_menu_save)
+                .setPositiveButton("네", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        // 확인시 처리 로직
+                        signOut();
+                        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
+                        finish();
+                    }})
+                .setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        // 취소시 처리 로직
 
+                    }})
+                .show();
+
+            return false;
+            }
+        });
+        View userUpdate_withdraw = findViewById(R.id.userUpdate_withdraw);
+        userUpdate_withdraw.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                new AlertDialog.Builder(UserUpdateActivity.this)
+                        .setTitle("회원탈퇴")
+                        .setMessage("정말 탈퇴 하시겠습니까?")
+//                        .setIcon(android.R.drawable.ic_menu_save)
+                        .setPositiveButton("네", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                // 확인시 처리 로직
+                                revokeAccess();
+                                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intent);
+                                finish();
+                            }})
+                        .setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                // 취소시 처리 로직
+
+                            }})
+                        .show();
+
+                return false;
+            }
+        });
 
 
     }
@@ -182,6 +225,77 @@ public class UserUpdateActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         finish();
+    }
+
+    private void signOut() {
+        // Firebase sign out
+        mAuth.signOut();
+
+        // Google sign out
+        mGoogleSignInClient.signOut().addOnCompleteListener(this,
+                new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                    }
+                });
+    }
+
+    private void revokeAccess() {
+        // Firebase sign out
+        mAuth.signOut();
+
+        // Google revoke access
+        mGoogleSignInClient.revokeAccess().addOnCompleteListener(this,
+                new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                    }
+                });
+    }
+
+    private void updateUserInfo() {
+        nickname = userUpdate_nickname.getText().toString();
+        year = datePickerDateOfBirth.getYear();
+        month= datePickerDateOfBirth.getMonth()+1;
+        day  = datePickerDateOfBirth.getDayOfMonth();
+
+        if(nickname == null || nickname.equals("") ) {
+            Toast.makeText(UserUpdateActivity.this, "닉네임을 작성해주세요.", Toast.LENGTH_SHORT).show();
+            return;
+        } else if (gender == null) {
+            Toast.makeText(UserUpdateActivity.this, "성별을 선택해주세요."+nickname, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String dateOfBirth = ""+year;
+        if(month<10) dateOfBirth +="0";
+        dateOfBirth += month;
+        if(day<10) dateOfBirth +="0";
+        dateOfBirth += day;
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        Map<String, Object> user = new HashMap<>();
+        user.put("nickname", nickname);
+        user.put("dateOfBirth", dateOfBirth);
+        user.put("gender", gender);
+        user.put("RegistrationDate", new Date());
+
+        db.collection("users").document(token)
+                .set(user)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("RegisterActivity", "DocumentSnapshot successfully written!");
+                        Toast.makeText(UserUpdateActivity.this, "등록 성공 : dateOfBirth : "+year+"/"+month+"/"+day+"\n성별 : "+gender+"\n닉네임 : "+nickname, Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(UserUpdateActivity.this, "등록 실패", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
 }
