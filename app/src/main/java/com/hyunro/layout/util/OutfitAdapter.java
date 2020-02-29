@@ -11,10 +11,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.Timestamp;
 import com.hyunro.layout.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class OutfitAdapter extends RecyclerView.Adapter<OutfitAdapter.ViewHolder> implements OnOutfitClickListener {
@@ -68,6 +72,7 @@ public class OutfitAdapter extends RecyclerView.Adapter<OutfitAdapter.ViewHolder
         ImageView outfitRecycle_photo;
         TextView outfitRecycle_nickname;
         TextView outfitRecycle_ageGender;
+        TextView outfitRecycle_uploadDate;
         TextView outfitRecycle_location;
         TextView outfitRecycle_outer;
         TextView outfitRecycle_top;
@@ -80,6 +85,7 @@ public class OutfitAdapter extends RecyclerView.Adapter<OutfitAdapter.ViewHolder
             outfitRecycle_photo = itemView.findViewById(R.id.outfitRecycle_photo);
             outfitRecycle_nickname = itemView.findViewById(R.id.outfitRecycle_nickname);
             outfitRecycle_ageGender = itemView.findViewById(R.id.outfitRecycle_ageGender);
+            outfitRecycle_uploadDate = itemView.findViewById(R.id.outfitRecycle_uploadDate);
             outfitRecycle_location = itemView.findViewById(R.id.outfitRecycle_location);
             outfitRecycle_outer = itemView.findViewById(R.id.outfitRecycle_outer);
             outfitRecycle_top = itemView.findViewById(R.id.outfitRecycle_top);
@@ -103,7 +109,14 @@ public class OutfitAdapter extends RecyclerView.Adapter<OutfitAdapter.ViewHolder
             outfitRecycle_photo.setImageBitmap((Bitmap)outfit.get("photo"));
 
             outfitRecycle_nickname.setText((String)outfit.get("nickname"));
-            outfitRecycle_ageGender.setText((String)outfit.get("gender")+"/"+outfit.get("age"));
+            String gender = "남";
+            if(outfit.get("gender").equals("F")) gender = "여";
+            outfitRecycle_ageGender.setText("("+outfit.get("age")+"/"+gender+")");
+            Date uploadDate = ((Timestamp)outfit.get("uploadDate")).toDate();
+            String[] yoilArray = { "일", "월", "화", "수", "목", "금", "토" };
+            String formattedDate = uploadDate.getMonth()+"/"+uploadDate.getDate()+" "+yoilArray[uploadDate.getDay()];
+            outfitRecycle_uploadDate.setText(formattedDate);
+
             outfitRecycle_location.setText((String)outfit.get("location"));
             outfitRecycle_outer.setText((String)outfit.get("outer"));
             outfitRecycle_top.setText((String)outfit.get("top"));

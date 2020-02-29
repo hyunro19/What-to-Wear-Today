@@ -92,10 +92,14 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.ViewHold
 
         public void setItem(Map<String, Object> today) {
             dateByThreeHours.setText((String)today.get("fcstDate"));
-            timeByThreeHours.setText((String)today.get("fcstTime")+"시");
+
+            String fcstTime = (String)today.get("fcstTime");
+            timeByThreeHours.setText(fcstTime+"시");
 
             String todaySkyCodeByThreeHours = (String)today.get("SKY")+(String)today.get("PTY");
-            int todaySkyImageIdByThreeHours = context.getResources().getIdentifier( "ic_weather_1"+todaySkyCodeByThreeHours, "drawable",context.getPackageName());
+            String flag = "1";
+            if(fcstTime.equals("0") || fcstTime.equals("3") || fcstTime.equals("21") ) flag = "2";
+            int todaySkyImageIdByThreeHours = context.getResources().getIdentifier( "ic_weather_"+flag+todaySkyCodeByThreeHours, "drawable",context.getPackageName());
             weatherByThreeHours.setImageResource(todaySkyImageIdByThreeHours);
             weatherTextByThreeHours.setText(skyText.get(todaySkyCodeByThreeHours));
 
@@ -103,7 +107,7 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.ViewHold
             if(Integer.parseInt((String)today.get("fcstTime"))%6==0) {
                 rainByThreeHours.setText((String)today.get("POP")+"% "+(String)today.get("R06")+"mm");
             }
-            String[] weatherDirectionArray = {"북", "북동", "북동", "동", "동", "남동", "남동", "남", "남", "남서", "남서", "서", "서", "북서", "북서", "북"};
+            String[] weatherDirectionArray = {"북", "북동", "북동", "동", "동", "남동", "남동", "남", "남", "남서", "남서", "서", "서", "북서", "북서", "북", "북"};
             Double weatherDirectionAngle = Double.parseDouble((String)today.get("VEC"));
             windByThreeHours.setText(weatherDirectionArray[(int)(weatherDirectionAngle/22.5)]+" "+today.get("WSD")+"m/s");
             humidityByThreeHours.setText((String)today.get("REH")+"%");
@@ -113,17 +117,17 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.ViewHold
     }
 
     public static Map<String, String> skyText = new HashMap<String, String>() {{
-        put("10", "맑음\n");
-        put("11", "비\n");
-        put("12","비/눈\n");
-        put("13","눈\n");
-        put("14","소나기\n");
-        put("30","구름많음\n");
+        put("10", "맑음");
+        put("11", "비");
+        put("12","비/눈");
+        put("13","눈");
+        put("14","소나기");
+        put("30","구름많음");
         put("31","구름많고\n비");
         put("32","구름많고\n비/눈");
         put("33","구름많고\n눈");
         put("34","구름많고\n소나기");
-        put("40","흐림\n");
+        put("40","흐림");
         put("41","흐리고\n비");
         put("42","흐리고\n비/눈");
         put("43","흐리고\n눈");

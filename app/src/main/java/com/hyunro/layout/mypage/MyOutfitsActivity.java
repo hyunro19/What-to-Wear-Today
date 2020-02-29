@@ -53,19 +53,8 @@ public class MyOutfitsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         token = (String)bundle.get("token");
-        query = db.collection("outfit").whereEqualTo("uid", token).orderBy("uploadDate",Query.Direction.DESCENDING).limit(2);
+        query = db.collection("outfit").whereEqualTo("uid", token).orderBy("uploadDate",Query.Direction.DESCENDING).limit(1);
         downloadOutfitInfo(token);
-
-
-
-
-
-
-
-
-
-
-
 
 
         View myoutfits_backButton = findViewById(R.id.myoutfits_backButton);
@@ -80,7 +69,6 @@ public class MyOutfitsActivity extends AppCompatActivity {
         myoutfits_readMore.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                Toast.makeText(MyOutfitsActivity.this, "Read More", Toast.LENGTH_SHORT).show();
                 downloadOutfitInfo(token);
                 return false;
             }
@@ -101,16 +89,28 @@ public class MyOutfitsActivity extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot documentSnapshots) {
-                        // ...
-
                         // Get the last visible document
-                        DocumentSnapshot lastVisible = documentSnapshots.getDocuments()
-                                .get(documentSnapshots.size() -1);
-
+                        List<DocumentSnapshot> datas = documentSnapshots.getDocuments();
+                        Map<String, Map<String, Object>> tempOutfit = new HashMap<>();
+                        for(DocumentSnapshot data : datas) {
+                            Log.d("paging : ", data.getData().get("documentId")+"");
+                            Map<String, Object> map = data.getData();
+                            tempOutfit.put(data.getId(), map);
+                            myOutfit.put(data.getId(), map);
+                        }
+                        downloadOutfitPhoto(tempOutfit);
                         // Construct a new query starting at this document,
                         // get the next 25 cities.
-                        query = db.collection("outfit").whereEqualTo("uid", tempToken).orderBy("uploadDate",Query.Direction.DESCENDING)
-                                .limit(2);
+                        try {
+                            DocumentSnapshot lastVisible = datas.get(documentSnapshots.size() -1);
+                            query = db.collection("outfit").whereEqualTo("uid", tempToken).orderBy("uploadDate",Query.Direction.DESCENDING)
+                                    .startAfter(lastVisible)
+                                    .limit(1);
+                            findViewById(R.id.myOutfitsEmpty).setVisibility(View.GONE);
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            Toast.makeText(MyOutfitsActivity.this, "읽어올 데이터가 없습니다.", Toast.LENGTH_SHORT).show();
+                        }
+
 
                         // Use the query for pagination
                         // ...
@@ -142,8 +142,9 @@ public class MyOutfitsActivity extends AppCompatActivity {
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageRef = storage.getReference();
     int count;
-    public void downloadOutfitPhoto(){
-        for(String key : myOutfit.keySet()) {
+    public void downloadOutfitPhoto(Map<String, Map<String, Object>> tempMap){
+        final Map<String, Map<String, Object>> tempOutfit = tempMap;
+        for(String key : tempOutfit.keySet()) {
             final String documentId = key;
             StorageReference islandRef = storageRef.child("outfitPhoto/"+documentId+".jpg");
             final long ONE_MEGABYTE = 1024 * 1024;
@@ -152,12 +153,12 @@ public class MyOutfitsActivity extends AppCompatActivity {
                 public void onSuccess(byte[] bytes) {
                     // Data for "images/island.jpg" is returns, use this as needed
                     Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                    myOutfit.get(documentId).put("photo", bitmap);
+                    tempOutfit.get(documentId).put("photo", bitmap);
                     Log.d("downloadOutfitPhoto", "successful for "+documentId);
                     count += 1;
-                    if(count == myOutfit.keySet().size()) {
+                    if(count == tempOutfit.keySet().size()) {
                         count = 0;
-                        spread_outfit();
+                        spread_outfit(tempOutfit);
                         Log.d("downloadOutfitPhoto", "successful for all");
                     }
                 }
@@ -173,8 +174,8 @@ public class MyOutfitsActivity extends AppCompatActivity {
     RecyclerView outfitRecyclerView;
     LinearLayoutManager layoutManagerOutfit;
     OutfitAdapter outfitAdapter;
-    public void spread_outfit(){
-        if(myOutfit.isEmpty()) return;
+    public void spread_outfit(Map<String, Map<String, Object>> tempOutfit){
+        if(tempOutfit.isEmpty()) return;
         if(outfitRecyclerView == null) outfitRecyclerView = findViewById(R.id.myoutfitsRecyclerView);
         if(layoutManagerOutfit == null) {
             layoutManagerOutfit = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
@@ -182,18 +183,19 @@ public class MyOutfitsActivity extends AppCompatActivity {
         }
         if(outfitAdapter == null) {
             outfitAdapter = new OutfitAdapter(this);
-            outfitAdapter.notifyDataSetChanged();
+            outfitRecyclerView.setAdapter(outfitAdapter);
         }
-        for(String key : myOutfit.keySet()) {
-            outfitAdapter.addItem(myOutfit.get(key));
+        for(String key : tempOutfit.keySet()) {
+            outfitAdapter.addItem(tempOutfit.get(key));
         }
+        outfitAdapter.notifyDataSetChanged();
 //        Set set = myOutfit.keySet();
 //        List list = new ArrayList(set);
 //        Collections.sort(list);
 //        for(Object key : list) {
 //            outfitAdapter.addItem(myOutfit.get(key));
 //        }
-        outfitRecyclerView.setAdapter(outfitAdapter);
+
 
         outfitAdapter.setOnOutfitClickListener(new OnOutfitClickListener() {
             @Override
@@ -210,6 +212,9 @@ public class MyOutfitsActivity extends AppCompatActivity {
     }
 
 
-
+    @Override
+    public void onBackPressed(){
+        finish();
+    }
 
 }

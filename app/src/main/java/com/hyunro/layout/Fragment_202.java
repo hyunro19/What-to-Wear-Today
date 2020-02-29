@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -29,6 +30,8 @@ import com.hyunro.layout.util.WeatherAdapter;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static com.hyunro.layout.MainActivity.firstLoc;
 
 public class Fragment_202 extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
@@ -109,10 +112,22 @@ public class Fragment_202 extends Fragment {
     public void onStart() {
         super.onStart();
 //        spread_fragment_202();
-        Log.d("Fragment202 Cycle", "fragment202 onStrart");
         MainActivity mainActivity = (MainActivity)getActivity();
+
+        View fragment_202_commercial = mainActivity.findViewById(R.id.fragment_202_commercial);
+        fragment_202_commercial.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "광고문의 : hyunro91@gmail.com", Toast.LENGTH_SHORT).show();
+            }
+        });
+        if(!firstLoc.equals("서울특별시")) {
+            Toast.makeText(mainActivity, "현재 서울특별시의 날씨 정보만 제공됩니다.", Toast.LENGTH_SHORT).show();
+            return;
+        }
         spread_fragment_202_top(mainActivity);
         spread_fragment_202_bottom(mainActivity);
+
     }
     public void onResuem() {
         super.onResume();
@@ -130,7 +145,6 @@ public class Fragment_202 extends Fragment {
     }
 
     public void spread_fragment_202_top(MainActivity mainActivity){
-
         Map<String, Object> yesterdayAM = mainActivity.yesterdayAM;
         Map<String, Object> yesterdayPM = mainActivity.yesterdayPM;
         Map<String, Map<String, Object>> today = mainActivity.today;

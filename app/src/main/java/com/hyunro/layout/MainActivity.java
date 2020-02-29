@@ -2,22 +2,31 @@ package com.hyunro.layout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.SystemClock;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -28,12 +37,13 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.hyunro.layout.location.LocSelectActivity;
@@ -91,11 +101,39 @@ public class MainActivity extends AppCompatActivity
     FirebaseAuth mAuth;
     public String token;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+//        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(this,
+//                new OnSuccessListener<InstanceIdResult>() {
+//                    @Override
+//                    public void onSuccess(InstanceIdResult instanceIdResult) {
+//                        String newToken = instanceIdResult.getToken();
+//                        Log.d("FB Instance", newToken);
+//                    }
+//                });
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w("FB Instance", "getInstanceId failed", task.getException());
+                            return;
+                        }
+
+                        // Get new Instance ID token
+                        String token = task.getResult().getToken();
+
+                        // Log and toast
+                        Log.d("FB Instance", token);
+                        Toast.makeText(MainActivity.this, token, Toast.LENGTH_SHORT).show();
+                    }
+                });
         mAuth = FirebaseAuth.getInstance();
         token = mAuth.getCurrentUser().getUid();
         Log.d("MainActivity","in onCreate() method, token = "+token);
@@ -208,7 +246,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        TextView readDBtest = findViewById(R.id.readDBtest);
+        TextView readDBtest = findViewById(R.id.frag201_mention);
         DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
         TimeZone timezone = TimeZone.getTimeZone("Asia/Seoul");
         dateFormat.setTimeZone(timezone);
@@ -255,18 +293,22 @@ public class MainActivity extends AppCompatActivity
 
 
     FirebaseFirestore db;
-    @Override
+    public static String firstLoc;
     protected void onStart() {
         super.onStart();
 
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
-        String firstLoc = pref.getString("firstLoc", "서울특별시");
+        firstLoc = pref.getString("firstLoc", "서울특별시");
         String secondLoc = pref.getString("secondLoc", "중구");
         String thirdLoc = pref.getString("thirdLoc", "신당동");
         locXY = pref.getString("locXY", "60127");
         TextView currentLocation = findViewById(R.id.currentLocation);
         currentLocation.setText(firstLoc+" "+secondLoc+" "+thirdLoc);
 
+        if(!firstLoc.equals("서울특별시")) {
+            Toast.makeText(this, "현재 서울특별시의 날씨 정보만 제공됩니다.", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         db = FirebaseFirestore.getInstance();
         // outfit data 가져오기
@@ -494,10 +536,21 @@ public class MainActivity extends AppCompatActivity
         Toast.makeText(this, "permissions granted : " + permissions.length, Toast.LENGTH_LONG).show();
     }
 
+    private long lastTimeBackPressed;
+    @Override
+    public void onBackPressed() {
+        if(System.currentTimeMillis() - lastTimeBackPressed < 1500){
+            finish();
+            return;
+        }
+        lastTimeBackPressed = System.currentTimeMillis();
+        Toast.makeText(this,"'뒤로' 버튼을 한 번 더 누르면 종료됩니다.",Toast.LENGTH_SHORT).show();
+    }
+
     @Override
     public void onDestroy(){
         super.onDestroy();
-        if(token.equals("")) mAuth.signOut();
+        if(token.equals("1eGwRyYHF5dnbx557pWn9q4bzYf2")) mAuth.signOut();
     }
 
 

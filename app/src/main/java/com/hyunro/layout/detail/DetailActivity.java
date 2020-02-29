@@ -11,11 +11,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.Timestamp;
 import com.hyunro.layout.MainActivity;
 import com.hyunro.layout.R;
 import com.hyunro.layout.mypage.MyOutfitsActivity;
 import com.hyunro.layout.util.WeatherAdapter;
 
+import java.util.Date;
 import java.util.Map;
 
 import static com.hyunro.layout.MainActivity.outfit;
@@ -50,11 +52,17 @@ public class DetailActivity extends AppCompatActivity {
 
         TextView detail_nickname = findViewById(R.id.detail_nickname);
         TextView detail_ageGender = findViewById(R.id.detail_ageGender);
+        TextView detail_date = findViewById(R.id.detail_date);
         TextView detail_location = findViewById(R.id.detail_location);
 
         detail_nickname.setText((String)info.get("nickname"));
-        detail_ageGender.setText((String)info.get("gender")+"/"+info.get("age"));
+        String gender = "남";
+        if(info.get("gender").equals("F")) gender = "여";
+        detail_ageGender.setText(info.get("age")+"/"+gender);
         detail_location.setText((String)info.get("location"));
+        String[] yoilArray = { "일", "월", "화", "수", "목", "금", "토" };
+        Date uploadDate = ((Timestamp)info.get("uploadDate")).toDate();
+        detail_date.setText(uploadDate.getMonth()+1+"/"+uploadDate.getDate()+" "+yoilArray[uploadDate.getDay()]);
 
         Map<String, String> skyText = WeatherAdapter.skyText;
         ImageView detail_amSkyImage = findViewById(R.id.detail_amSkyImage);
