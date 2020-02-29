@@ -4,9 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
+import android.os.SystemClock;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -29,6 +32,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.hyunro.layout.MainActivity;
 import com.hyunro.layout.R;
 
+import java.net.URL;
+
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -43,12 +48,12 @@ public class LoginActivity extends AppCompatActivity {
     private TextView mStatusTextView;
     private TextView mDetailTextView;
     FirebaseUser currentUser;
+    String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
 
         // [START config_signin]
         // Configure Google Sign In
@@ -65,23 +70,14 @@ public class LoginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         // [END initialize_auth]
 
-        Button toMainActivity = findViewById(R.id.toMainActivity);
-        toMainActivity.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-
         Button googleSignInButton = findViewById(R.id.googleSignInButton);
         googleSignInButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if(currentUser == null) {
                     signIn();
                 } else {
-                    Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
-                    startActivity(intent);
+                    token = currentUser.getUid();
+                    checkCustomUserDataExists(token);
                 }
             }
         });
@@ -90,26 +86,6 @@ public class LoginActivity extends AppCompatActivity {
         sampleSignInButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
                 sampleSignIn();
-            }
-        });
-        Button sampleCreateButton = findViewById(R.id.sampleCreateButton);
-        sampleCreateButton.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v) {
-                createAccount("mulcam1305@gmail.com", "mc13051305!");
-            }
-        });
-
-        Button signOutButton = findViewById(R.id.signOutButton);
-        signOutButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                signOut();
-            }
-        });
-
-        Button disconnectButton = findViewById(R.id.disconnectButton);
-        disconnectButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                revokeAccess();
             }
         });
 
@@ -121,38 +97,17 @@ public class LoginActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
 
-        // Check if user is signed in (non-null) and update UI accordingly.
+        // Check if user is signed in (non-null)
         currentUser = mAuth.getCurrentUser();
         if(currentUser == null) return;
 
-        // currentUser != null
-        String token = currentUser.getUid();
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("users").document(token)
-                .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    document = task.getResult();
-                    // Custom User Data Exists
-                    Log.d("ReadFromFirebase : ", "Cached document data: " + document.getData());
-                    if(document.getData() != null) {
-                        document = null;
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                } else {
-                    // Custom User Data X -> Registration Required
-                    Log.d("ReadFromFirebase : ", "Cached get failed: ", task.getException());
-
-                }
-            }
-        });
-
-
+        token = currentUser.getUid();
+        Log.d("onStart", "currentUser not null, + / token? "+token);
+        checkCustomUserDataExists(token);
     }
     // [END on_start_check_user]
+
+
 
     // [START onactivityresult]
     @Override
@@ -191,9 +146,6 @@ public class LoginActivity extends AppCompatActivity {
                         // Sign in success, update UI with the signed-in user's information
                         Log.d(TAG, "signInWithCredential:success");
                         currentUser = mAuth.getCurrentUser();
-
-                        Intent registerIntent = new Intent(getApplicationContext(), RegisterActivity.class);
-                        startActivityForResult(registerIntent, 100);
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w(TAG, "signInWithCredential:failure", task.getException());
@@ -211,35 +163,8 @@ public class LoginActivity extends AppCompatActivity {
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
-        Log.d("signIn Method", "-----------------------------");
     }
     // [END signin]
-
-    private void signOut() {
-        // Firebase sign out
-        mAuth.signOut();
-
-        // Google sign out
-        mGoogleSignInClient.signOut().addOnCompleteListener(this,
-            new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                }
-            });
-    }
-
-    private void revokeAccess() {
-        // Firebase sign out
-        mAuth.signOut();
-
-        // Google revoke access
-        mGoogleSignInClient.revokeAccess().addOnCompleteListener(this,
-            new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                }
-            });
-    }
 
     private void sampleSignIn() {
         // [START sign_in_with_email]
@@ -249,46 +174,51 @@ public class LoginActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     // Sign in success, update UI with the signed-in user's information
-                    Toast.makeText(LoginActivity.this, "샘플 계정으로\n로그인하셨습니다.",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "테스트 계정으로 로그인하셨습니다.", Toast.LENGTH_LONG).show();
+//                    TextView view = (TextView) toast.getView().findViewById(android.R.id.message);
+//                    if( view != null) view.setGravity(Gravity.CENTER);
+//                    toast.show();
+
                     currentUser = mAuth.getCurrentUser();
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
                     finish();
+
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "signInWithEmail:failure", task.getException());
                     Toast.makeText(LoginActivity.this, "Authentication failed.",Toast.LENGTH_SHORT).show();
+
                 }
                 }
             });
         // [END sign_in_with_email]
     }
-
-    private void createAccount(String email, String password) {
-        Log.d(TAG, "createAccount:" + email);
-//        showProgressBar();
-
-        // [START create_user_with_email]
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(LoginActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-
-                        // [START_EXCLUDE]
-//                        hideProgressBar();
-                        // [END_EXCLUDE]
+    private void checkCustomUserDataExists(String token) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("users").document(token)
+                .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    document = task.getResult();
+                    // Custom User Data Exists
+                    Log.d("At LoginActivity, ", "Read User Data From FirebaseDB : " + document.getData());
+                    if(document.getData() != null) {
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
+                        startActivity(intent);
                     }
-                });
-        // [END create_user_with_email]
+                } else {
+                    // Custom User Data X -> Registration Required
+                    Log.d("At LoginActivity, ", "Cached get failed: ", task.getException());
+                }
+            }
+        });
     }
+
 }
+
