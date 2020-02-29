@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/location_select"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -70,6 +71,14 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/seoulOnlyMention"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginBottom="8dp"
+        android:text="*현재 '서울특별시'의 날씨정보만 제공됩니다." />
 
     <fragment
         android:id="@+id/frameLocSelectSearch"

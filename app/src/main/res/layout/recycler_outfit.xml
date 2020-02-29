@@ -9,7 +9,7 @@
 
     <ImageView
         android:id="@+id/outfitRecycle_photo"
-        android:layout_width="180dp"
+        android:layout_width="150dp"
         android:layout_height="180dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
@@ -21,20 +21,21 @@
         android:id="@+id/outfitRecycle_nickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:text="닉네임"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintEnd_toStartOf="@+id/outfitRecycle_ageGender"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/outfitRecycle_ageGender"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="50dp"
-        android:text="나이/성별"
+        android:text="20세/남"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -93,7 +94,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="190dp" />
+        app:layout_constraintGuide_begin="160dp" />
 
     <TextView
         android:id="@+id/outfitRecycle_outer"
@@ -134,4 +135,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/outfitRecycle_shoesLabel"
         app:layout_constraintTop_toBottomOf="@+id/outfitRecycle_bottomLabel" />
+
+    <TextView
+        android:id="@+id/outfitRecycle_uploadDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="01/01 월"
+        app:layout_constraintStart_toEndOf="@+id/outfitRecycle_ageGender"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

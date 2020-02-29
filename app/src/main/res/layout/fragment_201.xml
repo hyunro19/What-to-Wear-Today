@@ -11,7 +11,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="250dp">
+        android:layout_height="232dp">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -51,7 +51,7 @@
                 android:id="@+id/leftLabelWeather"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="36dp"
+                android:layout_marginTop="41dp"
                 android:gravity="center"
                 android:text="날씨"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -62,7 +62,7 @@
                 android:id="@+id/leftLabelTemp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="36dp"
+                android:layout_marginTop="41dp"
                 android:gravity="center"
                 android:text="기온"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -70,30 +70,33 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/leftLabelWeather" />
 
-            <ImageView
+            <TextView
                 android:id="@+id/leftLabelRain"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginTop="16dp"
-                android:src="@android:drawable/ic_input_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="비/눈"
+                android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/leftLabelTemp" />
 
-            <ImageView
+            <TextView
                 android:id="@+id/leftLabelWind"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@android:drawable/ic_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="바람"
+                android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/leftLabelRain" />
 
-            <ImageView
+            <TextView
                 android:id="@+id/leftLabelHumidity"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@android:drawable/ic_lock_lock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="습도"
+                android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/leftLabelWind" />
@@ -128,9 +131,10 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/readDBtest"
+                    android:id="@+id/frag201_mention"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
                     android:gravity="center"
                     android:text="오늘과 비슷한 날씨에 다른 사람들은 아래와 같이 입었습니다." />
 

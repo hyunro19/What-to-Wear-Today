@@ -64,7 +64,6 @@
                     android:layout_marginTop="20dp"
                     android:minHeight="300dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.495"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:src="@tools:sample/avatars">
@@ -101,7 +100,6 @@
                     android:text="나이/성별"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toStartOf="@+id/verticalGuideline1"
-                    app:layout_constraintHorizontal_bias="0.481"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/detail_label_nickname" />
 
@@ -121,8 +119,8 @@
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:hint="설명 내용"
-                    android:lines="10"
+                    android:hint="오늘 의상을 설명해주세요."
+                    android:lines="8"
                     android:maxLength="200"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -133,21 +131,10 @@
                     android:id="@+id/detail_spinner_outer"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginTop="56dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.483"
                     app:layout_constraintStart_toStartOf="@+id/verticalGuideline1"
                     app:layout_constraintTop_toBottomOf="@+id/detail_label_weather" />
-
-                <Spinner
-                    android:id="@+id/detail_spinner_bottom"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.483"
-                    app:layout_constraintStart_toStartOf="@+id/verticalGuideline1"
-                    app:layout_constraintTop_toBottomOf="@+id/detail_spinner_top" />
 
                 <Spinner
                     android:id="@+id/detail_spinner_top"
@@ -155,9 +142,18 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.483"
                     app:layout_constraintStart_toStartOf="@+id/verticalGuideline1"
                     app:layout_constraintTop_toBottomOf="@+id/detail_spinner_outer" />
+
+                <Spinner
+                    android:id="@+id/detail_spinner_bottom"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/verticalGuideline1"
+                    app:layout_constraintTop_toBottomOf="@+id/detail_spinner_top" />
+
 
                 <Spinner
                     android:id="@+id/detail_spinner_shoes"
@@ -165,7 +161,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.483"
                     app:layout_constraintStart_toStartOf="@+id/verticalGuideline1"
                     app:layout_constraintTop_toBottomOf="@+id/detail_spinner_bottom" />
 
@@ -173,11 +168,10 @@
                     android:id="@+id/detail_label_outer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginTop="56dp"
                     android:text="아우터"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toStartOf="@+id/verticalGuideline1"
-                    app:layout_constraintHorizontal_bias="0.506"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/detail_label_weather" />
 
@@ -298,8 +292,8 @@
 
                 <ImageView
                     android:id="@+id/detail_amSkyImage"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:layout_marginTop="20dp"
                     app:layout_constraintStart_toStartOf="@+id/verticalGuideline1"
                     app:layout_constraintTop_toBottomOf="@+id/detail_label_am"
@@ -307,8 +301,8 @@
 
                 <ImageView
                     android:id="@+id/detail_pmSkyImage"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:layout_marginTop="20dp"
                     app:layout_constraintStart_toStartOf="@+id/verticalGuideline2"
                     app:layout_constraintTop_toBottomOf="@+id/detail_label_pm"
@@ -327,10 +321,10 @@
                 <TextView
                     android:id="@+id/detail_amSkyText"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="8dp"
                     android:text="맑음"
+                    app:layout_constraintEnd_toStartOf="@+id/verticalGuideline2"
                     app:layout_constraintStart_toEndOf="@+id/detail_amSkyImage"
                     app:layout_constraintTop_toBottomOf="@+id/detail_label_am" />
 
@@ -338,8 +332,8 @@
                     android:id="@+id/detail_amTemp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
                     android:text="0.0˚C"
+                    app:layout_constraintEnd_toStartOf="@+id/verticalGuideline2"
                     app:layout_constraintStart_toEndOf="@+id/detail_amSkyImage"
                     app:layout_constraintTop_toBottomOf="@+id/detail_amSkyText" />
 
@@ -347,8 +341,8 @@
                     android:id="@+id/detail_amHumidity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
                     android:text="30%"
+                    app:layout_constraintEnd_toStartOf="@+id/verticalGuideline2"
                     app:layout_constraintStart_toEndOf="@+id/detail_amSkyImage"
                     app:layout_constraintTop_toBottomOf="@+id/detail_amTemp" />
 
@@ -356,8 +350,8 @@
                     android:id="@+id/detail_pmHumidity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
                     android:text="30%"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/detail_pmSkyImage"
                     app:layout_constraintTop_toBottomOf="@+id/detail_pmTemp" />
 
@@ -365,18 +359,18 @@
                     android:id="@+id/detail_pmTemp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="35dp"
                     android:text="0.0˚C"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/detail_pmSkyImage"
                     app:layout_constraintTop_toBottomOf="@+id/detail_pmSkyText" />
 
                 <TextView
                     android:id="@+id/detail_pmSkyText"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="8dp"
                     android:text="흐림"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/detail_pmSkyImage"
                     app:layout_constraintTop_toBottomOf="@+id/detail_label_pm" />
 
@@ -394,8 +388,8 @@
                     android:id="@+id/countCurrentText"
                     android:layout_width="50dp"
                     android:layout_height="20dp"
-                    android:text="0"
                     android:gravity="right"
+                    android:text="0"
                     app:layout_constraintEnd_toStartOf="@+id/countMaxText"
                     app:layout_constraintTop_toBottomOf="@+id/detail_description" />
 

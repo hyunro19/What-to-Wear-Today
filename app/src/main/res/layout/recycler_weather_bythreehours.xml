@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/weatherByThreeHoursRecycleLayout"
-    android:layout_width="100dp"
+    android:layout_width="90dp"
     android:layout_height="match_parent">
 
     <TextView
@@ -31,7 +31,7 @@
         android:id="@+id/weatherByThreeHours"
         android:layout_width="44dp"
         android:layout_height="44dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
         android:gravity="center"
         android:src="@android:drawable/sym_def_app_icon"
         android:text="날씨"
@@ -54,12 +54,11 @@
     <TextView
         android:id="@+id/weatherTextByThreeHours"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_marginTop="4dp"
         android:gravity="center"
         android:text="날씨"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.472"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/weatherByThreeHours" />
 
@@ -67,7 +66,7 @@
         android:id="@+id/rainByThreeHours"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:gravity="center"
         android:text="-"
         android:textSize="12sp"
@@ -80,7 +79,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="바람"
+        android:text="-"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -91,7 +90,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="습도"
+        android:text="-"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

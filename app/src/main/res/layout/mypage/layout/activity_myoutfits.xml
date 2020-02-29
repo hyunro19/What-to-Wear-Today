@@ -46,6 +46,15 @@
             android:orientation="vertical"
             android:minHeight="500dp">
 
+            <TextView
+                android:id="@+id/myOutfitsEmpty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp"
+                android:text="아직 내 게시물이 없습니다.\n\n첫 게시물로 오늘의 의상을 올려보세요!" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/myoutfitsRecyclerView"
                 android:layout_width="match_parent"
