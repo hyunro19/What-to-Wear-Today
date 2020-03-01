@@ -1,19 +1,29 @@
 package com.hyunro.layout.detail;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.hyunro.layout.MainActivity;
 import com.hyunro.layout.R;
+import com.hyunro.layout.login.LoginActivity;
 import com.hyunro.layout.mypage.MyOutfitsActivity;
+import com.hyunro.layout.mypage.UserUpdateActivity;
 import com.hyunro.layout.util.WeatherAdapter;
 
 import java.util.Date;
@@ -22,18 +32,62 @@ import java.util.Map;
 import static com.hyunro.layout.MainActivity.outfit;
 
 public class DetailActivity extends AppCompatActivity {
-
+    String documentId;
+    String token = MainActivity.token;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+
+        View detail_delete = findViewById(R.id.detail_delete);
+        detail_delete.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                new AlertDialog.Builder(DetailActivity.this)
+                        .setTitle("의상 게시물 삭제")
+                        .setMessage("정말 삭제하시겠습니까?")
+                        .setPositiveButton("네", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                if (token.equals("1eGwRyYHF5dnbx557pWn9q4bzYf2")) {
+                                    Toast.makeText(DetailActivity.this, "TEST계정의 게시물은 삭제할 수 없습니다.", Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
+                                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                                db.collection("outfit").document(documentId)
+                                        .delete()
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                Toast.makeText(DetailActivity.this, "게시물이 삭제되었습니다.", Toast.LENGTH_SHORT).show();
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(DetailActivity.this, "잠시 후에 다시 시도해주세요.", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                            }})
+                        .setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                // 취소시 처리 로직
+                            }})
+                        .show();
+
+                return false;
+            }
+        });
+
+
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        String documentId = (String)bundle.get("documentId");
+        documentId = (String)bundle.get("documentId");
         String senderActivity = (String)bundle.get("senderActivity");
-        Toast.makeText(this, "From "+senderActivity, Toast.LENGTH_SHORT).show();
         Map<String, Object> info = outfit.get(documentId);
-        if (senderActivity.equals("MyOutfitsActivity")) info = MyOutfitsActivity.myOutfit.get(documentId);
+        if (senderActivity.equals("MyOutfitsActivity")) {
+            detail_delete.setVisibility(View.VISIBLE);
+            info = MyOutfitsActivity.myOutfit.get(documentId);
+        }
 
 
         // info를 ui에 뿌려주면 된다.
@@ -99,6 +153,8 @@ public class DetailActivity extends AppCompatActivity {
         detail_bottom.setText((String)info.get("bottom"));
         detail_shoes.setText((String)info.get("shoes"));
         detail_description.setText((String)info.get("description"));
+
+
 
     }
 

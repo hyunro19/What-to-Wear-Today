@@ -2,19 +2,42 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory/>
+    <PreferenceCategory>
 
-    <SwitchPreference
-        android:defaultValue="true"
-        android:key="agreeDailyAlarm"
-        android:summary="매일 아침 7시 출근 전 오늘 의상 확인 알림"
-        android:title="아침 알림"
-        app:iconSpaceReserved="false"/>
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="agreeDailyAlarm"
+            android:summary="매일 아침 7시 출근 전 오늘 의상 확인 알림"
+            android:title="아침 알림"
+            app:iconSpaceReserved="false"/>
 
-    <SwitchPreference
-        android:defaultValue="true"
-        android:key="agreeMarketingAlarm"
-        android:title="이벤트 혜택 알림"
-        android:summary="광고 및 마케팅 정보 알림"
-        app:iconSpaceReserved="false"/>
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="agreeMarketingAlarm"
+            android:title="이벤트 혜택 알림"
+            android:summary="광고 및 마케팅 정보 알림"
+            app:iconSpaceReserved="false"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory>
+
+        <Preference
+            android:title="관리자에게 문의하기"
+            android:summary="hyunro19@gmail.com"
+            app:iconSpaceReserved="false">
+            <intent
+                android:action="android.intent.action.SENDTO"
+                android:data="mailto:hyunro19@gmail.com" />
+        </Preference>
+        <Preference
+            android:title="버전정보"
+            android:summary="ver1.0"
+            app:iconSpaceReserved="false"/>
+
+    </PreferenceCategory>
+    <PreferenceCategory/>
+
 
 </PreferenceScreen>

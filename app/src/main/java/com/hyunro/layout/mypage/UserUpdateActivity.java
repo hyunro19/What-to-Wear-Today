@@ -27,7 +27,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.auth.User;
 import com.hyunro.layout.R;
+import com.hyunro.layout.detail.DetailActivity;
 import com.hyunro.layout.login.LoginActivity;
 
 import java.util.Date;
@@ -131,6 +133,10 @@ public class UserUpdateActivity extends AppCompatActivity {
                         .setPositiveButton("네", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
                                 // 확인시 처리 로직
+                                if (token.equals("1eGwRyYHF5dnbx557pWn9q4bzYf2")) {
+                                    Toast.makeText(UserUpdateActivity.this, "TEST계정의 정보는 수정할 수 없습니다.", Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
                                 updateUserInfo();
                                 finish();
                             }})
@@ -202,6 +208,10 @@ public class UserUpdateActivity extends AppCompatActivity {
                         .setPositiveButton("네", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
                                 // 확인시 처리 로직
+                                if (token.equals("1eGwRyYHF5dnbx557pWn9q4bzYf2")) {
+                                    Toast.makeText(UserUpdateActivity.this, "TEST계정은 탈퇴할 수 없습니다.", Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
                                 revokeAccess();
                                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -259,10 +269,7 @@ public class UserUpdateActivity extends AppCompatActivity {
         month= datePickerDateOfBirth.getMonth()+1;
         day  = datePickerDateOfBirth.getDayOfMonth();
 
-        if(nickname == null || nickname.equals("") ) {
-            Toast.makeText(UserUpdateActivity.this, "닉네임을 작성해주세요.", Toast.LENGTH_SHORT).show();
-            return;
-        } else if (gender == null) {
+        if (gender == null) {
             Toast.makeText(UserUpdateActivity.this, "성별을 선택해주세요."+nickname, Toast.LENGTH_SHORT).show();
             return;
         }

@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity
     String yesterdayDateAsString;
 
     FirebaseAuth mAuth;
-    public String token;
+    public static String token;
 
 
 
