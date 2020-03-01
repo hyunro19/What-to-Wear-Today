@@ -36,7 +36,7 @@ import java.util.Map;
 
 public class UserUpdateActivity extends AppCompatActivity {
     Map<String, Object> userInfo;
-    EditText userUpdate_nickname;
+    TextView userUpdate_nickname;
     DatePicker datePickerDateOfBirth;
     RadioGroup userUpdate_genderRadioGroup;
     int year;

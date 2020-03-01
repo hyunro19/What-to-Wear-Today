@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".login.RegisterActivity">
 
+    <ImageButton
+        android:id="@+id/register_backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_media_rew" />
+
     <TextView
         android:id="@+id/register_title"
         android:layout_width="wrap_content"
@@ -21,11 +31,10 @@
         android:id="@+id/register_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="email"
-        android:textSize="25sp"
+        android:layout_marginTop="28dp"
+        android:text="ID/Email"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.509"
         app:layout_constraintStart_toStartOf="@+id/verticalGuideline1"
         app:layout_constraintTop_toTopOf="@+id/horizontalGuideline1" />
 
@@ -34,8 +43,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="name"
-        android:textSize="25sp"
+        android:text="No Provider Name"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/verticalGuideline1"
         app:layout_constraintTop_toBottomOf="@+id/register_email" />
@@ -52,7 +61,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="210dp" />
+        app:layout_constraintGuide_begin="190dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/verticalGuideline1"
@@ -67,7 +76,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="ID/Email"
-        android:textSize="25sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/verticalGuideline1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/horizontalGuideline1" />
@@ -78,7 +87,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="이  름"
-        android:textSize="25sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/verticalGuideline1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/register_label_email" />
@@ -89,7 +98,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="닉네임"
-        android:textSize="25sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/verticalGuideline1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/horizontalGuideline2" />
@@ -98,9 +107,9 @@
         android:id="@+id/register_label_dateOfBirth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="110dp"
+        android:layout_marginTop="136dp"
         android:text="생년월일"
-        android:textSize="25sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/verticalGuideline1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/register_label_nickname" />
@@ -109,21 +118,24 @@
         android:id="@+id/register_label_gender"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="116dp"
         android:text="성별"
-        android:textSize="25sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/verticalGuideline1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/register_label_dateOfBirth" />
 
     <EditText
         android:id="@+id/register_nickname"
-        android:layout_width="wrap_content"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
         android:hint="닉네임"
-        android:textSize="25sp"
-        app:layout_constraintEnd_toStartOf="@+id/register_nickname_checkButton"
+        android:maxLength="12"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.15"
         app:layout_constraintStart_toStartOf="@+id/verticalGuideline1"
         app:layout_constraintTop_toTopOf="@+id/horizontalGuideline2" />
 
@@ -131,7 +143,7 @@
         android:id="@+id/register_genderRadioGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="12dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/verticalGuideline1"
@@ -162,14 +174,14 @@
         android:id="@+id/register_dateOfBirthPicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:calendarViewShown="false"
         android:clickable="false"
         android:datePickerMode="spinner"
         android:spinnersShown="true"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.627"
         app:layout_constraintStart_toStartOf="@+id/verticalGuideline1"
-        app:layout_constraintTop_toBottomOf="@+id/register_nickname" />
+        app:layout_constraintTop_toBottomOf="@+id/register_nickname_availabilityCheck" />
 
     <Button
         android:id="@+id/register_cancelButton"
@@ -195,13 +207,24 @@
 
     <Button
         android:id="@+id/register_nickname_checkButton"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="12dp"
+        android:text="중복 검사"
+        app:layout_constraintStart_toEndOf="@+id/register_nickname"
+        app:layout_constraintTop_toTopOf="@+id/horizontalGuideline2" />
+
+    <TextView
+        android:id="@+id/register_nickname_availabilityCheck"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="10dp"
-        android:text="중복확인"
+        android:layout_marginTop="2dp"
+        android:text="*4~12자의 영문 및 숫자만 사용가능합니다."
+        android:textSize="13sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/horizontalGuideline2" />
+        app:layout_constraintStart_toStartOf="@+id/verticalGuideline1"
+        app:layout_constraintTop_toBottomOf="@+id/register_nickname" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

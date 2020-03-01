@@ -22,6 +22,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".util.SettingsActivity"></activity>
+
         <receiver
             android:name=".BootReceiver"
             android:enabled="true"
@@ -34,8 +36,7 @@
         <receiver
             android:name=".MorningAlarmReceiver"
             android:enabled="true"
-            android:exported="true">
-        </receiver>
+            android:exported="true"></receiver>
 
         <service
             android:name=".MyFirebaseMessagingService"

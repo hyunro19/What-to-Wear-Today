@@ -12,26 +12,23 @@
     <Button
         android:id="@+id/googleSignInButton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="64dp"
         android:layout_centerInParent="true"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="450dp"
         android:background="@drawable/common_google_signin_btn_text_light"
-        android:text="Google  SignIn  "
-        android:visibility="visible"
+        android:text="Google 로그인\t\t"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <TextView
         android:id="@+id/sampleSignInButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_marginTop="100dp"
-        android:background="@drawable/common_google_signin_btn_icon_light_normal_background"
-        android:text="  '오늘 뭐 입지?' 둘러보기  "
-        android:visibility="visible"
+        android:layout_marginTop="12dp"
+        android:text="TEST계정으로 둘러보기"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/googleSignInButton" />

@@ -12,7 +12,7 @@
         android:layout_height="80dp">
 
         <ImageButton
-            android:id="@+id/detail_backButton"
+            android:id="@+id/settings_backButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -31,7 +31,7 @@
             android:textSize="22sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/detail_backButton"
+            app:layout_constraintStart_toEndOf="@+id/settings_backButton"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -132,7 +132,7 @@
                     android:id="@+id/detail_outer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="56dp"
+                    android:layout_marginTop="64dp"
                     android:text="outer"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -176,7 +176,7 @@
                     android:id="@+id/detail_label_outer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="56dp"
+                    android:layout_marginTop="64dp"
                     android:text="아우터"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toStartOf="@+id/verticalGuideline1"

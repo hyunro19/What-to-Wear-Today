@@ -12,7 +12,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.Timestamp;
-import com.hyunro.layout.MainActivity;
 import com.hyunro.layout.R;
 import com.hyunro.layout.mypage.MyOutfitsActivity;
 import com.hyunro.layout.util.WeatherAdapter;
@@ -39,7 +38,7 @@ public class DetailActivity extends AppCompatActivity {
 
         // info를 ui에 뿌려주면 된다.
 
-        ImageButton detail_backButton = findViewById(R.id.detail_backButton);
+        ImageButton detail_backButton = findViewById(R.id.settings_backButton);
         detail_backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

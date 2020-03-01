@@ -4,7 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -15,17 +18,24 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.hyunro.layout.MainActivity;
 import com.hyunro.layout.R;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -40,6 +50,8 @@ public class RegisterActivity extends AppCompatActivity {
     String nickname;
     EditText editTextNickname;
     DatePicker datePickerDateOfBirth;
+    Boolean isNicknameOnly = false;
+    Boolean isNicknameAvailable = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +75,55 @@ public class RegisterActivity extends AppCompatActivity {
         textViewDisplayName.setText(displayName);
 
         editTextNickname = findViewById(R.id.register_nickname);
+        editTextNickname.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {   }
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {    }
+            @Override
+            public void afterTextChanged(Editable s) {
+                isNicknameOnly = false;
+                if(!Pattern.matches("^[a-zA-Z0-9]{4,12}$", s)) {
+                    ((TextView)findViewById(R.id.register_nickname_availabilityCheck)).setTextColor(Color.parseColor("#D81B60"));
+                    isNicknameAvailable = false;
+                } else {
+                    ((TextView)findViewById(R.id.register_nickname_availabilityCheck)).setTextColor(Color.parseColor("#8a000000"));
+                    isNicknameAvailable = true;
+                }
+            }
+        });
 
+        View register_nickname_checkButton = findViewById(R.id.register_nickname_checkButton);
+        register_nickname_checkButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nickname = editTextNickname.getText().toString();
+                if(!isNicknameAvailable) {
+                    Toast.makeText(RegisterActivity.this, "유효한 닉네임을 입력해주세요.", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                db.collection("users")
+                        .whereEqualTo("nickname", nickname)
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    if(task.getResult().isEmpty()){
+                                        isNicknameOnly = true;
+                                        Toast.makeText(RegisterActivity.this, "사용가능한 닉네임입니다.", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        isNicknameOnly = false;
+                                        Toast.makeText(RegisterActivity.this, "이미 사용중인 닉네임입니다.", Toast.LENGTH_SHORT).show();
+                                    }
+                                } else {
+                                    Toast.makeText(RegisterActivity.this, "잠시 후에 다시 시도해주세요.", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+            }
+        });
 
         datePickerDateOfBirth = findViewById(R.id.register_dateOfBirthPicker);
         datePickerDateOfBirth.init(1990, 0, 1,null);
@@ -86,10 +146,9 @@ public class RegisterActivity extends AppCompatActivity {
 
 
 
-        View cancelButton = findViewById(R.id.register_cancelButton);
+        View cancelButton = findViewById(R.id.register_backButton);
         cancelButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Toast.makeText(RegisterActivity.this, "cancelButton", Toast.LENGTH_SHORT).show();
                 mAuth.signOut();
                 finish();
 //                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
@@ -104,11 +163,15 @@ public class RegisterActivity extends AppCompatActivity {
                 month= datePickerDateOfBirth.getMonth()+1;
                 day  = datePickerDateOfBirth.getDayOfMonth();
 
-                if(nickname == null || nickname.equals("") ) {
-                    Toast.makeText(RegisterActivity.this, "닉네임을 작성해주세요.", Toast.LENGTH_SHORT).show();
+
+                if(!isNicknameAvailable) {
+                    Toast.makeText(RegisterActivity.this, "유효한 닉네임을 입력해주세요.", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (!isNicknameOnly) {
+                    Toast.makeText(RegisterActivity.this, "닉네임 중복확인을 해주세요.", Toast.LENGTH_SHORT).show();
                     return;
                 } else if (gender == null) {
-                    Toast.makeText(RegisterActivity.this, "성별을 선택해주세요."+nickname, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "성별을 선택해주세요.", Toast.LENGTH_SHORT).show();
                     return;
                 }
 

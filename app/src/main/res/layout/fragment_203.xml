@@ -35,7 +35,7 @@
                 android:text="내 게시글 관리" />
 
             <Button
-                android:id="@+id/fragment203_preferences"
+                android:id="@+id/fragment203_settings"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:textSize="25sp"

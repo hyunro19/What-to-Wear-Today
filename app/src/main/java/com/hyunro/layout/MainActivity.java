@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.FragmentManager;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -44,6 +45,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.hyunro.layout.location.LocSelectActivity;
@@ -108,32 +110,6 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-//        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(this,
-//                new OnSuccessListener<InstanceIdResult>() {
-//                    @Override
-//                    public void onSuccess(InstanceIdResult instanceIdResult) {
-//                        String newToken = instanceIdResult.getToken();
-//                        Log.d("FB Instance", newToken);
-//                    }
-//                });
-        FirebaseInstanceId.getInstance().getInstanceId()
-                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
-                        if (!task.isSuccessful()) {
-                            Log.w("FB Instance", "getInstanceId failed", task.getException());
-                            return;
-                        }
-
-                        // Get new Instance ID token
-                        String token = task.getResult().getToken();
-
-                        // Log and toast
-                        Log.d("FB Instance", token);
-                        Toast.makeText(MainActivity.this, token, Toast.LENGTH_SHORT).show();
-                    }
-                });
         mAuth = FirebaseAuth.getInstance();
         token = mAuth.getCurrentUser().getUid();
         Log.d("MainActivity","in onCreate() method, token = "+token);
@@ -178,7 +154,7 @@ public class MainActivity extends AppCompatActivity
                                     // 갤러리, intent는 MainActivity -> 갤러리 -> 다시 MainActivity -> UploadActivity 순서 (액티비티간 이동이므로)
                                     openGallery();
                                 }
-                                Toast.makeText(getApplicationContext(), items[index], Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(getApplicationContext(), items[index], Toast.LENGTH_SHORT).show();
                             }
                         });
                 builder.show();
@@ -296,6 +272,18 @@ public class MainActivity extends AppCompatActivity
     public static String firstLoc;
     protected void onStart() {
         super.onStart();
+
+        SharedPreferences defultPref = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor defaultEditor = defultPref.edit();
+
+        Boolean isExists_agreeDailyAlarm = defultPref.contains("agreeDailyAlarm");
+        if(!isExists_agreeDailyAlarm) {
+            defaultEditor.putBoolean("agreeDailyAlarm", true);
+        }
+        Boolean isExists_agreeMarketingAlarm = defultPref.contains("agreeMarketingAlarm");
+        if(!isExists_agreeMarketingAlarm) {
+            defaultEditor.putBoolean("isExists_agreeMarketingAlarm", true);
+        }
 
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
         firstLoc = pref.getString("firstLoc", "서울특별시");
@@ -529,11 +517,11 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onDenied(int requestCode, String[] permissions) {
-        Toast.makeText(this, "permissions denied : " + permissions.length, Toast.LENGTH_LONG).show();
+//        Toast.makeText(this, "permissions denied : " + permissions.length, Toast.LENGTH_LONG).show();
     }
     @Override
     public void onGranted(int requestCode, String[] permissions) {
-        Toast.makeText(this, "permissions granted : " + permissions.length, Toast.LENGTH_LONG).show();
+//        Toast.makeText(this, "permissions granted : " + permissions.length, Toast.LENGTH_LONG).show();
     }
 
     private long lastTimeBackPressed;

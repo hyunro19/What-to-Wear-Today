@@ -7,10 +7,13 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
+import androidx.preference.PreferenceManager;
 
 import com.hyunro.layout.location.LocSelectActivity;
 import com.hyunro.layout.login.LoginActivity;
@@ -20,6 +23,12 @@ public class MorningAlarmReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        SharedPreferences deafultPref = PreferenceManager.getDefaultSharedPreferences(context);
+        Boolean agreeDailyAlarm = deafultPref.getBoolean("agreeDailyAlarm",false);
+
+        // 모닝 알람 비동의시 리턴
+        if(agreeDailyAlarm == false) return;
+
         Log.d(" ", "MorningAlarmReceiver");
         notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
         NotificationCompat.Builder builder = null;

@@ -20,11 +20,11 @@
             android:text="기준 지역을 설정하세요"
             android:textSize="22sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/detail_backButton"
+            app:layout_constraintStart_toEndOf="@+id/settings_backButton"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
-            android:id="@+id/detail_backButton"
+            android:id="@+id/settings_backButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"

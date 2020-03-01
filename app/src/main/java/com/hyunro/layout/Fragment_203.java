@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 
 import com.hyunro.layout.mypage.MyOutfitsActivity;
 import com.hyunro.layout.mypage.UserUpdateActivity;
+import com.hyunro.layout.util.SettingsActivity;
 
 
 /**
@@ -132,6 +133,15 @@ public class Fragment_203 extends Fragment {
                 String token = mainActivity.token;
                 Intent intent = new Intent(getActivity(), MyOutfitsActivity.class);
                 intent.putExtra("token", token);
+                startActivity(intent);
+            }
+        });
+
+        View fragment203_settings = getActivity().findViewById(R.id.fragment203_settings);
+        fragment203_settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), SettingsActivity.class);
                 startActivity(intent);
             }
         });

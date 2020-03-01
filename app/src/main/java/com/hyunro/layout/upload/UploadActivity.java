@@ -94,7 +94,7 @@ public class UploadActivity extends AppCompatActivity {
         }
 
         ImageButton backButton; // 뒤로가기 버튼▼
-        backButton = findViewById(R.id.detail_backButton);
+        backButton = findViewById(R.id.settings_backButton);
         backButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 onBackPressed();
