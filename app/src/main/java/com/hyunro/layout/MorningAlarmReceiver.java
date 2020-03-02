@@ -9,13 +9,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
-import android.util.Log;
-import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
 import androidx.preference.PreferenceManager;
 
-import com.hyunro.layout.location.LocSelectActivity;
 import com.hyunro.layout.login.LoginActivity;
 
 public class MorningAlarmReceiver extends BroadcastReceiver {
@@ -26,10 +23,9 @@ public class MorningAlarmReceiver extends BroadcastReceiver {
         SharedPreferences deafultPref = PreferenceManager.getDefaultSharedPreferences(context);
         Boolean agreeDailyAlarm = deafultPref.getBoolean("agreeDailyAlarm",false);
 
-        // 모닝 알람 비동의시 리턴
+        // No agreement to receive morning alarm, return
         if(agreeDailyAlarm == false) return;
 
-        Log.d(" ", "MorningAlarmReceiver");
         notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
         NotificationCompat.Builder builder = null;
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -39,9 +35,7 @@ public class MorningAlarmReceiver extends BroadcastReceiver {
                 ));
             }
             builder = new NotificationCompat.Builder(context, "channel1");
-            Log.d("Receiver_MA", "AFTER OREO BUILDER CREATED");
         } else {
-            Log.d("Receiver_MA", "BEFORE OREO");
             builder = new NotificationCompat.Builder(context);
         }
 

@@ -202,7 +202,6 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onStart() {
         super.onStart();
-        Toast.makeText(this, ""+fragment_202.isAdded(), Toast.LENGTH_SHORT).show();
     }
     private String dateFormating(String dateAsString, String Yoil) {
         String month = dateAsString.substring(4,6);

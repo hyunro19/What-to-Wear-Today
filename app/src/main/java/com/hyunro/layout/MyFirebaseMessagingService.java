@@ -4,19 +4,14 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.Service;
 import android.content.Intent;
 import android.os.Build;
-import android.os.IBinder;
-import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.hyunro.layout.location.LocSelectActivity;
-
-import java.util.Map;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
     private static final String TAG = "FMS";
@@ -27,15 +22,10 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     @Override
     public void onNewToken(String token) {
         super.onNewToken(token);
-        Log.e(TAG, "onNewToken 호출됨 "+token);
     }
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
-        Log.e(TAG, "onMessageReceived 호출됨");
-        // 여기에 알림바로 보내는 기능 추가
-        // showNoti()메소드 인자로 Title, Content를 넣으면, 그게 알림에 떠야함
-        String from = remoteMessage.getFrom();
         String title = remoteMessage.getNotification().getTitle();
         String body = remoteMessage.getNotification().getBody();
         showFirebaseMessage(title, body);
@@ -52,9 +42,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 ));
             }
             builder = new NotificationCompat.Builder(this, "channel1");
-            Log.d("VERSION", "AFTER OREO BUILDER CREATED");
         } else {
-            Log.d("VERSION", "BEFORE OREO");
             builder = new NotificationCompat.Builder(this);
         }
 

@@ -45,7 +45,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 return false;
             }
         });
-//        Boolean agreeMarketingAlarm = sharedPreferences.getBoolean("agreeMarketingAlarm", false);
 
         View settings_backButton = getActivity().findViewById(R.id.settings_backButton);
         settings_backButton.setOnClickListener(new View.OnClickListener() {

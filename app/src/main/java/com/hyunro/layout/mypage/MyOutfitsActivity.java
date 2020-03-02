@@ -75,11 +75,6 @@ public class MyOutfitsActivity extends AppCompatActivity {
         });
     }
 
-
-
-
-
-
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     // outfit data 가져오기
     // filtering 필요
@@ -99,8 +94,6 @@ public class MyOutfitsActivity extends AppCompatActivity {
                             myOutfit.put(data.getId(), map);
                         }
                         downloadOutfitPhoto(tempOutfit);
-                        // Construct a new query starting at this document,
-                        // get the next 25 cities.
                         try {
                             DocumentSnapshot lastVisible = datas.get(documentSnapshots.size() -1);
                             query = db.collection("outfit").whereEqualTo("uid", tempToken).orderBy("uploadDate",Query.Direction.DESCENDING)
@@ -117,27 +110,6 @@ public class MyOutfitsActivity extends AppCompatActivity {
                     }
                 });
     }
-//    public void downloadOutfitInfo(String token) {
-//        query.get()
-//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                        if (task.isSuccessful()) {
-//                            for (QueryDocumentSnapshot document : task.getResult()) {
-//                                Log.w("Outfit Read", "Complete getting documents.", task.getException());
-//                                Map<String, Object> data = document.getData();
-//                                myOutfit.put(document.getId(), data);
-//                            }
-//
-//                            // weatherByThreeHours
-//                            downloadOutfitPhoto();
-//
-//                        } else {
-//                            Log.w("Outfit Read", "Error getting documents.", task.getException());
-//                        }
-//                    }
-//                });
-//    }
 
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageRef = storage.getReference();
@@ -151,10 +123,8 @@ public class MyOutfitsActivity extends AppCompatActivity {
             islandRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
                 @Override
                 public void onSuccess(byte[] bytes) {
-                    // Data for "images/island.jpg" is returns, use this as needed
                     Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
                     tempOutfit.get(documentId).put("photo", bitmap);
-                    Log.d("downloadOutfitPhoto", "successful for "+documentId);
                     count += 1;
                     if(count == tempOutfit.keySet().size()) {
                         count = 0;
@@ -189,13 +159,6 @@ public class MyOutfitsActivity extends AppCompatActivity {
             outfitAdapter.addItem(tempOutfit.get(key));
         }
         outfitAdapter.notifyDataSetChanged();
-//        Set set = myOutfit.keySet();
-//        List list = new ArrayList(set);
-//        Collections.sort(list);
-//        for(Object key : list) {
-//            outfitAdapter.addItem(myOutfit.get(key));
-//        }
-
 
         outfitAdapter.setOnOutfitClickListener(new OnOutfitClickListener() {
             @Override
@@ -206,7 +169,6 @@ public class MyOutfitsActivity extends AppCompatActivity {
                 intent.putExtra("documentId", documentId);
                 intent.putExtra("senderActivity", "MyOutfitsActivity");
                 startActivity(intent);
-//              Toast.makeText(getContext(), "아이템 선택됨 : "+item.toString(), Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -84,7 +84,6 @@ public class Fragment_202 extends Fragment {
     public void onStart() {
         super.onStart();
         MainActivity mainActivity = (MainActivity)getActivity();
-        Toast.makeText(mainActivity, "Fragment_202 onStart()", Toast.LENGTH_SHORT).show();
 
         View fragment_202_commercial = mainActivity.findViewById(R.id.fragment_202_commercial);
         fragment_202_commercial.setOnClickListener(new View.OnClickListener() {

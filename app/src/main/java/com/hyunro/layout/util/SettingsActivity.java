@@ -14,12 +14,6 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        // 이거 해주면 Preference List가 2번 뜸(중복)
-//        getSupportFragmentManager()
-//                .beginTransaction()
-//                .replace(R.id.settings_container, new SettingsFragment())
-//                .commit();
-
     }
 
     @Override

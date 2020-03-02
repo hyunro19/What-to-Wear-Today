@@ -21,7 +21,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -69,8 +68,6 @@ public class UploadActivity extends AppCompatActivity {
         if (bundle.get("file") != null) {
             File file;
             file = (File)bundle.get("file");
-//            BitmapFactory.Options options = new BitmapFactory.Options();
-//            options.inSampleSize = 8;
             bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
             ImageView imageView = findViewById(R.id.detail_image);
             imageView.setImageBitmap(bitmap);
@@ -93,7 +90,7 @@ public class UploadActivity extends AppCompatActivity {
             }
         }
 
-        ImageButton backButton; // 뒤로가기 버튼▼
+        ImageButton backButton;
         backButton = findViewById(R.id.settings_backButton);
         backButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -101,7 +98,7 @@ public class UploadActivity extends AppCompatActivity {
             }
         });
 
-        Button cancelButton; // 취소 버튼▼
+        Button cancelButton;
         cancelButton = findViewById(R.id.detail_cancelButton);
         cancelButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -109,15 +106,13 @@ public class UploadActivity extends AppCompatActivity {
             }
         });
 
-        Button uploadButton; // 업로드 버튼▼
+        Button uploadButton;
         uploadButton = findViewById(R.id.uploadButton);
         uploadButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 uploadOutfit();
-                Toast.makeText(UploadActivity.this, "Upload Button Clicked", Toast.LENGTH_SHORT).show();
             }
         });
-
 
 
         Spinner spinnerOuter = findViewById(R.id.detail_spinner_outer);
@@ -217,8 +212,6 @@ public class UploadActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     // Custom User Data Exists
-                    Log.d("Token : ", "token : " + token);
-                    Log.d("UploadActivity : ", "Cached document data: " + document.getData());
                     nickname = document.getString("nickname");
                     gender = document.getString("gender");
                     dateOfBirth = document.getString("dateOfBirth");
@@ -239,13 +232,11 @@ public class UploadActivity extends AppCompatActivity {
                     nicknameTextView.setText(nickname);
                     TextView ageGenderTextView = findViewById(R.id.detail_ageGender);
                     String genderText = "남성";
-//                    if(gender.equals("M")) genderText = "남성";
                     if(gender.equals("F")) genderText = "여성";
                     ageGenderTextView.setText(age+"세/"+genderText);
 
                 } else {
-                    // Custom User Data X -> Registration Required
-                    Log.d("UploadActivity : ", "Cached get failed: ", task.getException());
+                    Log.d("UploadActivity", "Failed to read custom user data", task.getException());
 
                 }
             }
@@ -257,7 +248,6 @@ public class UploadActivity extends AppCompatActivity {
         Date now = new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
         String ref = format.format(now)+"_"+token;
-        Toast.makeText(this, ref, Toast.LENGTH_SHORT).show();
 
         Map<String, Object> data = new HashMap<>();
         // user info
@@ -304,14 +294,13 @@ public class UploadActivity extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Log.d("UploadActivity", "DocumentSnapshot successfully written!");
-                        Toast.makeText(UploadActivity.this, "DB 등록 성공", Toast.LENGTH_SHORT).show();
+                        Log.d("UploadActivity", "Successfully wrote outfit info");
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(UploadActivity.this, "DB 등록 실패", Toast.LENGTH_SHORT).show();
+                        Log.d("UploadActivity", "Failed to write outfit info");
                     }
                 });
 
@@ -325,16 +314,13 @@ public class UploadActivity extends AppCompatActivity {
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(UploadActivity.this, "Photo 등록 실패", Toast.LENGTH_SHORT).show();
-                // Handle unsuccessful uploads
+                Log.d("UploadActivity", "Successfully wrote outfit photo");
             }
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Toast.makeText(UploadActivity.this, "Photo 등록 성공", Toast.LENGTH_SHORT).show();
+                Log.d("UploadActivity", "Failed to write outfit photo");
                 finish();
-                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
-                // ...
             }
         });
 

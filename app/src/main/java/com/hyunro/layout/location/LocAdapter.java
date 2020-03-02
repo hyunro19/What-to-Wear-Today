@@ -21,12 +21,8 @@ public class LocAdapter extends RecyclerView.Adapter<LocAdapter.ViewHolder> impl
     ArrayList<String> list = new ArrayList<>();
     OnItemClickListener listener;
     private static String keyword;
-    LocAdapter(){
-        Log.d("Constructor : ","Default Constructor");
-    }
-    LocAdapter(String keyword){
-        keyword = keyword;
-        Log.d("Constructor : ","Constructor with keyword");
+    LocAdapter() {
+
     }
 
 
@@ -63,6 +59,12 @@ public class LocAdapter extends RecyclerView.Adapter<LocAdapter.ViewHolder> impl
         list.set(position, firstLoc);
         return;
     }
+    public void clearItem() {
+        list.clear();
+    }
+    public void setKeyword(String inputKeyword) {
+        this.keyword = inputKeyword;
+    }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView textView;
@@ -85,19 +87,15 @@ public class LocAdapter extends RecyclerView.Adapter<LocAdapter.ViewHolder> impl
 
         public void setItem(String item) {
             if(keyword != null) {
-                //                spannable이 적용이 안된다. 오류남.
-                // 문제1. 이 분기로 넘어오지 않는다. keyword를 계속 null로 인식한다.
                 final SpannableStringBuilder sb = new SpannableStringBuilder(item);
-                final ForegroundColorSpan fcs = new ForegroundColorSpan(Color.rgb(200, 0, 0));
-//                sb.setSpan(fcs, item.indexOf(keyword), keyword.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-                sb.setSpan(fcs, 0, 4, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+                final ForegroundColorSpan fcs = new ForegroundColorSpan(Color.parseColor("#D81B60"));
+                int startIndex = item.indexOf(keyword);
+                if(startIndex>-1) {
+                    int endIndex = (startIndex + keyword.length());
+                    sb.setSpan(fcs, startIndex, endIndex, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+                }
                 textView.setText(sb);
             } else {
-//                문제2.   spannable이 적용이 안된다. 오류남.
-//                SpannableStringBuilder sb = new SpannableStringBuilder(item);
-//                ForegroundColorSpan fcs = new ForegroundColorSpan(Color.rgb(200, 0, 0));
-//                sb.setSpan(fcs, 0, 4, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-//                textView.setText(sb, TextView.BufferType.SPANNABLE);
               textView.setText(item);
             }
         }

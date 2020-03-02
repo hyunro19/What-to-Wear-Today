@@ -16,16 +16,15 @@ public class BootReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         int alarmType = AlarmManager.RTC_WAKEUP;
-        // Set the alarm to start at approximately 7:00 a.m.
+        // Set the alarm to start at approximately 7:05 a.m.
         Calendar calendarForDailyAlarm = Calendar.getInstance();
 
         calendarForDailyAlarm.setTimeInMillis(System.currentTimeMillis());
         calendarForDailyAlarm.set(Calendar.HOUR_OF_DAY, 7);
-        calendarForDailyAlarm.set(Calendar.MINUTE, 5); // daily alarm at 7:05am
+        calendarForDailyAlarm.set(Calendar.MINUTE, 5);
 
         SimpleDateFormat format1 = new SimpleDateFormat("yyyy.MM.dd/hh.mm.ss");
         String formatted = format1.format(calendarForDailyAlarm.getTime());
-        Log.d("CalendarTZ", formatted);
 
         Intent alarmIntent = new Intent(context, MorningAlarmReceiver.class);
         PendingIntent alarmPendingIntent = PendingIntent.getBroadcast(context, 102, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -36,7 +35,6 @@ public class BootReceiver extends BroadcastReceiver {
 //        long after = 1000 * 15;
 //        long t = SystemClock.elapsedRealtime();
 //        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, t + after, period, alarmPendingIntent);
-
 
     }
 }

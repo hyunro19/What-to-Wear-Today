@@ -16,7 +16,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.TableLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -295,12 +294,19 @@ public class LocSelectActivity
         });
     }
 
+    RecyclerView recyclerViewSearch;
+    LinearLayoutManager searchLayoutManager;
+    LocAdapter adapterSearch;
     private void listSearchResult(String keyword){
-        RecyclerView recyclerViewSearch = findViewById(R.id.searchLocRecycleLayout);
-        Toast.makeText(this, keyword, Toast.LENGTH_SHORT).show();
-        LinearLayoutManager searchLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        recyclerViewSearch.setLayoutManager(searchLayoutManager);
-        final LocAdapter adapterSearch = new LocAdapter(keyword);
+        if(recyclerViewSearch==null || searchLayoutManager==null || adapterSearch==null) {
+            recyclerViewSearch = findViewById(R.id.searchLocRecycleLayout);
+            searchLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+            recyclerViewSearch.setLayoutManager(searchLayoutManager);
+            adapterSearch = new LocAdapter();
+        }
+
+        adapterSearch.clearItem();
+        adapterSearch.setKeyword(keyword);
         for(String item : locList){
             if(item.contains(keyword)) {
                 adapterSearch.addItem(item);
