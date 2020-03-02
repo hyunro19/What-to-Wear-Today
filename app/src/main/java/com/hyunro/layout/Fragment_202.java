@@ -34,54 +34,29 @@ import java.util.Map;
 import static com.hyunro.layout.MainActivity.firstLoc;
 
 public class Fragment_202 extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     private OnFragmentInteractionListener mListener;
 
     public Fragment_202() {
-        // Required empty public constructor
+
     }
 
     // TODO: Rename and change types and number of parameters
     public static Fragment_202 newInstance(String param1, String param2) {
         Fragment_202 fragment = new Fragment_202();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-        Log.d("Fragment202 Cycle", "fragment202 onCreate");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        Log.d("Fragment202 Cycle", "fragment202 onCreateView");
-        return inflater.inflate(R.layout.fragment_202, container, false);
-    }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-//            mListener.onFragmentInteraction(uri);
-        }
+        return inflater.inflate(R.layout.fragment_202, container, false);
     }
 
     @Override
@@ -93,26 +68,23 @@ public class Fragment_202 extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
-        Log.d("Fragment202 Cycle", "fragment202 onAttach");
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
-        Log.d("Fragment202 Cycle", "fragment202 onDetach");
     }
 
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction202(Uri uri);
     }
 
     @Override
     public void onStart() {
         super.onStart();
-//        spread_fragment_202();
         MainActivity mainActivity = (MainActivity)getActivity();
+        Toast.makeText(mainActivity, "Fragment_202 onStart()", Toast.LENGTH_SHORT).show();
 
         View fragment_202_commercial = mainActivity.findViewById(R.id.fragment_202_commercial);
         fragment_202_commercial.setOnClickListener(new View.OnClickListener() {
@@ -121,19 +93,17 @@ public class Fragment_202 extends Fragment {
                 Toast.makeText(getContext(), "광고문의 : hyunro91@gmail.com", Toast.LENGTH_SHORT).show();
             }
         });
-        if(!firstLoc.equals("서울특별시")) {
-            Toast.makeText(mainActivity, "현재 서울특별시의 날씨 정보만 제공됩니다.", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        spread_fragment_202_top(mainActivity);
+        spread_fragment_202_label(mainActivity);
+
+        spread_fragment_202_top_halfday("yesterdayAM", mainActivity.yesterdayAM, mainActivity);
+        spread_fragment_202_top_halfday("yesterdayPM", mainActivity.yesterdayPM, mainActivity);
+        spread_fragment_202_top_halfday("todayAM", mainActivity.today.get("0600"), mainActivity);
+        spread_fragment_202_top_halfday("todayPM", mainActivity.today.get("1500"), mainActivity);
+        spread_fragment_202_top_halfday("tomorrowAM", mainActivity.tomorrowAM, mainActivity);
+        spread_fragment_202_top_halfday("tomorrowPM", mainActivity.tomorrowPM, mainActivity);
+
         spread_fragment_202_bottom(mainActivity);
-
     }
-    public void onResuem() {
-        super.onResume();
-        Log.d("Fragment202 Cycle", "fragment202 onResume");
-    }
-
 
     private String dateFormating(String dateAsString, String Yoil) {
         String month = dateAsString.substring(4,6);
@@ -144,94 +114,31 @@ public class Fragment_202 extends Fragment {
         return month+"/"+day+" "+Yoil;
     }
 
-    public void spread_fragment_202_top(MainActivity mainActivity){
-        Map<String, Object> yesterdayAM = mainActivity.yesterdayAM;
-        Map<String, Object> yesterdayPM = mainActivity.yesterdayPM;
-        Map<String, Map<String, Object>> today = mainActivity.today;
-        Map<String, Object> tomorrowAM = mainActivity.tomorrowAM;
-        Map<String, Object> tomorrowPM = mainActivity.tomorrowPM;
+    public void spread_fragment_202_top_halfday(String distinction, Map<String, Object> inputMap, MainActivity mainActivity) {
+        // distinction == yesterdayAM, todayPM, etc.
+        int SkyImageViewId = getViewId(distinction+"Sky");
+        int skyTextViewId = getViewId(distinction+"SkyText");
+        int tempTextViewId = getViewId(distinction+"Temp");
 
-        Map<String, String> skyText = WeatherAdapter.skyText;
+        ImageView skyImageView = mainActivity.findViewById(SkyImageViewId);
+        TextView skyTextView = mainActivity.findViewById(skyTextViewId);
+        TextView tempTextView = mainActivity.findViewById(tempTextViewId);
 
-        // 어제
-        String yesterdayDateAsString = mainActivity.yesterdayDateAsString;
-        String yesterdayYoil = mainActivity.yesterdayYoil;
-        TextView yesterdayDate = mainActivity.findViewById(R.id.yesterdayDate);
-        yesterdayDate.setText(dateFormating(yesterdayDateAsString, yesterdayYoil));
+        String skyCode = (String)inputMap.get("SKY")+(String)inputMap.get("PTY");
+        int skyImageId = getResources().getIdentifier( "ic_weather_1"+skyCode, "drawable",getActivity().getPackageName());
 
-        ImageView yesterdayAMSky = mainActivity.findViewById(R.id.yesterdayAMSky);
-        String yesterdayAMSkyCode = (String)yesterdayAM.get("SKY")+(String)yesterdayAM.get("PTY");
-        int yesterdayAMSkyImageId = getResources().getIdentifier( "ic_weather_1"+yesterdayAMSkyCode, "drawable",getActivity().getPackageName());
-        yesterdayAMSky.setImageResource(yesterdayAMSkyImageId);
-        TextView yesterdayAMSkyText = mainActivity.findViewById(R.id.yesterdayAMSkyText);
-        yesterdayAMSkyText.setText(skyText.get(yesterdayAMSkyCode));
-        TextView yesterdayAMTemp = mainActivity.findViewById(R.id.yesterdayAMTemp);
-        yesterdayAMTemp.setText((String)yesterdayAM.get("TMN")+"˚C");
+        skyImageView.setImageResource(skyImageId);
+        skyTextView.setText(WeatherAdapter.skyText.get(skyCode));
+        tempTextView.setText((String)inputMap.get("TMN")+"˚C");
+        if (distinction.contains("PM")) tempTextView.setText((String)inputMap.get("TMX")+"˚C");
 
-        ImageView yesterdayPMSky = mainActivity.findViewById(R.id.yesterdayPMSky);
-        String yesterdayPMSkyCode = (String)yesterdayPM.get("SKY")+(String)yesterdayPM.get("PTY");
-        int yesterdayPMSkyImageId = getResources().getIdentifier( "ic_weather_1"+yesterdayPMSkyCode, "drawable",getActivity().getPackageName());
-        yesterdayPMSky.setImageResource(yesterdayPMSkyImageId);
-        TextView yesterdayPMSkyText = mainActivity.findViewById(R.id.yesterdayPMSkyText);
-        yesterdayPMSkyText.setText(skyText.get(yesterdayPMSkyCode));
-        TextView yesterdayPMTemp = mainActivity.findViewById(R.id.yesterdayPMTemp);
-        yesterdayPMTemp.setText((String)yesterdayPM.get("TMX")+"˚C");
-
-
-        // 오늘
-        String todayDateAsString = mainActivity.todayDateAsString;
-        String todayYoil = mainActivity.todayYoil;
-        TextView todayDate = mainActivity.findViewById(R.id.todayDate);
-        todayDate.setText(dateFormating(todayDateAsString, todayYoil));
-        Map<String, Object> todayAM = today.get("0600");
-        Map<String, Object> todayPM = today.get("1500");
-
-
-        ImageView todayAMSky = mainActivity.findViewById(R.id.todayAMSky);
-        TextView todayAMSkyText = mainActivity.findViewById(R.id.todayAMSkyText);
-        String todayAMSkyCode = (String)todayAM.get("SKY")+(String)todayAM.get("PTY");
-        int todayAMSkyImageId = getResources().getIdentifier( "ic_weather_1"+todayAMSkyCode, "drawable",getActivity().getPackageName());
-        todayAMSky.setImageResource(todayAMSkyImageId);
-        todayAMSkyText.setText(skyText.get(todayAMSkyCode));
-        TextView todayAMTemp = mainActivity.findViewById(R.id.todayAMTemp);
-        todayAMTemp.setText((String)todayAM.get("TMN")+"˚C");
-
-        ImageView todayPMSky = mainActivity.findViewById(R.id.todayPMSky);
-        TextView todayPMSkyText = mainActivity.findViewById(R.id.todayPMSkyText);
-        String todayPMSkyCode = (String)todayPM.get("SKY")+(String)todayPM.get("PTY");
-        int todayPMSkyImageId = getResources().getIdentifier( "ic_weather_1"+todayPMSkyCode, "drawable",getActivity().getPackageName());
-        todayPMSky.setImageResource(todayPMSkyImageId);
-        todayPMSkyText.setText(skyText.get(todayPMSkyCode));
-        TextView todayPMTemp = mainActivity.findViewById(R.id.todayPMTemp);
-        todayPMTemp.setText((String)todayPM.get("TMX")+"˚C");
-
-
-        // 내일
-        String tomorrowDateAsString = mainActivity.tomorrowDateAsString;
-        String tomorrowYoil = mainActivity.tomorrowYoil;
-        TextView tomorrowDate = mainActivity.findViewById(R.id.tomorrowDate);
-        tomorrowDate.setText(dateFormating(tomorrowDateAsString, tomorrowYoil));
-
-        ImageView tomorrowAMSky = mainActivity.findViewById(R.id.tomorrowAMSky);
-        TextView tomorrowAMSkyText = mainActivity.findViewById(R.id.tomorrowAMSkyText);
-        String tomorrowAMSkyCode = (String)tomorrowAM.get("SKY")+(String)tomorrowAM.get("PTY");
-        int tomorrowAMSkyImageId = getResources().getIdentifier( "ic_weather_1"+tomorrowAMSkyCode, "drawable",getActivity().getPackageName());
-        tomorrowAMSky.setImageResource(tomorrowAMSkyImageId);
-        tomorrowAMSkyText.setText(skyText.get(tomorrowAMSkyCode));
-        TextView tomorrowAMTemp = mainActivity.findViewById(R.id.tomorrowAMTemp);
-        tomorrowAMTemp.setText((String)tomorrowAM.get("TMN")+"˚C");
-
-        ImageView tomorrowPMSky = mainActivity.findViewById(R.id.tomorrowPMSky);
-        TextView tomorrowPMSkyText = mainActivity.findViewById(R.id.tomorrowPMSkyText);
-        String tomorrowPMSkyCode = (String)tomorrowPM.get("SKY")+(String)tomorrowPM.get("PTY");
-        int tomorrowPMSkyImageId = getResources().getIdentifier( "ic_weather_1"+tomorrowPMSkyCode, "drawable",getActivity().getPackageName());
-        tomorrowPMSky.setImageResource(tomorrowPMSkyImageId);
-        tomorrowPMSkyText.setText(skyText.get(tomorrowPMSkyCode));
-        TextView tomorrowPMTemp = mainActivity.findViewById(R.id.tomorrowPMTemp);
-        tomorrowPMTemp.setText((String)tomorrowPM.get("TMX")+"˚C");
+    }
+    private int getViewId(String viewName) {
+        int id = getResources().getIdentifier(viewName, "id",getActivity().getPackageName());
+        return id;
     }
 
-    public void spread_fragment_202_bottom(final MainActivity mainActivity) {
+    public void spread_fragment_202_bottom(MainActivity mainActivity) {
 
         String yesterdayDateAsString = mainActivity.yesterdayDateAsString;
         String todayDateAsString = mainActivity.todayDateAsString;
@@ -239,13 +146,8 @@ public class Fragment_202 extends Fragment {
         map.put("today", todayDateAsString);
         map.put("yesterday", yesterdayDateAsString);
 
-        // photo spread
-//        FirebaseStorage storage = FirebaseStorage.getInstance();
-//        StorageReference storageRef = storage.getReference();
-        // mainActivity꺼 같이 쓰자
         StorageReference storageRef = mainActivity.storageRef;
         FirebaseFirestore db = mainActivity.db;
-
 
         for(String key : map.keySet()) {
 
@@ -257,7 +159,6 @@ public class Fragment_202 extends Fragment {
             ref.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
                 @Override
                 public void onSuccess(byte[] bytes) {
-                    // Data for "images/island.jpg" is returns, use this as needed
                     Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
                     int outfitImage = getContext().getResources().getIdentifier(temp + "OutfitImage", "id", getContext().getPackageName());
                     ImageView myOutfitPhoto = getActivity().findViewById(outfitImage);
@@ -267,7 +168,6 @@ public class Fragment_202 extends Fragment {
                 @Override
                 public void onFailure(@NonNull Exception exception) {
                     Log.d("loglog", "spread_fragment_202_bottom");
-                    // Handle any errors
                 }
             });
 
@@ -292,12 +192,23 @@ public class Fragment_202 extends Fragment {
                     }
                 }
             });
-
-
         }
+    }
 
-        // info spread
+    private void spread_fragment_202_label(MainActivity mainActivity) {
+        String yesterdayDateAsString = mainActivity.yesterdayDateAsString;
+        String yesterdayYoil = mainActivity.yesterdayYoil;
+        TextView yesterdayDate = mainActivity.findViewById(R.id.yesterdayDate);
+        yesterdayDate.setText(dateFormating(yesterdayDateAsString, yesterdayYoil));
 
+        String todayDateAsString = mainActivity.todayDateAsString;
+        String todayYoil = mainActivity.todayYoil;
+        TextView todayDate = mainActivity.findViewById(R.id.todayDate);
+        todayDate.setText(dateFormating(todayDateAsString, todayYoil));
 
+        String tomorrowDateAsString = mainActivity.tomorrowDateAsString;
+        String tomorrowYoil = mainActivity.tomorrowYoil;
+        TextView tomorrowDate = mainActivity.findViewById(R.id.tomorrowDate);
+        tomorrowDate.setText(dateFormating(tomorrowDateAsString, tomorrowYoil));
     }
 }

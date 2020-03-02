@@ -41,13 +41,9 @@ public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "GoogleActivity";
     private static final int RC_SIGN_IN = 9001;
 
-    // [START declare_auth]
+    View progressBar;
     private FirebaseAuth mAuth;
-    // [END declare_auth]
-
     private GoogleSignInClient mGoogleSignInClient;
-    private TextView mStatusTextView;
-    private TextView mDetailTextView;
     FirebaseUser currentUser;
     String token;
 
@@ -56,22 +52,15 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // [START config_signin]
-        // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
-        // [END config_signin]
-
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        // [START initialize_auth]
-        // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
-        // [END initialize_auth]
 
-        Button googleSignInButton = findViewById(R.id.googleSignInButton);
+        View googleSignInButton = findViewById(R.id.googleSignInButton);
         googleSignInButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if(currentUser == null) {
@@ -92,53 +81,49 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        setProgressBar(R.id.progressBar);
     }
 
     DocumentSnapshot document;
-    // [START on_start_check_user]
     @Override
     public void onStart() {
         super.onStart();
 
         // Check if user is signed in (non-null)
         currentUser = mAuth.getCurrentUser();
-        if(currentUser == null) return;
+        if(currentUser == null) {
+            return;
+            // nudge to click SignInButton
+        } else {
+            token = currentUser.getUid();
+            checkCustomUserDataExists(token);
+            // If customerUserData exists, move on to MainActivity
+            // If not, pop up RegisterActivity
+        }
 
-        token = currentUser.getUid();
-        Log.d("onStart", "currentUser not null, + / token? "+token);
-        checkCustomUserDataExists(token);
     }
-    // [END on_start_check_user]
 
 
 
-    // [START onactivityresult]
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = task.getResult(ApiException.class);
-                // 여기까지는 currentUser == null, firebaseAuthWithGoogle함수로 들어가야 uid 사용 가능
                 firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
-                // Google Sign In failed, update UI appropriately
                 Log.w(TAG, "Google sign in failed", e);
             }
         }
     }
-    // [END onactivityresult]
 
-    // [START auth_with_google]
+
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
-        Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
-        // [START_EXCLUDE silent]
-//        showProgressBar();
-        // [END_EXCLUDE]
+        showProgressBar();
 
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         mAuth.signInWithCredential(credential)
@@ -146,58 +131,53 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                        // Sign in success, update UI with the signed-in user's information
                         Log.d(TAG, "signInWithCredential:success");
                         currentUser = mAuth.getCurrentUser();
+                        token = currentUser.getUid();
+                        checkCustomUserDataExists(token);
                     } else {
-                        // If sign in fails, display a message to the user.
                         Log.w(TAG, "signInWithCredential:failure", task.getException());
                     }
 
-                    // [START_EXCLUDE]
-//                        hideProgressBar();
-                    // [END_EXCLUDE]
+                        hideProgressBar();
                 }
             });
     }
-    // [END auth_with_google]
 
-    // [START signin]
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
-    // [END signin]
 
     private void sampleSignIn() {
-        // [START sign_in_with_email]
+        showProgressBar();
+
         mAuth.signInWithEmailAndPassword("mulcam1305@gmail.com", "mc13051305!")
             .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    // Sign in success, update UI with the signed-in user's information
                     Toast.makeText(LoginActivity.this, "TEST계정으로 로그인하셨습니다.", Toast.LENGTH_LONG).show();
-//                    TextView view = (TextView) toast.getView().findViewById(android.R.id.message);
-//                    if( view != null) view.setGravity(Gravity.CENTER);
-//                    toast.show();
 
                     currentUser = mAuth.getCurrentUser();
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+
+                    hideProgressBar();
                     startActivity(intent);
                     finish();
 
                 } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w(TAG, "signInWithEmail:failure", task.getException());
-                    Toast.makeText(LoginActivity.this, "Authentication failed.",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "잠시 후 다시 시도해주세요.",Toast.LENGTH_SHORT).show();
+                    hideProgressBar();
 
                 }
                 }
             });
-        // [END sign_in_with_email]
     }
+
     private void checkCustomUserDataExists(String token) {
+        showProgressBar();
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("users").document(token)
                 .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -207,6 +187,7 @@ public class LoginActivity extends AppCompatActivity {
                     document = task.getResult();
                     // Custom User Data Exists
                     Log.d("At LoginActivity, ", "Read User Data From FirebaseDB : " + document.getData());
+                    hideProgressBar();
                     if(document.getData() != null) {
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(intent);
@@ -218,10 +199,27 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     // Custom User Data X -> Registration Required
                     Log.d("At LoginActivity, ", "Cached get failed: ", task.getException());
+                    hideProgressBar();
                 }
             }
         });
     }
 
+
+    public void setProgressBar(int resId) {
+        progressBar = findViewById(resId);
+    }
+
+    public void showProgressBar() {
+        if (progressBar != null) {
+            progressBar.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public void hideProgressBar() {
+        if (progressBar != null) {
+            progressBar.setVisibility(View.INVISIBLE);
+        }
+    }
 }
 
