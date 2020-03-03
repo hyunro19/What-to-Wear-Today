@@ -87,7 +87,7 @@ public class RegisterActivity extends AppCompatActivity {
                     ((TextView)findViewById(R.id.register_nickname_availabilityCheck)).setTextColor(Color.parseColor("#D81B60"));
                     isNicknameAvailable = false;
                 } else {
-                    ((TextView)findViewById(R.id.register_nickname_availabilityCheck)).setTextColor(Color.parseColor("#8a000000"));
+                    ((TextView)findViewById(R.id.register_nickname_availabilityCheck)).setTextColor(Color.parseColor("#000000"));
                     isNicknameAvailable = true;
                 }
             }
@@ -144,15 +144,12 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-
-
-        View cancelButton = findViewById(R.id.register_backButton);
-        cancelButton.setOnClickListener(new View.OnClickListener() {
+        View backButton = findViewById(R.id.register_backButton);
+        backButton.setOnClickListener(new View.OnClickListener(){
+            @Override
             public void onClick(View v) {
-                mAuth.signOut();
+                if(mAuth.getCurrentUser() != null) mAuth.signOut();
                 finish();
-//                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-//                startActivity(intent);
             }
         });
         View completeButton = findViewById(R.id.register_completeButton);

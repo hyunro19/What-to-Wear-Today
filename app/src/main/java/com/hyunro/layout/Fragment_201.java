@@ -106,7 +106,7 @@ public class Fragment_201 extends Fragment {
     LinearLayoutManager layoutManagerOutfit;
     OutfitAdapter outfitAdapter;
     public void spread_Fragment_201_outfit(){
-        MainActivity mainActivity = (MainActivity) getActivity();
+        final MainActivity mainActivity = (MainActivity) getActivity();
         if(mainActivity.outfit.isEmpty()) return;
         Map<String, Map<String, Object>> outfit = mainActivity.outfit;
         outfitRecyclerView = mainActivity.findViewById(R.id.outfitRecyclerView);
@@ -128,7 +128,7 @@ public class Fragment_201 extends Fragment {
             public void onOutfitClick(OutfitAdapter.ViewHolder holder, View view, int position) {
                 HashMap<String, Object> info = (HashMap)outfitAdapter.getItem(position);
                 String documentId = (String)info.get("documentId");
-                Intent intent = new Intent(getContext(), DetailActivity.class);
+                Intent intent = new Intent(mainActivity, DetailActivity.class);
                 intent.putExtra("documentId", documentId);
                 intent.putExtra("senderActivity", "MainActivity");
                 startActivity(intent);

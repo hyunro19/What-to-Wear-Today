@@ -42,7 +42,7 @@ import java.util.Set;
 
 public class MyOutfitsActivity extends AppCompatActivity {
 
-    public static Map<String, Map<String, Object>> myOutfit = new HashMap<>();
+    public static Map<String, Map<String, Object>> myOutfit;
     String token;
     Query query;
     @Override
@@ -50,10 +50,11 @@ public class MyOutfitsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_myoutfits);
 
+        myOutfit = new HashMap<>();
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         token = (String)bundle.get("token");
-        query = db.collection("outfit").whereEqualTo("uid", token).orderBy("uploadDate",Query.Direction.DESCENDING).limit(1);
+        query = db.collection("outfit").whereEqualTo("uid", token).orderBy("uploadDate",Query.Direction.DESCENDING).limit(2);
         downloadOutfitInfo(token);
 
 
@@ -98,7 +99,7 @@ public class MyOutfitsActivity extends AppCompatActivity {
                             DocumentSnapshot lastVisible = datas.get(documentSnapshots.size() -1);
                             query = db.collection("outfit").whereEqualTo("uid", tempToken).orderBy("uploadDate",Query.Direction.DESCENDING)
                                     .startAfter(lastVisible)
-                                    .limit(1);
+                                    .limit(2);
                             findViewById(R.id.myOutfitsEmpty).setVisibility(View.GONE);
                         } catch (ArrayIndexOutOfBoundsException e) {
                             Toast.makeText(MyOutfitsActivity.this, "읽어올 데이터가 없습니다.", Toast.LENGTH_SHORT).show();
@@ -165,7 +166,7 @@ public class MyOutfitsActivity extends AppCompatActivity {
             public void onOutfitClick(OutfitAdapter.ViewHolder holder, View view, int position) {
                 HashMap<String, Object> info = (HashMap)outfitAdapter.getItem(position);
                 String documentId = (String)info.get("documentId");
-                Intent intent = new Intent(getApplicationContext(), DetailActivity.class);
+                Intent intent = new Intent(MyOutfitsActivity.this, DetailActivity.class);
                 intent.putExtra("documentId", documentId);
                 intent.putExtra("senderActivity", "MyOutfitsActivity");
                 startActivity(intent);
@@ -179,4 +180,9 @@ public class MyOutfitsActivity extends AppCompatActivity {
         finish();
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        myOutfit = null;
+    }
 }

@@ -126,6 +126,27 @@
                     app:layout_constraintTop_toBottomOf="@+id/detail_label_location" />
 
                 <TextView
+                    android:id="@+id/detail_label_temp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="온도"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toStartOf="@+id/verticalGuideline1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/detail_label_weather" />
+
+                <TextView
+                    android:id="@+id/detail_label_humidity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="습도"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toStartOf="@+id/verticalGuideline1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/detail_label_temp" />
+
+                <TextView
                     android:id="@+id/detail_description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

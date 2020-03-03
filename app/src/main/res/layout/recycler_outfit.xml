@@ -4,7 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/outfitRecycleLayout"
     android:layout_width="match_parent"
-    android:layout_height="200dp">
+    android:layout_height="200dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:padding="5dp"
+    android:background="@drawable/round_corner_layout">
 
 
     <ImageView
@@ -18,22 +24,11 @@
         app:srcCompat="@drawable/common_google_signin_btn_icon_light" />
 
     <TextView
-        android:id="@+id/outfitRecycle_nickname"
+        android:id="@+id/outfitRecycle_nicknameAgeGenderUploaddate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="닉네임"
-        app:layout_constraintEnd_toStartOf="@+id/outfitRecycle_ageGender"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/outfitRecycle_ageGender"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:text="20세/남"
+        android:text="닉네임_나이_성별_날짜"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="parent" />
@@ -43,19 +38,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="16dp"
         android:text="서울 중구 신당동"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/outfitRecycle_nickname" />
+        app:layout_constraintTop_toBottomOf="@+id/outfitRecycle_nicknameAgeGenderUploaddate" />
 
     <TextView
         android:id="@+id/outfitRecycle_outerLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="12dp"
         android:text="외투"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/outfitRecycle_location" />
 
@@ -63,9 +57,9 @@
         android:id="@+id/outfitRecycle_topLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="10dp"
         android:text="상의"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/outfitRecycle_outerLabel" />
 
@@ -73,9 +67,9 @@
         android:id="@+id/outfitRecycle_bottomLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="10dp"
         android:text="하의"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/outfitRecycle_topLabel" />
 
@@ -83,9 +77,9 @@
         android:id="@+id/outfitRecycle_shoesLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="10dp"
         android:text="신발"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/outfitRecycle_bottomLabel" />
 
@@ -103,7 +97,7 @@
         android:layout_marginTop="12dp"
         android:text="외투 내용"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/outfitRecycle_outerLabel"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/outfitRecycle_location" />
 
     <TextView
@@ -113,7 +107,7 @@
         android:layout_marginTop="10dp"
         android:text="상의 내용"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/outfitRecycle_topLabel"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/outfitRecycle_outerLabel" />
 
     <TextView
@@ -123,7 +117,7 @@
         android:layout_marginTop="10dp"
         android:text="하의 내용"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/outfitRecycle_bottomLabel"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/outfitRecycle_topLabel" />
 
     <TextView
@@ -133,16 +127,13 @@
         android:layout_marginTop="10dp"
         android:text="신발 내용"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/outfitRecycle_shoesLabel"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/outfitRecycle_bottomLabel" />
 
-    <TextView
-        android:id="@+id/outfitRecycle_uploadDate"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="01/01 월"
-        app:layout_constraintStart_toEndOf="@+id/outfitRecycle_ageGender"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="240dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

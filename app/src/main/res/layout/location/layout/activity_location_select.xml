@@ -16,11 +16,11 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
             android:text="기준 지역을 설정하세요"
-            android:textSize="22sp"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@id/divider3"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/settings_backButton"
+            app:layout_constraintStart_toStartOf="@+id/settings_backButton"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
@@ -28,46 +28,61 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:background="@android:color/transparent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@android:drawable/ic_media_rew" />
+            app:layout_constraintBottom_toTopOf="@id/divider3"
+            app:srcCompat="@drawable/ic_custom_arrow_back" />
 
         <EditText
             android:id="@+id/detail_title"
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
             android:hint="예) 동, 읍, 면 이름을 입력하세요."
             android:inputType="textPersonName"
-            android:textSize="22sp"
-            app:layout_constraintBottom_toTopOf="@+id/locFindButton"
+            android:textSize="18sp"
             app:layout_constraintEnd_toStartOf="@+id/locSearchButton"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+            app:layout_constraintTop_toBottomOf="@+id/divider3" />
 
         <ImageButton
             android:id="@+id/locSearchButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="18dp"
             android:layout_marginEnd="16dp"
-            app:layout_constraintBottom_toTopOf="@+id/locFindButton"
+            android:background="@drawable/round_corner_button"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2"
-            app:srcCompat="@android:drawable/ic_menu_search" />
+            app:layout_constraintTop_toBottomOf="@+id/divider3"
+            app:srcCompat="@drawable/ic_custom_search_24dp" />
 
         <Button
             android:id="@+id/locFindButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_margin="16dp"
-            android:drawableLeft="@android:drawable/ic_menu_compass"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/round_corner_button"
+            android:drawableLeft="@drawable/ic_custom_gps_24dp"
             android:drawablePadding="10dp"
             android:gravity="left|center_vertical"
-            android:paddingLeft="100dp"
-            android:text="현 위치로 주소 설정"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:paddingLeft="90dp"
+            android:text="현재 위치로 주소 설정"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/detail_title" />
+
+        <View
+            android:id="@+id/divider3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="60dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="1dp" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -77,8 +92,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:layout_marginBottom="8dp"
-        android:text="*현재 '서울특별시'의 날씨정보만 제공됩니다." />
+        android:layout_marginBottom="12dp"
+        android:text="*현재 서울특별시의 날씨정보만 제공됩니다." />
 
     <fragment
         android:id="@+id/frameLocSelectSearch"
@@ -122,9 +137,10 @@
     <Button
         android:id="@+id/locSetButton"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="50dp"
         android:layout_margin="16dp"
-        android:layout_weight="0.12"
+        android:background="@drawable/round_corner_button"
+        android:textSize="22dp"
         android:text="완료" />
 
 </LinearLayout>

@@ -175,13 +175,14 @@ public class LocSelectActivity
             }
         });
 
-        ImageButton locSearchButton;
-        locSearchButton = findViewById(R.id.locSearchButton);
-        locSearchButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                listSearchResult(searchLocEdit.getText().toString());
-            }
-        });
+//        ImageButton locSearchButton = findViewById(R.id.locSearchButton);
+//        locSearchButton.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                String keyword = searchLocEdit.getText().toString();
+//                if (keyword == null || keyword.equals("")) return;
+//                listSearchResult(keyword);
+//            }
+//        });
 
         listFirstLoc();
         AutoPermissions.Companion.loadAllPermissions(this, 101);

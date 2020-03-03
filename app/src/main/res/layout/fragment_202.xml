@@ -16,6 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
+            android:padding="10dp"
             tools:layout_conversion_absoluteHeight="0dp"
             tools:layout_conversion_absoluteWidth="411dp"
             tools:layout_editor_absoluteX="0dp"
@@ -29,7 +30,7 @@
                 android:orientation="horizontal"
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintGuide_begin="40dp"
+                app:layout_constraintGuide_begin="48dp"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <androidx.constraintlayout.widget.Guideline
@@ -38,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintGuide_begin="68dp"
+                app:layout_constraintGuide_begin="72dp"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <androidx.constraintlayout.widget.Guideline
@@ -47,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintGuide_begin="100dp"
+                app:layout_constraintGuide_begin="96dp"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <androidx.constraintlayout.widget.Guideline
@@ -56,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintGuide_end="388dp"
+                app:layout_constraintGuide_begin="184dp"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <androidx.constraintlayout.widget.Guideline
@@ -65,7 +66,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintGuide_end="344dp"
+                app:layout_constraintGuide_begin="232dp"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <androidx.constraintlayout.widget.Guideline
@@ -78,12 +79,21 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
             <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/horizontalGuideLine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintGuide_begin="264dp"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/horizontalGuideLine7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintGuide_begin="428dp"
+                app:layout_constraintGuide_begin="424dp"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <androidx.constraintlayout.widget.Guideline
@@ -92,7 +102,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintGuide_begin="568dp"
+                app:layout_constraintGuide_begin="564dp"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <androidx.constraintlayout.widget.Guideline
@@ -100,77 +110,92 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_begin="40dp" />
+                app:layout_constraintGuide_begin="36dp" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/verticalGuideLine2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_begin="160dp" />
+                app:layout_constraintGuide_begin="148dp" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/verticalGuideLine3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_begin="280dp" />
+                app:layout_constraintGuide_begin="260dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/verticalGuideLine4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="372dp" />
 
             <TextView
                 android:id="@+id/weatherLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_width="32dp"
+                android:layout_height="200dp"
+                android:background="@drawable/round_corner_label"
+                android:gravity="center"
                 android:text="날\n\n씨"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine6"
                 app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine1"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine2" />
+                app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine1" />
 
 
             <TextView
                 android:id="@+id/outfitLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_width="32dp"
+                android:layout_height="296dp"
+                android:background="@drawable/round_corner_label"
+                android:gravity="center"
                 android:text="내\n\n의\n상"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine8"
                 app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine1"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine6" />
+                app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine" />
 
             <TextView
                 android:id="@+id/yesterdayLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="어제"
+                android:layout_width="100dp"
+                android:layout_height="32dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/round_corner_label"
+                android:gravity="center"
+                android:text="어 제"
                 android:textSize="18sp"
-                app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine1"
                 app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine2"
                 app:layout_constraintStart_toStartOf="@+id/verticalGuideLine1"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/todayLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="오늘"
+                android:layout_width="100dp"
+                android:layout_height="32dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/round_corner_label"
+                android:gravity="center"
+                android:text="오 늘"
                 android:textSize="18sp"
-                app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine1"
                 app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine3"
                 app:layout_constraintStart_toStartOf="@+id/verticalGuideLine2"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tomorrowLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="32dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/round_corner_label"
+                android:gravity="center"
                 android:text="내일"
                 android:textSize="18sp"
-                app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine1"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine4"
                 app:layout_constraintStart_toStartOf="@+id/verticalGuideLine3"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -178,7 +203,7 @@
                 android:id="@+id/yesterdayDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2/18 화"
+                android:text="월/일 어"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine2"
                 app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine2"
@@ -189,7 +214,7 @@
                 android:id="@+id/todayDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2/19 수"
+                android:text="월/일 오"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine2"
                 app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine3"
@@ -200,10 +225,10 @@
                 android:id="@+id/tomorrowDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2/20 목"
+                android:text="월/일 내"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine2"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine4"
                 app:layout_constraintStart_toStartOf="@+id/verticalGuideLine3"
                 app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine1" />
 
@@ -211,7 +236,7 @@
                 android:id="@+id/yesterdayAMLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="16dp"
                 android:text="오전"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine3"
@@ -223,7 +248,7 @@
                 android:id="@+id/yesterdayPMLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
+                android:layout_marginEnd="16dp"
                 android:text="오후"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine3"
@@ -235,7 +260,7 @@
                 android:id="@+id/todayAMLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="16dp"
                 android:text="오전"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine3"
@@ -246,7 +271,7 @@
                 android:id="@+id/tomorrowAMLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="16dp"
                 android:text="오전"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine3"
@@ -257,7 +282,7 @@
                 android:id="@+id/todayPMLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
+                android:layout_marginEnd="16dp"
                 android:text="오후"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine3"
@@ -268,18 +293,18 @@
                 android:id="@+id/tomorrowPMLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
+                android:layout_marginEnd="16dp"
                 android:text="오후"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine3"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine4"
                 app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine2" />
 
             <ImageView
                 android:id="@+id/yesterdayAMSky"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="4dp"
                 android:src="@color/design_default_color_secondary"
                 app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine4"
                 app:layout_constraintStart_toStartOf="@+id/verticalGuideLine1"
@@ -289,7 +314,7 @@
                 android:id="@+id/todayAMSky"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="4dp"
                 android:src="@color/design_default_color_secondary"
                 app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine4"
                 app:layout_constraintStart_toStartOf="@+id/verticalGuideLine2"
@@ -299,7 +324,7 @@
                 android:id="@+id/todayPMSky"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="4dp"
                 android:src="@color/design_default_color_secondary"
                 app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine4"
                 app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine3"
@@ -309,7 +334,7 @@
                 android:id="@+id/tomorrowAMSky"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="4dp"
                 android:src="@color/design_default_color_secondary"
                 app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine4"
                 app:layout_constraintStart_toStartOf="@+id/verticalGuideLine3"
@@ -319,17 +344,17 @@
                 android:id="@+id/tomorrowPMSky"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="4dp"
                 android:src="@color/design_default_color_secondary"
                 app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine4"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine4"
                 app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine3" />
 
             <ImageView
                 android:id="@+id/yesterdayPMSky"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="4dp"
                 android:src="@color/design_default_color_secondary"
                 app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine4"
                 app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine2"
@@ -337,11 +362,12 @@
 
             <TextView
                 android:id="@+id/yesterdayAMSkyText"
-                android:layout_width="60dp"
+                android:layout_width="55dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="2dp"
                 android:gravity="center"
                 android:text="흐리고\n비"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine5"
                 app:layout_constraintStart_toStartOf="@+id/verticalGuideLine1"
                 app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine4"
@@ -349,44 +375,48 @@
 
             <TextView
                 android:id="@+id/todayAMSkyText"
-                android:layout_width="60dp"
+                android:layout_width="55dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="2dp"
                 android:gravity="center"
-                android:text="흐리고비"
+                android:text="흐리고\n비"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine5"
                 app:layout_constraintStart_toStartOf="@+id/verticalGuideLine2"
                 app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine4" />
 
             <TextView
                 android:id="@+id/tomorrowAMSkyText"
-                android:layout_width="60dp"
+                android:layout_width="55dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="2dp"
                 android:gravity="center"
-                android:text="흐리고비"
+                android:text="흐리고\n비"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine5"
                 app:layout_constraintStart_toStartOf="@+id/verticalGuideLine3"
                 app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine4" />
 
             <TextView
                 android:id="@+id/yesterdayPMSkyText"
-                android:layout_width="60dp"
+                android:layout_width="55dp"
                 android:layout_height="40dp"
                 android:layout_marginEnd="2dp"
                 android:gravity="center"
                 android:text="흐리고\n눈"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine5"
                 app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine2"
                 app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine4" />
 
             <TextView
                 android:id="@+id/todayPMSkyText"
-                android:layout_width="60dp"
+                android:layout_width="55dp"
                 android:layout_height="40dp"
                 android:layout_marginEnd="2dp"
                 android:gravity="center"
-                android:text="흐리고눈"
+                android:text="흐리고\n눈"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine5"
                 app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine3"
                 app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine4"
@@ -394,13 +424,13 @@
 
             <TextView
                 android:id="@+id/tomorrowPMSkyText"
-                android:layout_width="60dp"
+                android:layout_width="55dp"
                 android:layout_height="40dp"
-                android:layout_marginEnd="6dp"
                 android:gravity="center"
-                android:text="흐리고눈"
+                android:text="흐리고\n눈"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine5"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine4"
                 app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine4"
                 app:layout_constraintVertical_bias="0.5" />
 
@@ -408,7 +438,7 @@
                 android:id="@+id/yesterdayAMTemp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
+                android:layout_marginStart="8dp"
                 android:gravity="center"
                 android:text="10.0˚C"
                 app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine6"
@@ -419,7 +449,7 @@
                 android:id="@+id/todayAMTemp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
+                android:layout_marginStart="8dp"
                 android:gravity="center"
                 android:text="-10.0˚C"
                 app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine6"
@@ -430,7 +460,7 @@
                 android:id="@+id/tomorrowAMTemp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
+                android:layout_marginStart="8dp"
                 android:gravity="center"
                 android:text="10.0˚C"
                 app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine6"
@@ -441,7 +471,7 @@
                 android:id="@+id/yesterdayPMTemp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="12dp"
+                android:layout_marginEnd="8dp"
                 android:gravity="center"
                 android:text="10.0˚C"
                 app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine6"
@@ -452,7 +482,7 @@
                 android:id="@+id/todayPMTemp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="12dp"
+                android:layout_marginEnd="8dp"
                 android:gravity="center"
                 android:text="-10.0˚C"
                 app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine6"
@@ -463,38 +493,37 @@
                 android:id="@+id/tomorrowPMTemp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="12dp"
+                android:layout_marginEnd="8dp"
                 android:gravity="center"
                 android:text="10.0˚C"
                 app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine6"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine5" />
+                app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine4"
+                app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine5"
+                app:layout_constraintVertical_bias="0.0" />
 
             <ImageView
                 android:id="@+id/yesterdayOutfitImage"
-                android:layout_width="110dp"
+                android:layout_width="102dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
                 android:maxHeight="150dp"
                 android:minHeight="100dp"
-                android:src="@color/design_default_color_secondary"
+                app:srcCompat="@drawable/myphoto_default_yesterday"
                 app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine7"
                 app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine2"
                 app:layout_constraintStart_toStartOf="@+id/verticalGuideLine1"
-                app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine6" />
+                app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine" />
 
             <ImageView
                 android:id="@+id/todayOutfitImage"
-                android:layout_width="110dp"
+                android:layout_width="102dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
                 android:maxHeight="150dp"
                 android:minHeight="100dp"
-                android:src="@color/design_default_color_secondary"
+                app:srcCompat="@drawable/myphoto_default_today"
                 app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine7"
                 app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine3"
                 app:layout_constraintStart_toStartOf="@+id/verticalGuideLine2"
-                app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine6"
+                app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine"
                 app:layout_constraintVertical_bias="0.5" />
 
 
@@ -502,7 +531,7 @@
                 android:id="@+id/yesterdayOutfitOuter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="8dp"
                 android:text="외투"
                 app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine2"
                 app:layout_constraintStart_toStartOf="@+id/verticalGuideLine1"
@@ -574,7 +603,7 @@
                 android:id="@+id/todayOutfitOuter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="8dp"
                 android:text="외투"
                 app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine3"
                 app:layout_constraintStart_toStartOf="@+id/verticalGuideLine2"
@@ -582,11 +611,11 @@
 
             <ImageView
                 android:id="@+id/fragment_202_commercial"
-                android:layout_width="130dp"
+                android:layout_width="110dp"
                 android:layout_height="300dp"
-                android:src="@drawable/fashion_couple_cartoon"
+                android:src="@drawable/commercial_fashion_couple"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine4"
                 app:layout_constraintStart_toStartOf="@+id/verticalGuideLine3"
                 app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine6" />
 

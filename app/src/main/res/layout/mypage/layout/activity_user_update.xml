@@ -9,9 +9,7 @@
     <ScrollView
         android:id="@+id/scrollView4"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+        android:layout_height="match_parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -22,18 +20,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="16dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@android:drawable/ic_media_rew" />
+                    app:srcCompat="@drawable/ic_custom_arrow_back"
+                    android:background="@android:color/transparent"/>
 
                 <TextView
                     android:id="@+id/userUpdate_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="회원정보수정"
-                    android:textSize="30sp"
-                    app:layout_constraintBottom_toTopOf="@+id/horizontalGuideline1"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toTopOf="@+id/horizontalDivider1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -42,64 +41,50 @@
                     android:id="@+id/userUpdate_email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="28dp"
+                    android:layout_marginTop="80dp"
                     android:text="ID/Email"
                     android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.509"
                     app:layout_constraintStart_toStartOf="@+id/verticalGuideline1"
-                    app:layout_constraintTop_toTopOf="@+id/horizontalGuideline1" />
+                    app:layout_constraintTop_toTopOf="@+id/horizontalDivider1" />
 
                 <TextView
                     android:id="@+id/userUpdate_displayName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="32dp"
                     android:text="No Provider Name"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/verticalGuideline1"
                     app:layout_constraintTop_toBottomOf="@+id/userUpdate_email" />
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/horizontalGuideline1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layout_constraintGuide_begin="70dp" />
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/horizontalGuideline2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layout_constraintGuide_begin="190dp" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/verticalGuideline1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintGuide_begin="120dp" />
+                    app:layout_constraintGuide_begin="108dp" />
 
                 <TextView
                     android:id="@+id/userUpdate_label_email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="80dp"
                     android:text="ID/Email"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     app:layout_constraintEnd_toStartOf="@+id/verticalGuideline1"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/horizontalGuideline1" />
+                    app:layout_constraintTop_toTopOf="@+id/horizontalDivider1" />
 
                 <TextView
                     android:id="@+id/userUpdate_label_displayName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="32dp"
                     android:text="이  름"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     app:layout_constraintEnd_toStartOf="@+id/verticalGuideline1"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/userUpdate_label_email" />
@@ -108,20 +93,20 @@
                     android:id="@+id/userUpdate_label_nickname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="32dp"
                     android:text="닉네임"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     app:layout_constraintEnd_toStartOf="@+id/verticalGuideline1"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/horizontalGuideline2" />
+                    app:layout_constraintTop_toBottomOf="@+id/userUpdate_label_displayName" />
 
                 <TextView
                     android:id="@+id/userUpdate_label_dateOfBirth"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="96dp"
+                    android:layout_marginTop="104dp"
                     android:text="생년월일"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     app:layout_constraintEnd_toStartOf="@+id/verticalGuideline1"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/userUpdate_label_nickname" />
@@ -130,9 +115,11 @@
                     android:id="@+id/userUpdate_label_gender"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="116dp"
+                    android:layout_marginTop="120dp"
+                    android:layout_marginBottom="40dp"
                     android:text="성별"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/verticalGuideline1"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/userUpdate_label_dateOfBirth" />
@@ -141,12 +128,12 @@
                     android:id="@+id/userUpdate_nickname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="32dp"
                     android:text="닉네임"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/verticalGuideline1"
-                    app:layout_constraintTop_toTopOf="@+id/horizontalGuideline2" />
+                    app:layout_constraintTop_toBottomOf="@+id/userUpdate_displayName" />
 
                 <RadioGroup
                     android:id="@+id/userUpdate_genderRadioGroup"
@@ -164,6 +151,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
                         android:text="남성"
+                        android:textSize="18sp"
                         tools:layout_editor_absoluteX="197dp"
                         tools:layout_editor_absoluteY="377dp" />
 
@@ -173,6 +161,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
                         android:text="여성"
+                        android:textSize="18sp"
                         tools:layout_editor_absoluteX="197dp"
                         tools:layout_editor_absoluteY="377dp" />
 
@@ -183,7 +172,7 @@
                     android:id="@+id/userUpdate_dateOfBirthPicker"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="12dp"
                     android:calendarViewShown="false"
                     android:clickable="false"
                     android:datePickerMode="spinner"
@@ -193,58 +182,55 @@
                     app:layout_constraintStart_toStartOf="@+id/verticalGuideline1"
                     app:layout_constraintTop_toBottomOf="@+id/userUpdate_nickname" />
 
-                <Button
-                    android:id="@+id/userUpdate_cancelButton"
-                    android:layout_width="180dp"
-                    android:layout_height="80dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="60dp"
-                    android:text="취소"
-                    android:textSize="25sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/userUpdate_label_gender" />
-
-                <Button
-                    android:id="@+id/userUpdate_completeButton"
-                    android:layout_width="180dp"
-                    android:layout_height="80dp"
-                    android:layout_marginTop="60dp"
-                    android:layout_marginEnd="16dp"
-                    android:text="수정"
-                    android:textSize="25sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/userUpdate_label_gender" />
-
-
                 <TextView
                     android:id="@+id/userUpdate_signout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="16dp"
                     android:layout_marginRight="20dp"
-                    android:layout_marginBottom="24dp"
                     android:text="로그아웃"
+                    android:textColor="@color/grey_500"
                     android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/userUpdate_withdraw"
-                    app:layout_constraintTop_toBottomOf="@+id/userUpdate_completeButton" />
+                    app:layout_constraintTop_toBottomOf="@+id/horizontalDivider1" />
 
                 <TextView
                     android:id="@+id/userUpdate_withdraw"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="28dp"
-                    android:layout_marginBottom="24dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
                     android:text="회원탈퇴"
+                    android:textColor="@color/grey_500"
                     android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/userUpdate_completeButton" />
+                    app:layout_constraintTop_toBottomOf="@+id/horizontalDivider1" />
+
+                <View
+                    android:id="@+id/horizontalDivider1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="60dp"
+                    android:background="?android:attr/listDivider"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:layout_editor_absoluteX="1dp" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
 
+    <Button
+        android:id="@+id/userUpdate_completeButton"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/round_corner_button"
+        android:text="수정"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

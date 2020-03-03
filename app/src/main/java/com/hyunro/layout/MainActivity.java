@@ -136,7 +136,12 @@ public class MainActivity extends AppCompatActivity
         });
 
         final View LeftBtmBtn;
+        final View MidBtmBtn;
+        final View RightBtmBtn;
         LeftBtmBtn = findViewById(R.id.LeftBtmBtn);
+        MidBtmBtn = findViewById(R.id.MidBtmBtn);
+        RightBtmBtn = findViewById(R.id.RightBtmBtn);
+
         LeftBtmBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if(fragment_201 != null) manager.beginTransaction().show(fragment_201).commit();
@@ -145,8 +150,6 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        final View MidBtmBtn;
-        MidBtmBtn = findViewById(R.id.MidBtmBtn);
         MidBtmBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if(!fragment_202.isAdded()) manager.beginTransaction().add(R.id.container, fragment_202).commit();
@@ -158,8 +161,6 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        final View RightBtmBtn;
-        RightBtmBtn = findViewById(R.id.RightBtmBtn);
         RightBtmBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if(!fragment_203.isAdded()) manager.beginTransaction().add(R.id.container, fragment_203).commit();

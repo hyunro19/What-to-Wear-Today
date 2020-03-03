@@ -161,15 +161,6 @@ public class UserUpdateActivity extends AppCompatActivity {
             }
         });
 
-        // Lower Back Button(Cancel)
-        View userUpdate_cancelButton = findViewById(R.id.userUpdate_cancelButton);
-        userUpdate_cancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
         View userUpdate_signout = findViewById(R.id.userUpdate_signout);
         userUpdate_signout.setOnTouchListener(new View.OnTouchListener() {
             @Override
