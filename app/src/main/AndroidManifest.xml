@@ -47,22 +47,31 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".mypage.MyOutfitsActivity" />
-        <activity android:name=".mypage.UserUpdateActivity" />
-        <activity android:name=".detail.DetailActivity" />
-        <activity android:name=".login.RegisterActivity" />
-        <activity android:name=".login.LoginActivity">
+        <activity android:name=".mypage.MyOutfitsActivity"
+            android:launchMode = "singleTop" />
+        <activity android:name=".mypage.UserUpdateActivity"
+            android:launchMode = "singleTop" />
+        <activity android:name=".detail.DetailActivity"
+            android:launchMode = "singleTop" />
+        <activity android:name=".login.RegisterActivity"
+            android:launchMode = "singleTop" />
+        <activity
+            android:name=".login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".upload.UploadActivity" />
+        <activity android:name=".upload.UploadActivity"
+            android:launchMode = "singleTop" />
         <activity
             android:name=".location.LocSelectActivity"
-            android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".MainActivity" />
+            android:windowSoftInputMode="adjustPan"
+            android:launchMode = "singleTop" />
+        <activity
+            android:name=".MainActivity"
+            android:launchMode = "singleTop" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

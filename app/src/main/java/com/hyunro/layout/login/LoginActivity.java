@@ -28,9 +28,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.hyunro.layout.MainActivity;
 import com.hyunro.layout.R;
 
-import java.net.URL;
-
-
 public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG = "GoogleActivity";
@@ -215,6 +212,18 @@ public class LoginActivity extends AppCompatActivity {
         if (progressBar != null) {
             progressBar.setVisibility(View.INVISIBLE);
         }
+    }
+
+    // When Exit
+    private long lastTimeBackPressed;
+    @Override
+    public void onBackPressed() {
+        if(System.currentTimeMillis() - lastTimeBackPressed < 1500){
+            finish();
+            return;
+        }
+        lastTimeBackPressed = System.currentTimeMillis();
+        Toast.makeText(this,"'뒤로' 버튼을 한 번 더 누르면 종료됩니다.",Toast.LENGTH_SHORT).show();
     }
 }
 

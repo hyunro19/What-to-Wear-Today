@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -174,9 +175,12 @@ public class UserUpdateActivity extends AppCompatActivity {
                         // 확인시 처리 로직
                         signOut();
                         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.GINGERBREAD_MR1) {
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        } else {
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        }
                         startActivity(intent);
-                        finish();
                     }})
                 .setNegativeButton("아니오", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
@@ -205,9 +209,12 @@ public class UserUpdateActivity extends AppCompatActivity {
                                 }
                                 revokeAccess();
                                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.GINGERBREAD_MR1) {
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                } else {
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                }
                                 startActivity(intent);
-                                finish();
                             }})
                         .setNegativeButton("아니오", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
