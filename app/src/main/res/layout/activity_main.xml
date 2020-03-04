@@ -11,7 +11,7 @@
         android:id="@+id/fragment1"
         android:name="com.hyunro.layout.Fragment_1"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="56dp"
         android:layout_weight="0" />
 
 
@@ -36,7 +36,7 @@
         android:id="@+id/fragment3"
         android:name="com.hyunro.layout.Fragment_3"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="56dp"
         android:layout_weight="0" />
 
 </LinearLayout>

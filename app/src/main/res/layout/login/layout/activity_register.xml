@@ -12,10 +12,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:background="@android:color/transparent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_custom_arrow_back"
-        android:background="@android:color/transparent"/>
+        app:srcCompat="@drawable/ic_custom_arrow_back" />
 
     <TextView
         android:id="@+id/register_title"
@@ -55,7 +55,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="108dp" />
+        app:layout_constraintGuide_begin="90dp" />
 
     <TextView
         android:id="@+id/register_label_email"
@@ -114,15 +114,16 @@
 
     <EditText
         android:id="@+id/register_nickname"
-        android:layout_width="160dp"
+        android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
         android:gravity="center"
         android:hint="닉네임"
         android:maxLength="12"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.15"
+        app:layout_constraintEnd_toStartOf="@+id/register_nickname_checkButton"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/register_label_nickname"
         app:layout_constraintStart_toStartOf="@+id/verticalGuideline1"
         app:layout_constraintTop_toBottomOf="@+id/register_label_displayName" />
 
@@ -177,9 +178,9 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_margin="16dp"
-        android:textSize="22sp"
-        android:text="가입"
         android:background="@drawable/round_corner_button"
+        android:text="가입"
+        android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -187,11 +188,12 @@
         android:id="@+id/register_nickname_checkButton"
         android:layout_width="80dp"
         android:layout_height="40dp"
-        android:layout_marginStart="4dp"
         android:layout_marginTop="36dp"
         android:background="@drawable/round_corner_button"
         android:text="중복 검사"
         android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/register_nickname"
         app:layout_constraintTop_toBottomOf="@+id/register_label_displayName" />
 
@@ -210,7 +212,7 @@
         android:id="@+id/register_horizontalDivider1"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="56dp"
         android:background="?android:attr/listDivider"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="1dp" />

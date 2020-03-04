@@ -36,6 +36,7 @@ import com.hyunro.layout.util.WeatherAdapter;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -65,12 +66,23 @@ public class UploadActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        if (bundle.get("file") != null) {
-            File file;
-            file = (File)bundle.get("file");
-            bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
-            ImageView imageView = findViewById(R.id.detail_image);
-            imageView.setImageBitmap(bitmap);
+        if (bundle.get("filePath") != null) {
+            File filePath = (File)bundle.get("filePath");
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inJustDecodeBounds = true;
+
+            InputStream instream = null;
+            try {
+                instream = new FileInputStream(filePath);
+                bitmap = BitmapFactory.decodeStream(instream);
+                ImageView imageView = findViewById(R.id.detail_image);
+                imageView.setImageBitmap(bitmap);
+                instream.close();
+            } catch ( Exception e ) {
+                e.printStackTrace();
+            }
+
+
         } else if (bundle.get("fileUri") != null) {
             Uri fileUri;
             fileUri = (Uri)bundle.get("fileUri");
@@ -95,14 +107,6 @@ public class UploadActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 onBackPressed();
-            }
-        });
-
-        Button cancelButton;
-        cancelButton = findViewById(R.id.detail_cancelButton);
-        cancelButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                finish();
             }
         });
 

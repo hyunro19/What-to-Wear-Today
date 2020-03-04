@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -106,6 +107,17 @@ public class MainActivity extends AppCompatActivity
         fragment_202 = new Fragment_202();
         fragment_203 = new Fragment_203();
 
+        TextView currentLocation;
+        currentLocation = findViewById(R.id.currentLocation);
+        currentLocation.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                Intent intent = new Intent(getApplicationContext(), LocSelectActivity.class);
+                startActivityForResult(intent, 112);
+                return false;
+            }
+        });
+
         ImageButton location_select;
         location_select = findViewById(R.id.locationSelectButton);
         location_select.setOnClickListener(new View.OnClickListener() {
@@ -119,19 +131,7 @@ public class MainActivity extends AppCompatActivity
         image_upload = findViewById(R.id.uploadImage);
         image_upload.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                final CharSequence[] items = {"카메라", "갤러리"};
-                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                builder.setTitle("오늘 나의 의상 공유하기")
-                        .setItems(items, new DialogInterface.OnClickListener(){    // 목록 클릭시 설정
-                            public void onClick(DialogInterface dialog, int index){
-                                if(index == 0) {
-                                    takePicture();
-                                } else if (index == 1) {
-                                    openGallery();
-                                }
-                            }
-                        });
-                builder.show();
+                popupUploadImageDialog();
             }
         });
 
@@ -243,6 +243,7 @@ public class MainActivity extends AppCompatActivity
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
+                            if(today != null) today.clear();
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Map<String, Object> data = document.getData();
                                 if(document.getId().equals("0000")) data.put("fcstDate", dateFormating(todayDateAsString, todayYoil));
@@ -269,6 +270,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
+                    if (innerMap != null) innerMap.clear();
                     DocumentSnapshot document = task.getResult();
                     if(document.getData()!=null) {
                         for(String key : document.getData().keySet()){
@@ -293,6 +295,7 @@ public class MainActivity extends AppCompatActivity
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
+                            if (outfit != null) outfit.clear();
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Map<String, Object> data = document.getData();
                                 outfit.put(document.getId(), data);
@@ -350,28 +353,52 @@ public class MainActivity extends AppCompatActivity
 
 
     // Upload
-    File file;
-    private void takePicture() {
-        if(file==null) file = createFile();
+    public void popupUploadImageDialog() {
+        final CharSequence[] items = {"카메라", "갤러리"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle("오늘 나의 의상 공유하기")
+                .setItems(items, new DialogInterface.OnClickListener(){    // 목록 클릭시 설정
+                    public void onClick(DialogInterface dialog, int index){
+                        if(index == 0) {
+                            takePicture();
+                        } else if (index == 1) {
+                            openGallery();
+                        }
+                    }
+                });
+        builder.show();
+    }
 
-        Uri fileUri = FileProvider.getUriForFile(this, "com.hyunro.layout.fileprovider", file);
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(intent, 101);
+    File filePath;
+    private void takePicture() {
+        try {
+            String dirPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/wtwt";
+            File dir = new File(dirPath);
+            if(!dir.exists()) {
+                dir.mkdirs();
+            }
+
+            filePath = File.createTempFile("IMG", ".jpg", dir);
+            if(!filePath.exists()) {
+                filePath.createNewFile();
+            }
+
+            Uri fileUri = FileProvider.getUriForFile(this, "com.hyunro.layout.fileprovider", filePath);
+            Uri fromFile = FileProvider.getUriForFile(getApplicationContext(), "com.hyunro.layout.fileprovider", filePath);
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, fromFile);
+            if (intent.resolveActivity(getPackageManager()) != null) {
+                startActivityForResult(intent, 101);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
     private void openGallery() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
         startActivityForResult(intent, 102);
-    }
-    private File createFile() {
-        String filename = new Date().toString()+"wtwt_ootd.jpg";
-        File storageDir = Environment.getExternalStorageDirectory();
-        File outFile = new File(storageDir, filename);
-
-        return outFile;
     }
 
     @Override
@@ -381,7 +408,7 @@ public class MainActivity extends AppCompatActivity
         if (requestCode == 101 && resultCode == RESULT_OK) {
             // from Camera
             Intent intent = new Intent(this, UploadActivity.class);
-            intent.putExtra("file", file);
+            intent.putExtra("filePath", filePath);
             intent.putExtra("token", token);
             intent.putExtra("todayAM", (HashMap)today.get(AM));
             intent.putExtra("todayPM", (HashMap)today.get(PM));

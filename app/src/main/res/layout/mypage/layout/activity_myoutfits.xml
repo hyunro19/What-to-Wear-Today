@@ -9,7 +9,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="61dp">
+        android:layout_height="57dp">
 
         <ImageButton
             android:id="@+id/myoutfits_backButton"
@@ -37,7 +37,7 @@
             android:id="@+id/divider4"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="56dp"
             android:background="?android:attr/listDivider"
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_editor_absoluteX="1dp" />

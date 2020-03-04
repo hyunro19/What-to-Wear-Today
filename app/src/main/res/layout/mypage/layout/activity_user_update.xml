@@ -65,7 +65,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintGuide_begin="108dp" />
+                    app:layout_constraintGuide_begin="90dp" />
 
                 <TextView
                     android:id="@+id/userUpdate_label_email"
@@ -210,7 +210,7 @@
                     android:id="@+id/horizontalDivider1"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginTop="60dp"
+                    android:layout_marginTop="56dp"
                     android:background="?android:attr/listDivider"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:layout_editor_absoluteX="1dp" />

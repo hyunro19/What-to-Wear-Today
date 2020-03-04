@@ -12,12 +12,12 @@
     <Button
         android:id="@+id/googleSignInButton"
         android:layout_width="wrap_content"
-        android:layout_height="64dp"
+        android:layout_height="52dp"
         android:layout_centerInParent="true"
         android:layout_marginBottom="12dp"
         android:background="@drawable/common_google_signin_btn_text_light"
         android:text="Google 로그인\t\t"
-        android:textSize="18sp"
+        android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/sampleSignInButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -27,9 +27,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="110dp"
         android:text="TEST계정으로 둘러보기"
         android:textColor="@color/grey_500"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -47,9 +48,9 @@
 
     <ImageView
         android:id="@+id/login_logo_with_title"
-        android:layout_width="250dp"
+        android:layout_width="230dp"
         android:layout_height="150dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="120dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/weatherByThreeHoursRecycleLayout"
-    android:layout_width="90dp"
+    android:layout_width="80dp"
     android:layout_height="match_parent">
 
     <TextView
@@ -29,8 +29,8 @@
 
     <ImageView
         android:id="@+id/weatherByThreeHours"
-        android:layout_width="44dp"
-        android:layout_height="44dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginTop="8dp"
         android:gravity="center"
         android:src="@android:drawable/sym_def_app_icon"

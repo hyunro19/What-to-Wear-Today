@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -83,7 +84,16 @@ public class Fragment_202 extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        MainActivity mainActivity = (MainActivity)getActivity();
+        final MainActivity mainActivity = (MainActivity)getActivity();
+
+        View todayOutfitImage = mainActivity.findViewById(R.id.todayOutfitImage);
+        todayOutfitImage.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                mainActivity.popupUploadImageDialog();
+                return false;
+            }
+        });
 
         View fragment_202_commercial = mainActivity.findViewById(R.id.fragment_202_commercial);
         fragment_202_commercial.setOnClickListener(new View.OnClickListener() {

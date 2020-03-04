@@ -21,7 +21,8 @@
         android:roundIcon="@mipmap/ic_launcher_wtwt_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        android:requestLegacyExternalStorage="true">
         <activity android:name=".util.SettingsActivity"></activity>
 
         <receiver
@@ -81,6 +82,9 @@
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/external" />
+            <meta-data
+                android:name="android.max_aspect"
+                android:value="2.4" />
         </provider>
     </application>
 

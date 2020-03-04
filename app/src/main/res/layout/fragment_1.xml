@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frameLayout1"
     android:layout_width="match_parent"
-    android:layout_height="60dp"
+    android:layout_height="56dp"
     tools:context=".Fragment_1">
 
     <!-- TODO: Update blank fragment layout -->
@@ -24,11 +24,9 @@
         android:id="@+id/locationSelectButton"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:src="@drawable/ic_custom_drop_down_circle_24dp"
         android:background="@android:color/transparent"
+        android:src="@drawable/ic_custom_drop_down_circle_20dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.05"
         app:layout_constraintStart_toEndOf="@+id/currentLocation"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -38,7 +36,7 @@
         android:layout_height="50dp"
         android:layout_marginEnd="10dp"
         android:background="@android:color/transparent"
-        android:src="@drawable/ic_custom_add_a_photo_36dp"
+        android:src="@drawable/ic_custom_add_a_photo_28dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -53,8 +51,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         android:layout_marginStart="16dp"
         android:src="@drawable/logo"
         app:layout_constraintBottom_toBottomOf="parent"

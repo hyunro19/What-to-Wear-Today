@@ -8,679 +8,611 @@
     tools:context=".Fragment_202">
 
     <ScrollView
+        android:id="@+id/scrollView3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/scrollView3">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
+            android:id="@+id/fragment_202_layout_wrapper"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="10dp"
-            tools:layout_conversion_absoluteHeight="0dp"
-            tools:layout_conversion_absoluteWidth="411dp"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="0dp">
-
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/horizontalGuideLine1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:visibility="visible"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintGuide_begin="48dp"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/horizontalGuideLine2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintGuide_begin="72dp"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/horizontalGuideLine3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintGuide_begin="96dp"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/horizontalGuideLine4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintGuide_begin="184dp"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/horizontalGuideLine5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintGuide_begin="232dp"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/horizontalGuideLine6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintGuide_begin="252dp"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/horizontalGuideLine"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintGuide_begin="264dp"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/horizontalGuideLine7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintGuide_begin="424dp"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/horizontalGuideLine8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintGuide_begin="564dp"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/verticalGuideLine1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_begin="36dp" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/verticalGuideLine2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_begin="148dp" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/verticalGuideLine3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_begin="260dp" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/verticalGuideLine4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_begin="372dp" />
-
-            <TextView
-                android:id="@+id/weatherLabel"
-                android:layout_width="32dp"
-                android:layout_height="200dp"
-                android:background="@drawable/round_corner_label"
-                android:gravity="center"
-                android:text="날\n\n씨"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine6"
-                app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine1" />
-
-
-            <TextView
-                android:id="@+id/outfitLabel"
-                android:layout_width="32dp"
-                android:layout_height="296dp"
-                android:background="@drawable/round_corner_label"
-                android:gravity="center"
-                android:text="내\n\n의\n상"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine8"
-                app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine" />
-
-            <TextView
-                android:id="@+id/yesterdayLabel"
-                android:layout_width="100dp"
-                android:layout_height="32dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/round_corner_label"
-                android:gravity="center"
-                android:text="어 제"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine2"
-                app:layout_constraintStart_toStartOf="@+id/verticalGuideLine1"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/todayLabel"
-                android:layout_width="100dp"
-                android:layout_height="32dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/round_corner_label"
-                android:gravity="center"
-                android:text="오 늘"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine3"
-                app:layout_constraintStart_toStartOf="@+id/verticalGuideLine2"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tomorrowLabel"
-                android:layout_width="100dp"
-                android:layout_height="32dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/round_corner_label"
-                android:gravity="center"
-                android:text="내일"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine4"
-                app:layout_constraintStart_toStartOf="@+id/verticalGuideLine3"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/yesterdayDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="월/일 어"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine2"
-                app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine2"
-                app:layout_constraintStart_toStartOf="@+id/verticalGuideLine1"
-                app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine1" />
-
-            <TextView
-                android:id="@+id/todayDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="월/일 오"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine2"
-                app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine3"
-                app:layout_constraintStart_toStartOf="@+id/verticalGuideLine2"
-                app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine1" />
-
-            <TextView
-                android:id="@+id/tomorrowDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="월/일 내"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine2"
-                app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine4"
-                app:layout_constraintStart_toStartOf="@+id/verticalGuideLine3"
-                app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine1" />
-
-            <TextView
-                android:id="@+id/yesterdayAMLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="오전"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine3"
-                app:layout_constraintStart_toStartOf="@+id/verticalGuideLine1"
-                app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine2"
-                app:layout_constraintVertical_bias="0.523" />
-
-            <TextView
-                android:id="@+id/yesterdayPMLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:text="오후"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine3"
-                app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine2"
-                app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine2"
-                app:layout_constraintVertical_bias="0.523" />
-
-            <TextView
-                android:id="@+id/todayAMLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="오전"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine3"
-                app:layout_constraintStart_toStartOf="@+id/verticalGuideLine2"
-                app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine2" />
-
-            <TextView
-                android:id="@+id/tomorrowAMLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="오전"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine3"
-                app:layout_constraintStart_toStartOf="@+id/verticalGuideLine3"
-                app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine2" />
-
-            <TextView
-                android:id="@+id/todayPMLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:text="오후"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine3"
-                app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine3"
-                app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine2" />
-
-            <TextView
-                android:id="@+id/tomorrowPMLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:text="오후"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine3"
-                app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine4"
-                app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine2" />
-
-            <ImageView
-                android:id="@+id/yesterdayAMSky"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="4dp"
-                android:src="@color/design_default_color_secondary"
-                app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine4"
-                app:layout_constraintStart_toStartOf="@+id/verticalGuideLine1"
-                app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine3" />
-
-            <ImageView
-                android:id="@+id/todayAMSky"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="4dp"
-                android:src="@color/design_default_color_secondary"
-                app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine4"
-                app:layout_constraintStart_toStartOf="@+id/verticalGuideLine2"
-                app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine3" />
-
-            <ImageView
-                android:id="@+id/todayPMSky"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginEnd="4dp"
-                android:src="@color/design_default_color_secondary"
-                app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine4"
-                app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine3"
-                app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine3" />
-
-            <ImageView
-                android:id="@+id/tomorrowAMSky"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="4dp"
-                android:src="@color/design_default_color_secondary"
-                app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine4"
-                app:layout_constraintStart_toStartOf="@+id/verticalGuideLine3"
-                app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine3" />
-
-            <ImageView
-                android:id="@+id/tomorrowPMSky"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginEnd="4dp"
-                android:src="@color/design_default_color_secondary"
-                app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine4"
-                app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine4"
-                app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine3" />
-
-            <ImageView
-                android:id="@+id/yesterdayPMSky"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginEnd="4dp"
-                android:src="@color/design_default_color_secondary"
-                app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine4"
-                app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine2"
-                app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine3" />
-
-            <TextView
-                android:id="@+id/yesterdayAMSkyText"
-                android:layout_width="55dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="2dp"
-                android:gravity="center"
-                android:text="흐리고\n비"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine5"
-                app:layout_constraintStart_toStartOf="@+id/verticalGuideLine1"
-                app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine4"
-                app:layout_constraintVertical_bias="0.5" />
-
-            <TextView
-                android:id="@+id/todayAMSkyText"
-                android:layout_width="55dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="2dp"
-                android:gravity="center"
-                android:text="흐리고\n비"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine5"
-                app:layout_constraintStart_toStartOf="@+id/verticalGuideLine2"
-                app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine4" />
-
-            <TextView
-                android:id="@+id/tomorrowAMSkyText"
-                android:layout_width="55dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="2dp"
-                android:gravity="center"
-                android:text="흐리고\n비"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine5"
-                app:layout_constraintStart_toStartOf="@+id/verticalGuideLine3"
-                app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine4" />
-
-            <TextView
-                android:id="@+id/yesterdayPMSkyText"
-                android:layout_width="55dp"
-                android:layout_height="40dp"
-                android:layout_marginEnd="2dp"
-                android:gravity="center"
-                android:text="흐리고\n눈"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine5"
-                app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine2"
-                app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine4" />
-
-            <TextView
-                android:id="@+id/todayPMSkyText"
-                android:layout_width="55dp"
-                android:layout_height="40dp"
-                android:layout_marginEnd="2dp"
-                android:gravity="center"
-                android:text="흐리고\n눈"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine5"
-                app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine3"
-                app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine4"
-                app:layout_constraintVertical_bias="0.5" />
-
-            <TextView
-                android:id="@+id/tomorrowPMSkyText"
-                android:layout_width="55dp"
-                android:layout_height="40dp"
-                android:gravity="center"
-                android:text="흐리고\n눈"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine5"
-                app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine4"
-                app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine4"
-                app:layout_constraintVertical_bias="0.5" />
-
-            <TextView
-                android:id="@+id/yesterdayAMTemp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:gravity="center"
-                android:text="10.0˚C"
-                app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine6"
-                app:layout_constraintStart_toStartOf="@+id/verticalGuideLine1"
-                app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine5" />
-
-            <TextView
-                android:id="@+id/todayAMTemp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:gravity="center"
-                android:text="-10.0˚C"
-                app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine6"
-                app:layout_constraintStart_toStartOf="@+id/verticalGuideLine2"
-                app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine5" />
-
-            <TextView
-                android:id="@+id/tomorrowAMTemp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:gravity="center"
-                android:text="10.0˚C"
-                app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine6"
-                app:layout_constraintStart_toStartOf="@+id/verticalGuideLine3"
-                app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine5" />
-
-            <TextView
-                android:id="@+id/yesterdayPMTemp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:gravity="center"
-                android:text="10.0˚C"
-                app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine6"
-                app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine2"
-                app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine5" />
-
-            <TextView
-                android:id="@+id/todayPMTemp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:gravity="center"
-                android:text="-10.0˚C"
-                app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine6"
-                app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine3"
-                app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine5" />
-
-            <TextView
-                android:id="@+id/tomorrowPMTemp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:gravity="center"
-                android:text="10.0˚C"
-                app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine6"
-                app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine4"
-                app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine5"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <ImageView
-                android:id="@+id/yesterdayOutfitImage"
-                android:layout_width="102dp"
-                android:layout_height="wrap_content"
-                android:maxHeight="150dp"
-                android:minHeight="100dp"
-                app:srcCompat="@drawable/myphoto_default_yesterday"
-                app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine7"
-                app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine2"
-                app:layout_constraintStart_toStartOf="@+id/verticalGuideLine1"
-                app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine" />
-
-            <ImageView
-                android:id="@+id/todayOutfitImage"
-                android:layout_width="102dp"
-                android:layout_height="wrap_content"
-                android:maxHeight="150dp"
-                android:minHeight="100dp"
-                app:srcCompat="@drawable/myphoto_default_today"
-                app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine7"
-                app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine3"
-                app:layout_constraintStart_toStartOf="@+id/verticalGuideLine2"
-                app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine"
-                app:layout_constraintVertical_bias="0.5" />
-
-
-            <TextView
-                android:id="@+id/yesterdayOutfitOuter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="외투"
-                app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine2"
-                app:layout_constraintStart_toStartOf="@+id/verticalGuideLine1"
-                app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine7" />
-
-            <TextView
-                android:id="@+id/yesterdayOutfitTop"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:text="상의"
-                app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine2"
-                app:layout_constraintStart_toStartOf="@+id/verticalGuideLine1"
-                app:layout_constraintTop_toBottomOf="@+id/yesterdayOutfitOuter" />
-
-            <TextView
-                android:id="@+id/yesterdayOutfitBottom"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:text="하의"
-                app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine2"
-                app:layout_constraintStart_toStartOf="@+id/verticalGuideLine1"
-                app:layout_constraintTop_toBottomOf="@+id/yesterdayOutfitTop" />
-
-            <TextView
-                android:id="@+id/yesterdayOutfitShoes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:text="신발"
-                app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine2"
-                app:layout_constraintStart_toStartOf="@+id/verticalGuideLine1"
-                app:layout_constraintTop_toBottomOf="@+id/yesterdayOutfitBottom" />
-
-            <TextView
-                android:id="@+id/todayOutfitShoes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:text="신발"
-                app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine3"
-                app:layout_constraintStart_toStartOf="@+id/verticalGuideLine2"
-                app:layout_constraintTop_toBottomOf="@+id/todayOutfitBottom" />
-
-            <TextView
-                android:id="@+id/todayOutfitBottom"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:text="하의"
-                app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine3"
-                app:layout_constraintStart_toStartOf="@+id/verticalGuideLine2"
-                app:layout_constraintTop_toBottomOf="@+id/todayOutfitTop" />
-
-
-            <TextView
-                android:id="@+id/todayOutfitTop"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:text="상의"
-                app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine3"
-                app:layout_constraintStart_toStartOf="@+id/verticalGuideLine2"
-                app:layout_constraintTop_toBottomOf="@+id/todayOutfitOuter" />
-
-
-            <TextView
-                android:id="@+id/todayOutfitOuter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="외투"
-                app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine3"
-                app:layout_constraintStart_toStartOf="@+id/verticalGuideLine2"
-                app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine7" />
-
-            <ImageView
-                android:id="@+id/fragment_202_commercial"
-                android:layout_width="110dp"
-                android:layout_height="300dp"
-                android:src="@drawable/commercial_fashion_couple"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine4"
-                app:layout_constraintStart_toStartOf="@+id/verticalGuideLine3"
-                app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine6" />
-
-<!--            <ImageView-->
-<!--                android:id="@+id/tomorrowOutfitImage"-->
-<!--                android:layout_width="100dp"-->
-<!--                android:layout_height="100dp"-->
-<!--                android:src="@color/design_default_color_secondary"-->
-<!--                app:layout_constraintBottom_toTopOf="@+id/horizontalGuideLine7"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="@+id/verticalGuideLine3"-->
-<!--                app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine6"-->
-<!--                app:layout_constraintVertical_bias="0.5" />-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/tomorrowOutfitAcc"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="12dp"-->
-<!--                android:text="TextView"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="@+id/verticalGuideLine3"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/tomorrowOutfitShoes" />-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/tomorrowOutfitTop"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="12dp"-->
-<!--                android:text="TextView"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="@+id/verticalGuideLine3"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/tomorrowOutfitOuter" />-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/tomorrowOutfitShoes"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="12dp"-->
-<!--                android:text="TextView"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="@+id/verticalGuideLine3"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/tomorrowOutfitBottom" />-->
-<!--            -->
-<!--            <TextView-->
-<!--                android:id="@+id/tomorrowOutfitBottom"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="12dp"-->
-<!--                android:text="TextView"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="@+id/verticalGuideLine3"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/tomorrowOutfitTop" />-->
-<!--            -->
-<!--            <TextView-->
-<!--                android:id="@+id/tomorrowOutfitOuter"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="12dp"-->
-<!--                android:text="TextView"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="@+id/verticalGuideLine3"-->
-<!--                app:layout_constraintTop_toTopOf="@+id/horizontalGuideLine7" />-->
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_height="wrap_content"
+            android:baselineAligned="false"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/fragment_202_layout_label"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1"
+                android:padding="3dp">
+
+                <TextView
+                    android:id="@+id/weatherLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:layout_marginTop="48dp"
+                    android:background="@drawable/round_corner_label"
+                    android:gravity="center"
+                    android:text="날\n\n씨"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <TextView
+                    android:id="@+id/outfitLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="284dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/round_corner_label"
+                    android:gravity="center"
+                    android:text="내\n\n의\n상"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/weatherLabel" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/fragment_202_layout_yesterday"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3"
+                android:padding="2dp">
+
+                <TextView
+                    android:id="@+id/yesterdayLabel"
+                    android:layout_width="100dp"
+                    android:layout_height="32dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/round_corner_label"
+                    android:gravity="center"
+                    android:text="어 제"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/yesterdayDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="월/일 어"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/yesterdayLabel" />
+
+                <TextView
+                    android:id="@+id/yesterdayAMLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="오전"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toStartOf="@+id/yesterdayPMLabel"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/yesterdayDate" />
+
+                <TextView
+                    android:id="@+id/yesterdayPMLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="오후"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/yesterdayAMLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/yesterdayDate" />
+
+                <ImageView
+                    android:id="@+id/yesterdayAMSky"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="4dp"
+                    android:src="@color/design_default_color_secondary"
+                    app:layout_constraintEnd_toStartOf="@+id/yesterdayPMSky"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/yesterdayAMLabel" />
+
+                <ImageView
+                    android:id="@+id/yesterdayPMSky"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="4dp"
+                    android:src="@color/design_default_color_secondary"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/yesterdayAMSky"
+                    app:layout_constraintTop_toBottomOf="@+id/yesterdayPMLabel" />
+
+                <TextView
+                    android:id="@+id/yesterdayAMSkyText"
+                    android:layout_width="55dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:text="흐리고\n비"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toStartOf="@+id/yesterdayPMSkyText"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/yesterdayAMSky" />
+
+                <TextView
+                    android:id="@+id/yesterdayPMSkyText"
+                    android:layout_width="55dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:text="흐리고\n눈"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/yesterdayAMSkyText"
+                    app:layout_constraintTop_toBottomOf="@+id/yesterdayPMSky" />
+
+                <TextView
+                    android:id="@+id/yesterdayAMTemp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:text="10.0˚C"
+                    app:layout_constraintEnd_toStartOf="@+id/yesterdayPMTemp"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/yesterdayAMSkyText" />
+
+                <TextView
+                    android:id="@+id/yesterdayPMTemp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:text="10.0˚C"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/yesterdayAMTemp"
+                    app:layout_constraintTop_toBottomOf="@+id/yesterdayPMSkyText" />
+
+                <ImageView
+                    android:id="@+id/yesterdayOutfitImage"
+                    android:layout_width="102dp"
+                    android:layout_height="152dp"
+                    android:layout_marginTop="28dp"
+                    android:maxHeight="150dp"
+                    android:minHeight="100dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/yesterdayAMTemp"
+                    app:srcCompat="@drawable/myphoto_default_yesterday" />
+
+                <TextView
+                    android:id="@+id/yesterdayOutfitOuter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="외투"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/yesterdayOutfitImage" />
+
+                <TextView
+                    android:id="@+id/yesterdayOutfitTop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="상의"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/yesterdayOutfitOuter" />
+
+                <TextView
+                    android:id="@+id/yesterdayOutfitBottom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="하의"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/yesterdayOutfitTop" />
+
+                <TextView
+                    android:id="@+id/yesterdayOutfitShoes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="신발"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/yesterdayOutfitBottom" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/fragment_202_layout_today"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3"
+                android:padding="2dp">
+
+                <TextView
+                    android:id="@+id/todayLabel"
+                    android:layout_width="100dp"
+                    android:layout_height="32dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/round_corner_label"
+                    android:gravity="center"
+                    android:text="오 늘"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/todayDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="월/일 오"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/todayLabel" />
+
+                <TextView
+                    android:id="@+id/todayAMLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="오전"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toStartOf="@+id/todayPMLabel"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/todayDate" />
+
+                <TextView
+                    android:id="@+id/todayPMLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="오후"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/todayAMLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/todayDate" />
+
+                <ImageView
+                    android:id="@+id/todayAMSky"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="4dp"
+                    android:src="@color/design_default_color_secondary"
+                    app:layout_constraintEnd_toStartOf="@+id/todayPMSky"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/todayAMLabel" />
+
+                <ImageView
+                    android:id="@+id/todayPMSky"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="4dp"
+                    android:src="@color/design_default_color_secondary"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/todayAMSky"
+                    app:layout_constraintTop_toBottomOf="@+id/todayPMLabel" />
+
+                <TextView
+                    android:id="@+id/todayAMSkyText"
+                    android:layout_width="55dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:text="흐리고\n비"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toStartOf="@+id/todayPMSkyText"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/todayAMSky" />
+
+                <TextView
+                    android:id="@+id/todayPMSkyText"
+                    android:layout_width="55dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:text="흐리고\n눈"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/todayAMSkyText"
+                    app:layout_constraintTop_toBottomOf="@+id/todayPMSky" />
+
+                <TextView
+                    android:id="@+id/todayAMTemp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:text="10.0˚C"
+                    app:layout_constraintEnd_toStartOf="@+id/todayPMTemp"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/todayAMSkyText" />
+
+                <TextView
+                    android:id="@+id/todayPMTemp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:text="10.0˚C"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/todayAMTemp"
+                    app:layout_constraintTop_toBottomOf="@+id/todayPMSkyText" />
+
+                <ImageView
+                    android:id="@+id/todayOutfitImage"
+                    android:layout_width="102dp"
+                    android:layout_height="152dp"
+                    android:layout_marginTop="28dp"
+                    android:maxHeight="150dp"
+                    android:minHeight="100dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/todayAMTemp"
+                    app:srcCompat="@drawable/myphoto_default_today" />
+
+                <TextView
+                    android:id="@+id/todayOutfitOuter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="외투"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/todayOutfitImage" />
+
+                <TextView
+                    android:id="@+id/todayOutfitTop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="상의"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/todayOutfitOuter" />
+
+                <TextView
+                    android:id="@+id/todayOutfitBottom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="하의"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/todayOutfitTop" />
+
+                <TextView
+                    android:id="@+id/todayOutfitShoes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="신발"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/todayOutfitBottom" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/fragment_202_layout_tomorrow"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3"
+                android:padding="2dp">
+
+                <TextView
+                    android:id="@+id/tomorrowLabel"
+                    android:layout_width="100dp"
+                    android:layout_height="32dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/round_corner_label"
+                    android:gravity="center"
+                    android:text="내 일"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tomorrowDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="월/일 어"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tomorrowLabel" />
+
+                <TextView
+                    android:id="@+id/tomorrowAMLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="오전"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toStartOf="@+id/tomorrowPMLabel"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tomorrowDate" />
+
+                <TextView
+                    android:id="@+id/tomorrowPMLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="오후"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/tomorrowAMLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/tomorrowDate" />
+
+                <ImageView
+                    android:id="@+id/tomorrowAMSky"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="4dp"
+                    android:src="@color/design_default_color_secondary"
+                    app:layout_constraintEnd_toStartOf="@+id/tomorrowPMSky"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tomorrowAMLabel" />
+
+                <ImageView
+                    android:id="@+id/tomorrowPMSky"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="4dp"
+                    android:src="@color/design_default_color_secondary"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/tomorrowAMSky"
+                    app:layout_constraintTop_toBottomOf="@+id/tomorrowPMLabel" />
+
+                <TextView
+                    android:id="@+id/tomorrowAMSkyText"
+                    android:layout_width="55dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:text="흐리고\n비"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toStartOf="@+id/tomorrowPMSkyText"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tomorrowAMSky" />
+
+                <TextView
+                    android:id="@+id/tomorrowPMSkyText"
+                    android:layout_width="55dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:text="흐리고\n눈"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/tomorrowAMSkyText"
+                    app:layout_constraintTop_toBottomOf="@+id/tomorrowPMSky" />
+
+                <TextView
+                    android:id="@+id/tomorrowAMTemp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:text="10.0˚C"
+                    app:layout_constraintEnd_toStartOf="@+id/tomorrowPMTemp"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tomorrowAMSkyText" />
+
+                <TextView
+                    android:id="@+id/tomorrowPMTemp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:text="10.0˚C"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/tomorrowAMTemp"
+                    app:layout_constraintTop_toBottomOf="@+id/tomorrowPMSkyText" />
+
+                <ImageView
+                    android:id="@+id/fragment_202_commercial"
+                    android:layout_width="110dp"
+                    android:layout_height="280dp"
+                    android:layout_marginTop="28dp"
+                    android:src="@drawable/commercial_fashion_couple"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tomorrowAMTemp" />
+
+                <!--                <ImageView-->
+                <!--                    android:id="@+id/tomorrowOutfitImage"-->
+                <!--                    android:layout_width="102dp"-->
+                <!--                    android:layout_height="152dp"-->
+                <!--                    android:layout_marginTop="28dp"-->
+                <!--                    android:maxHeight="150dp"-->
+                <!--                    android:minHeight="100dp"-->
+                <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                    app:layout_constraintStart_toStartOf="parent"-->
+                <!--                    app:layout_constraintTop_toBottomOf="@+id/tomorrowAMTemp"-->
+                <!--                    app:srcCompat="@drawable/myphoto_default_tomorrow" />-->
+
+                <!--                <TextView-->
+                <!--                    android:id="@+id/tomorrowOutfitOuter"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="8dp"-->
+                <!--                    android:text="외투"-->
+                <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                    app:layout_constraintStart_toStartOf="parent"-->
+                <!--                    app:layout_constraintTop_toBottomOf="@+id/tomorrowOutfitImage" />-->
+
+                <!--                <TextView-->
+                <!--                    android:id="@+id/tomorrowOutfitTop"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="12dp"-->
+                <!--                    android:text="상의"-->
+                <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                    app:layout_constraintStart_toStartOf="parent"-->
+                <!--                    app:layout_constraintTop_toBottomOf="@+id/tomorrowOutfitOuter" />-->
+
+                <!--                <TextView-->
+                <!--                    android:id="@+id/tomorrowOutfitBottom"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="12dp"-->
+                <!--                    android:text="하의"-->
+                <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                    app:layout_constraintStart_toStartOf="parent"-->
+                <!--                    app:layout_constraintTop_toBottomOf="@+id/tomorrowOutfitTop" />-->
+
+                <!--                <TextView-->
+                <!--                    android:id="@+id/tomorrowOutfitShoes"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="12dp"-->
+                <!--                    android:text="신발"-->
+                <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                    app:layout_constraintStart_toStartOf="parent"-->
+                <!--                    app:layout_constraintTop_toBottomOf="@+id/tomorrowOutfitBottom" />-->
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
