@@ -101,7 +101,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:name="com.hyunro.layout.location.Fragment_LocSelect"/>
+        android:name="com.hyunro.wtwt.location.Fragment_LocSelect"/>
 
 <!--    <LinearLayout-->
 <!--        android:layout_width="match_parent"-->

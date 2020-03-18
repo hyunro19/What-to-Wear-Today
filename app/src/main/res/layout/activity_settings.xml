@@ -46,7 +46,7 @@
 
     <fragment
         android:id="@+id/settings_container"
-        android:name="com.hyunro.layout.util.SettingsFragment"
+        android:name="com.hyunro.wtwt.util.Fragment_Settings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>

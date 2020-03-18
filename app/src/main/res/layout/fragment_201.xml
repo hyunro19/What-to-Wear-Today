@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="600dp"
     android:orientation="vertical"
-    tools:context=".Fragment_201">
+    tools:context=".Fragment_Mid1">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayout"

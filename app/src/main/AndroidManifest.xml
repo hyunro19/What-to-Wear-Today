@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.hyunro.layout">
+    package="com.hyunro.wtwt">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -23,10 +23,10 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         android:requestLegacyExternalStorage="true">
-        <activity android:name=".util.SettingsActivity"></activity>
+        <activity android:name="com.hyunro.wtwt.util.SettingsActivity"></activity>
 
         <receiver
-            android:name=".BootReceiver"
+            android:name="com.hyunro.wtwt.BootReceiver"
             android:enabled="true"
             android:exported="true"
             android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
@@ -35,12 +35,12 @@
             </intent-filter>
         </receiver>
         <receiver
-            android:name=".MorningAlarmReceiver"
+            android:name="com.hyunro.wtwt.MorningAlarmReceiver"
             android:enabled="true"
             android:exported="true"></receiver>
 
         <service
-            android:name=".MyFirebaseMessagingService"
+            android:name="com.hyunro.wtwt.AdminFirebaseMessagingService"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -48,35 +48,35 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".mypage.MyOutfitsActivity"
+        <activity android:name="com.hyunro.wtwt.mypage.MyOutfitsActivity"
             android:launchMode = "singleTop" />
-        <activity android:name=".mypage.UserUpdateActivity"
+        <activity android:name="com.hyunro.wtwt.mypage.UserUpdateActivity"
             android:launchMode = "singleTop" />
-        <activity android:name=".detail.DetailActivity"
+        <activity android:name="com.hyunro.wtwt.detail.DetailActivity"
             android:launchMode = "singleTop" />
-        <activity android:name=".login.RegisterActivity"
+        <activity android:name="com.hyunro.wtwt.login.RegisterActivity"
             android:launchMode = "singleTop" />
         <activity
-            android:name=".login.LoginActivity">
+            android:name="com.hyunro.wtwt.login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".upload.UploadActivity"
+        <activity android:name="com.hyunro.wtwt.upload.UploadActivity"
             android:launchMode = "singleTop" />
         <activity
-            android:name=".location.LocSelectActivity"
+            android:name="com.hyunro.wtwt.location.LocSelectActivity"
             android:windowSoftInputMode="adjustPan"
             android:launchMode = "singleTop" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.hyunro.wtwt.MainActivity"
             android:launchMode = "singleTop" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.hyunro.layout.fileprovider"
+            android:authorities="com.hyunro.wtwt.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

@@ -38,11 +38,12 @@
             android:id="@+id/detail_delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:layout_marginEnd="28dp"
+            android:layout_marginEnd="16dp"
             android:text="삭제"
-            android:textSize="18sp"
+            android:textColor="@color/grey_500"
+            android:textSize="14sp"
             android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -86,7 +87,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:maxWidth="300dp"
-                    android:maxHeight="450dp"
+                    android:maxHeight="400dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -415,19 +416,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/verticalGuideline2"
                     app:layout_constraintTop_toBottomOf="@+id/detail_label_location" />
-
-                <Button
-                    android:id="@+id/detail_deleteButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:text="삭제"
-                    android:visibility="gone"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/detail_description" />
 
                 <TextView
                     android:id="@+id/detail_label_date"
