@@ -1,12 +1,12 @@
 # 오늘뭐입지_날씨기반 의상추천 서비스
 
-### Android-Native / Firebase 인증·DB·저장소
+### Firebase 인증·DB·저장소 를 이용한 Android-Native 애플리케이션
 
 
 
 
 
-### [Notion에서 프로젝트 보고서 읽기](https://github.com/hyunro19/What-to-Wear-Today)
+### [Notion에서 프로젝트 보고서 읽기](https://www.notion.so/_-Android-Native-Firebase-DB-3ef05fc5f57a43ac91220c98228287eb)
 
 
 
