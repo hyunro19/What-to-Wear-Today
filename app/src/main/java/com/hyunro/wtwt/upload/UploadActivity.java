@@ -120,19 +120,19 @@ public class UploadActivity extends AppCompatActivity {
 
 
         Spinner spinnerOuter = findViewById(R.id.detail_spinner_outer);
-        String[] itemsOuter = {"코트", "블레이저", "가죽자켓", "숏패딩", "롱패딩", "가디건", "정장자켓"};
+        String[] itemsOuter = {"없음", "코트", "트렌치코트", "봄자켓", "가디건", "블레이저", "가죽자켓", "숏패딩", "롱패딩", "정장자켓"};
         ArrayAdapter<String> adapterOuter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,itemsOuter);
         adapterOuter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerOuter.setAdapter(adapterOuter);
 
         Spinner spinnerTop = findViewById(R.id.detail_spinner_top);
-        String[] itemsTop = {"정장셔츠", "캐쥬얼셔츠", "맨투맨", "후드티", "반팔티셔츠", "민소매"};
+        String[] itemsTop = { "캐쥬얼셔츠", "맨투맨", "후드티", "반팔티셔츠", "민소매", "정장셔츠"};
         ArrayAdapter<String> adapterTop = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,itemsTop);
         adapterTop.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerTop.setAdapter(adapterTop);
 
         Spinner spinnerBottom = findViewById(R.id.detail_spinner_bottom);
-        String[] itemsBottom = {"긴_청바지", "반_청바지", "긴_면바지", "긴_반바지", "긴_린넨바지", "반_린넨바지", "짧은치마", "긴치마"};
+        String[] itemsBottom = {"긴_청바지", "반_청바지", "긴_면바지", "반_면바지", "긴_린넨바지", "반_린넨바지", "짧은치마", "긴치마"};
         ArrayAdapter<String> adapterBottom = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,itemsBottom);
         adapterBottom.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerBottom.setAdapter(adapterBottom);
