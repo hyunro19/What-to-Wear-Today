@@ -4,9 +4,9 @@
 
 
 
-
-
 ### [Notion에서 프로젝트 보고서 읽기](https://www.notion.so/_-Android-Native-Firebase-DB-3ef05fc5f57a43ac91220c98228287eb)
+
+### [Google Play에서 오늘뭐입지 다운로드하기](https://play.google.com/store/apps/details?id=com.hyunro.wtwt)
 
 
 
