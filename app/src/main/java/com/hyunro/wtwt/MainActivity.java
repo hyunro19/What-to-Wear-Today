@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity
         Fragment_Btm.OnFragmentInteractionListener,
         AutoPermissionsListener {
 
+    View progressBar;
     Fragment_Top fragment_Top;
     Fragment_Mid1 fragment_Mid1;
     Fragment_Mid2 fragment_Mid2;
@@ -203,6 +204,7 @@ public class MainActivity extends AppCompatActivity
 
         agreeReceivingAlarm();
         AutoPermissions.Companion.loadAllPermissions(this, 101);
+        setProgressBar(R.id.frag201_progressBar);
     } // onCreate()
 
     @Override
@@ -333,6 +335,7 @@ public class MainActivity extends AppCompatActivity
                         count = 0;
                         fragment_Mid1.spread_Fragment_201_outfit();
                         Log.d("downloadOutfitPhoto", "successful for all");
+                        hideProgressBar();
                     }
                 }
             }).addOnFailureListener(new OnFailureListener() {
@@ -341,6 +344,7 @@ public class MainActivity extends AppCompatActivity
                     // Handle any errors
                 }
             });
+
         }
     }
 
@@ -516,6 +520,22 @@ public class MainActivity extends AppCompatActivity
             alarmManager.setExact(AlarmManager.RTC_WAKEUP,calendarForDailyAlarm.getTimeInMillis(), alarmPendingIntent);
         } else {
             alarmManager.set(AlarmManager.RTC_WAKEUP, calendarForDailyAlarm.getTimeInMillis(), alarmPendingIntent);
+        }
+    }
+
+    public void setProgressBar(int resId) {
+        progressBar = findViewById(resId);
+    }
+
+    public void showProgressBar() {
+        if (progressBar != null) {
+            progressBar.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public void hideProgressBar() {
+        if (progressBar != null) {
+            progressBar.setVisibility(View.INVISIBLE);
         }
     }
 }

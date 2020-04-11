@@ -131,7 +131,7 @@ public class UserUpdateActivity extends AppCompatActivity {
                         .setPositiveButton("네", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
                                 // 확인시 처리 로직
-                                if (token.equals("1eGwRyYHF5dnbx557pWn9q4bzYf2")) {
+                                if (token.equals("bT7xqTmifZT468bxteRva2MQ7eG2")) {
                                     Toast.makeText(UserUpdateActivity.this, "TEST계정의 정보는 수정할 수 없습니다.", Toast.LENGTH_SHORT).show();
                                     return;
                                 }
@@ -200,7 +200,7 @@ public class UserUpdateActivity extends AppCompatActivity {
                         .setPositiveButton("네", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
                                 // 확인시 처리 로직
-                                if (token.equals("1eGwRyYHF5dnbx557pWn9q4bzYf2")) {
+                                if (token.equals("bT7xqTmifZT468bxteRva2MQ7eG2")) {
                                     Toast.makeText(UserUpdateActivity.this, "TEST계정은 탈퇴할 수 없습니다.", Toast.LENGTH_SHORT).show();
                                     return;
                                 }

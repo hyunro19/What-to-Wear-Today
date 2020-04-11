@@ -46,7 +46,7 @@ public class DetailActivity extends AppCompatActivity {
                         .setMessage("정말 삭제하시겠습니까?")
                         .setPositiveButton("네", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
-                                if (token.equals("1eGwRyYHF5dnbx557pWn9q4bzYf2")) {
+                                if (token.equals("bT7xqTmifZT468bxteRva2MQ7eG2")) {
                                     Toast.makeText(DetailActivity.this, "TEST계정의 게시물은 삭제할 수 없습니다.", Toast.LENGTH_SHORT).show();
                                     return;
                                 }
