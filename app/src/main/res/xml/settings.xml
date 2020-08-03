@@ -32,7 +32,7 @@
         </Preference>
         <Preference
             android:title="버전정보"
-            android:summary="ver1.0"
+            android:summary="ver1.2"
             app:iconSpaceReserved="false"/>
 
     </PreferenceCategory>
